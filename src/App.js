@@ -1,38 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { RouterProvider } from 'react-router-dom';
+import { routes } from './Routes/Routes';
 
-import {
-  ChakraBaseProvider,
-  extendBaseTheme,
-  theme as chakraTheme,
-} from '@chakra-ui/react';
+// import {
+//   ChakraBaseProvider,
+//   extendBaseTheme,
+//   theme as chakraTheme,
+// } from '@chakra-ui/react';
+import { ChakraBaseProvider } from '@chakra-ui/react';
 
-const { Button } = chakraTheme.components
+// const { Button } = chakraTheme.components
 
-const theme = extendBaseTheme({
-  components: {
-    Button,
-  },
-})
+// const theme = extendBaseTheme({
+//   components: {
+//     Button,
+//   },
+// })
 
 function App() {
   return (
-    <ChakraBaseProvider theme={theme}>
+    // <ChakraBaseProvider theme={theme}>
+    <ChakraBaseProvider>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <RouterProvider router={routes}></RouterProvider>
       </div>
     </ChakraBaseProvider >
   )
