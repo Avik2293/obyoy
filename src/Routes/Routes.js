@@ -5,6 +5,9 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Dashboard from "../Pages/Dashboard";
+import Leaderboard from "../Pages/Leaderboard";
+import Profile from "../Pages/Profile";
+import Withdraw from "../Pages/Withdraw";
 
 
 export const routes = createBrowserRouter([
@@ -17,6 +20,21 @@ export const routes = createBrowserRouter([
                 path: '/',
                 // loader: () => fetch('https://re-books-server.vercel.app/'),
                 element: <Home></Home>
+            },
+            {
+                path: '/profile',
+                // loader: () => fetch('https://re-books-server.vercel.app/'),
+                element: <Profile></Profile>
+            },
+            {
+                path: '/leaderboard',
+                // loader: () => fetch('https://re-books-server.vercel.app/'),
+                element: <Leaderboard></Leaderboard>
+            },
+            {
+                path: '/withdraw',
+                // loader: () => fetch('https://re-books-server.vercel.app/'),
+                element: <Withdraw></Withdraw>
             },
         ]
     },

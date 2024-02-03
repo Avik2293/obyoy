@@ -21,7 +21,8 @@ function App() {
   return (
     // <ChakraBaseProvider theme={theme}>
     <ChakraBaseProvider>
-      <div className="App">
+      {/* <div className="App"> */}
+      <div>
         <RouterProvider router={routes}></RouterProvider>
       </div>
     </ChakraBaseProvider >
