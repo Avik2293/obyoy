@@ -118,6 +118,7 @@ const Login = () => {
         console.log(password);
 
         //  after sign in direct to home page 
+        window.location.href = '/';
     };
 
 

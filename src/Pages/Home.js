@@ -75,9 +75,7 @@ const Home = () => {
                             <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={2}>Click "Start" to start translate.</Text>
 
                             <Text textAlign={'center'} my={2}>
-                                <Button
-                                    rightIcon={<IoArrowForwardCircleOutline />} colorScheme='teal' variant='solid' size='sm'
-                                    onClick={() => setStart(!start)}
+                                <Button rightIcon={<IoArrowForwardCircleOutline />} size="lg" bg={"blue"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} onClick={() => setStart(!start)}
                                 >
                                     Start
                                 </Button>
@@ -101,43 +99,28 @@ const Home = () => {
 
                                 <HStack justify={'space-evenly'}>
                                     <Text textAlign={'center'} my={2}>
-                                        <Button colorScheme='teal' variant='solid' size='sm' type='submit'
-                                            onClick={(event) => {
-                                                if (input) {
-                                                    handleSubmit(event);
-                                                }
-                                            }}
+                                        <Button size="lg" bg={"blue"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} type='submit' onClick={(event) => {
+                                            if (input) {
+                                                handleSubmit(event);
+                                            }
+                                        }}
                                         >
                                             Submit
                                         </Button>
                                     </Text>
 
                                     <Text textAlign={'end'} my={2}>
-                                        <Button colorScheme='teal' variant='solid' size='sm' type='submit'
-                                            onClick={(event) => {
-                                                if (input) {
-                                                    handleSubmitNext(event);
-                                                }
-                                            }}
+                                        <Button size="lg" bg={"blue"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} type='submit' onClick={(event) => {
+                                            if (input) {
+                                                handleSubmitNext(event);
+                                            }
+                                        }}
                                         >
                                             Submit & Next
                                         </Button>
                                     </Text>
                                 </HStack>
                             </Form>
-
-                            {/* <form onSubmit={handleSubmit} noValidate="" action="">
-                                <label htmlFor="input" > Your Email</label>
-                                <Input type="text" name="input" id="input" variant='filled' width='100%' p={3} my={3} placeholder='Type your input here..' required onChange={handleInputChange} />
-
-                                <Text textAlign={'end'} my={2}>
-                                    <Button colorScheme='teal' variant='solid' size='sm' type='submit'
-                                        onClick={() => setStart(!start)}
-                                    >
-                                        Submit
-                                    </Button>
-                                </Text>
-                            </form> */}
                         </Box>
                     }
 

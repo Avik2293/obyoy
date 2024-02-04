@@ -40,6 +40,7 @@ const Register = () => {
         console.log(firstName, lastName, email, password);
 
         //  after sign up direct to login page 
+        window.location.href = '/login';
     };
 
     return (
