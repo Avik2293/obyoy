@@ -15,9 +15,12 @@ const Footer = () => {
                         </Text>
 
                         <ButtonGroup variant="tertiary">
-                            <IconButton as="a" href="#" aria-label="LinkedIn" icon={<FaLinkedin color='white' size='20' />} />
-                            <IconButton as="a" href="#" aria-label="GitHub" icon={<FaGithub color='white' size='20' />} />
-                            <IconButton as="a" href="#" aria-label="Twitter" icon={<FaTwitter color='white' size='20' />} />
+                            <IconButton as="a" href="#" aria-label="LinkedIn"
+                                icon={<FaLinkedin color='white' size='20' />} />
+                            <IconButton as="a" href="#" aria-label="GitHub"
+                                icon={<FaGithub color='white' size='20' />} />
+                            <IconButton as="a" href="#" aria-label="Twitter"
+                                icon={<FaTwitter color='white' size='20' />} />
                         </ButtonGroup>
                     </Stack>
 

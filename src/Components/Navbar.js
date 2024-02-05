@@ -19,28 +19,27 @@ const Navbar = () => {
         <Box bg='gray'>
             <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" mb={3} px={5} py='3' maxWidth={"1350px"} mx={'auto'}>
 
-                <Text w="100px" fontSize="lg" fontWeight="bold" color='white'>
-                    Logo
-                </Text>
+                <Text w="100px" fontSize="lg" fontWeight="bold" color='white'
+                >Logo</Text>
 
                 <Box display={{ base: "block", md: "none" }} onClick={toggle}>
-                    {isOpen ? <IoMdCloseCircleOutline size="35" color='white' title='Close' /> : <TiThMenuOutline size="27" color='white' title='Menu' />}
+                    {
+                        isOpen ?
+                            <IoMdCloseCircleOutline size="35" color='white' title='Close' />
+                            :
+                            <TiThMenuOutline size="27" color='white' title='Menu' />
+                    }
                 </Box>
 
-                <Box
-                    display={{ base: isOpen ? "block" : "none", md: "block" }}
+                <Box display={{ base: isOpen ? "block" : "none", md: "block" }}
                     flexBasis={{ base: "100%", md: "auto" }}
                 >
-                    <Stack
-                        spacing={8} align="center" pt={[4, 4, 0, 0]}
-                        justify={["center", "space-between", "flex-end", "flex-end"]}
-                        direction={["column", "row", "row", "row"]}
+                    <Stack spacing={8} align="center" pt={[4, 4, 0, 0]} justify={["center", "space-between", "flex-end", "flex-end"]} direction={["column", "row", "row", "row"]}
                     >
                         {/* if logged in  */}
                         <Link href='/'>
                             <Text display="block" color='white'>Home</Text>
                         </Link>
-
 
                         {/* if logged in  */}
                         <Menu>

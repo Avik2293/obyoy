@@ -70,6 +70,7 @@ const Profile = () => {
                             <Text fontWeight={'bold'} >Email : Dummy</Text>
                             <Text fontWeight={'bold'} >Address : Dummy</Text>
                             <Text fontWeight={'bold'} >Birthday: 22 March, 1993</Text>
+
                             <Text fontWeight={'bold'} textAlign={'center'} my={1}>:: :: ::</Text>
                             <Text fontWeight={'bold'} >Date of Join : 22 March, 2022</Text>
                             <Text fontWeight={'bold'} >Total Working Days : 356 Days</Text>
@@ -78,7 +79,6 @@ const Profile = () => {
                             <Text fontWeight={'bold'} >Total Withdraw : Tk. 1345.56</Text>
                             <Text fontWeight={'bold'} >For Approve : Tk. 35.56</Text>
                             <Text fontWeight={'bold'} >Today's Contribution : Tk. 5.56</Text>
-
                         </Box>
                     </VStack>
 
@@ -89,7 +89,9 @@ const Profile = () => {
                             Learder Board Place : 22
                         </Text>
 
-                        <Button bgColor={'teal'} p={2} my={1} borderRadius={'lg'} color={'white'} onClick={() => setImg(!img)}>
+                        <Button bgColor={'teal'} p={2} my={1} borderRadius={'lg'} color={'white'}
+                            onClick={() => setImg(!img)}
+                        >
                             Change Your Photo
                         </Button>
 
@@ -105,7 +107,9 @@ const Profile = () => {
                             </>
                         }
 
-                        <Button bgColor={'blue'} p={2} my={8} borderRadius={'lg'} color={'white'} onClick={() => setStart(!start)}>
+                        <Button bgColor={'blue'} p={2} my={8} borderRadius={'lg'} color={'white'}
+                            onClick={() => setStart(!start)}
+                        >
                             Edit Personal Info
                         </Button>
                     </VStack>
@@ -121,39 +125,39 @@ const Profile = () => {
                                 Profile Details
                             </Heading>
 
-
                             <FormControl id="name" >
                                 <FormLabel fontWeight={'bold'}>Name</FormLabel>
-                                <Input type="name" placeholder='Your Name' px={2} w={'330px'} onChange={(e) => setName(e.target.value)} value={name} />
+                                <Input type="name" placeholder='Your Name' px={2} w={'330px'}
+                                    onChange={(e) => setName(e.target.value)} value={name} />
                             </FormControl>
 
                             <FormControl id="email" >
                                 <FormLabel fontWeight={'bold'}>Email</FormLabel>
-                                <Input type="email" placeholder='Your Email' px={2} w={'330px'} onChange={(e) => setEmail(e.target.value)} value={email} />
+                                <Input type="email" placeholder='Your Email' px={2} w={'330px'}
+                                    onChange={(e) => setEmail(e.target.value)} value={email} />
                             </FormControl>
 
                             <FormControl id="address" >
                                 <FormLabel fontWeight={'bold'}>Address</FormLabel>
-                                <Input type="address" placeholder='Your Address' px={2} w={'330px'} onChange={(e) => setAddress(e.target.value)} value={address} />
+                                <Input type="address" placeholder='Your Address' px={2} w={'330px'}
+                                    onChange={(e) => setAddress(e.target.value)} value={address} />
                             </FormControl>
 
                             <FormControl id="birthday" >
                                 <FormLabel fontWeight={'bold'}>Birthday</FormLabel>
                                 <Input
                                     // type="datetime-local"
-                                    type="date" placeholder='Your Birthday' px={2} w={'330px'} onChange={(e) => setBirthday(e.target.value)} value={birthday} />
+                                    type="date" placeholder='Your Birthday' px={2} w={'330px'}
+                                    onChange={(e) => setBirthday(e.target.value)} value={birthday} />
                             </FormControl>
 
                             <HStack justify={'space-between'} spacing={16}>
                                 <Button bgColor={'blue'} p={2} my={8} borderRadius={'lg'} color={'white'} type='submit'
-                                >
-                                    Submit
-                                </Button>
+                                >Submit</Button>
 
-                                <Button bgColor={'black'} p={2} my={8} borderRadius={'lg'} color={'white'} onClick={() => setStart(!start)}
-                                >
-                                    Cancel
-                                </Button>
+                                <Button bgColor={'black'} p={2} my={8} borderRadius={'lg'} color={'white'}
+                                    onClick={() => setStart(!start)}
+                                >Cancel</Button>
                             </HStack>
                         </VStack>
                     </Form>

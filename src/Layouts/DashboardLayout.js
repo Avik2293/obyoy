@@ -12,7 +12,7 @@ const DashboardLayout = () => {
 
             <Outlet></Outlet>
 
-            <Link to='/dashboard'>Dashboard Link</Link>
+            {/* <Link to='/dashboard'>Dashboard Link</Link> */}
 
             <Footer></Footer>
         </div>

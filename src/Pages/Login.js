@@ -3,7 +3,6 @@ import { forwardRef, useRef } from 'react';
 
 import { chakra, createIcon, IconButton, InputGroup, InputRightElement, useDisclosure, useMergeRefs, Button, ButtonGroup, VisuallyHidden, Box, Checkbox, Container, Divider, FormControl, FormLabel, Heading, HStack, Input, Link, Stack, Text, } from '@chakra-ui/react';
 import { Form, Link as ReactRouterLink } from 'react-router-dom';
-
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 
 
@@ -93,7 +92,6 @@ const OAuthButtonGroup = () => (
 
 
 const Login = () => {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -176,9 +174,7 @@ const Login = () => {
 
                                 <Stack spacing="4">
                                     <Button bgColor={'blue'} p={1} borderRadius={'lg'} color={'white'} type='submit'
-                                    >
-                                        Sign in
-                                    </Button>
+                                    >Sign in</Button>
 
                                     <HStack>
                                         <Divider />
