@@ -69,11 +69,21 @@ const WithdrawalHistory = () => {
 
     return (
         <>
-            <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={1} p={1}>Withdraw Data for User ID: {id}</Text>
+            <Text fontSize="lg" fontWeight="bold"
+                color='black' textAlign={'center'}
+                my={1} p={1}
+            >
+                Withdraw Data for User ID: {id}</Text>
 
             <TableContainer >
                 <VStack mx={'auto'} minWidth={"1200px"}>
-                    <HStack justify={'space-evenly'} textAlign={'center'} fontWeight={'bold'} gap={6} whiteSpace="break-spaces">
+                    <HStack
+                        justify={'space-evenly'}
+                        textAlign={'center'}
+                        fontWeight={'bold'}
+                        gap={6}
+                        whiteSpace="break-spaces"
+                    >
                         <Text w={'30px'} >No.</Text>
                         <Text w={'80px'} >Withdraw ID</Text>
                         <Text w={'120px'} >Withdraw Date</Text>
@@ -88,7 +98,12 @@ const WithdrawalHistory = () => {
 
                     {
                         userWithdrawalData.map((td, i) =>
-                            <HStack key={i} justify={'space-evenly'} textAlign={'center'} gap={6} whiteSpace="break-spaces">
+                            <HStack key={i}
+                                justify={'space-evenly'}
+                                gap={6}
+                                textAlign={'center'}
+                                whiteSpace="break-spaces"
+                            >
                                 <Text w={'30px'}>{i + 1}</Text>
                                 <Text w={'80px'} >{td?.withdraw_id}</Text>
                                 <Text w={'120px'} >{td?.withdraw_date}</Text>

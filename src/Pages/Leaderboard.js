@@ -39,17 +39,41 @@ const Leaderboard = () => {
         },
     ];
 
-    return (
-        <Container pb={{ base: '2', md: '4', }} px={{ base: '3', md: '8', }} maxWidth={"1200px"} mx={'auto'} >
-            <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={2} p={3}
-            >Leaderboard Full List</Text>
 
-            <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} mb={2} p={3}
-            >Your Leaderboard No. : 22</Text>
+    return (
+        <Container
+            pb={{ base: '2', md: '4', }}
+            px={{ base: '3', md: '8', }}
+            maxWidth={"1200px"}
+            mx={'auto'}
+        >
+            <Text
+                fontSize="lg"
+                fontWeight="bold"
+                color='black'
+                textAlign={'center'}
+                my={2}
+                p={3}
+            >
+                Leaderboard Full List</Text>
+
+            <Text
+                fontSize="lg"
+                fontWeight="bold"
+                color='black'
+                textAlign={'center'}
+                mb={2}
+                p={3}
+            >
+                Your Leaderboard No. : 22</Text>
 
             < TableContainer >
                 <VStack mx={'auto'} minWidth={"800px"}>
-                    <HStack justify={'space-between'} textAlign={'center'} fontWeight={'bold'}>
+                    <HStack
+                        justify={'space-between'}
+                        textAlign={'center'}
+                        fontWeight={'bold'}
+                    >
                         <Text w={'30px'} >No.</Text>
                         <Text w={'170px'}>Name</Text>
                         <Text w={'170px'}>Since</Text>
@@ -59,7 +83,10 @@ const Leaderboard = () => {
 
                     {
                         tableData.map((td, i) =>
-                            <HStack key={i} justify={'space-evenly'} textAlign={'center'}>
+                            <HStack key={i}
+                                justify={'space-evenly'}
+                                textAlign={'center'}
+                            >
                                 <Text w={'30px'}>{i + 1}</Text>
                                 <Text w={'170px'}>{td.name + ' ' + (i + 1)}</Text>
                                 <Text w={'170px'}>{td.joining_date}</Text>
@@ -71,7 +98,10 @@ const Leaderboard = () => {
 
                     {
                         tableData.map((td, i) =>
-                            <HStack key={i} justify={'space-evenly'} textAlign={'center'}>
+                            <HStack key={i}
+                                justify={'space-evenly'}
+                                textAlign={'center'}
+                            >
                                 <Text w={'30px'}>{i + 1}</Text>
                                 <Text w={'170px'}>{td.name + ' ' + (i + 1)}</Text>
                                 <Text w={'170px'}>{td.joining_date}</Text>

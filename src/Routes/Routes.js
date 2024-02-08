@@ -15,43 +15,40 @@ import WithdrawalHistory from "../Pages/WithdrawalHistory";
 export const routes = createBrowserRouter([
     {
         path: '/',
-        element: <Main></Main>,
+        element: <Main />,
         // errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
                 // loader: () => fetch('https://re-books-server.vercel.app/'),
-                element: <Home></Home>
+                element: <Home />
             },
             {
                 path: '/profile',
-                // loader: () => fetch('https://re-books-server.vercel.app/'),
-                element: <Profile></Profile>
+                element: <Profile />
             },
             {
                 path: '/leaderboard',
-                // loader: () => fetch('https://re-books-server.vercel.app/'),
-                element: <Leaderboard></Leaderboard>
+                element: <Leaderboard />
             },
             {
                 path: '/withdraw',
-                // loader: () => fetch('https://re-books-server.vercel.app/'),
-                element: <Withdraw></Withdraw>
+                element: <Withdraw />
             },
         ]
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <DashboardLayout />,
         // errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/dashboard',
-                element: <Dashboard></Dashboard>
+                element: <Dashboard />
             },
             {
                 path: '/dashboard/withdraw/history/:id',
-                element: <WithdrawalHistory></WithdrawalHistory>
+                element: <WithdrawalHistory />
             },
             // {
             //     path: '/dashboard/payment/:id',
@@ -63,10 +60,10 @@ export const routes = createBrowserRouter([
     },
     {
         path: '/login',
-        element: <Login></Login>
+        element: <Login />
     },
     {
         path: '/register',
-        element: <Register></Register>
+        element: <Register />
     },
 ]);

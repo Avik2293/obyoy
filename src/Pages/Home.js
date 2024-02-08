@@ -24,51 +24,91 @@ const Home = () => {
     };
 
     return (
-        <Container pb={{ base: '2', md: '4', }} px={{ base: '3', md: '8', }} maxWidth={"1400px"} mx={'auto'} >
-            <Grid gap={4} templateRows='repeat(3, 1fr)' templateColumns='repeat(5, 1fr)'
+        <Container
+            pb={{ base: '2', md: '4', }}
+            px={{ base: '3', md: '8', }}
+            maxWidth={"1400px"}
+            mx={'auto'}
+        >
+            <Grid
+                gap={4}
+                templateRows='repeat(3, 1fr)'
+                templateColumns='repeat(5, 1fr)'
             >
                 {/* left side part */}
-                <GridItem rowSpan={3} colSpan={[5, 5, 2, 2, 1]} bg='papayawhip' boxShadow='2xl' p='6' rounded='md' >
-                    <Text w="" fontSize="lg" fontWeight="bold" color='blue' textAlign={'center'} my={5}
-                    >Leaderboard (Balance)</Text>
+                <GridItem
+                    rowSpan={3}
+                    colSpan={[5, 5, 2, 2, 1]}
+                    bg='papayawhip'
+                    boxShadow='2xl'
+                    p='6'
+                    rounded='md'
+                >
+                    <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        color='blue'
+                        textAlign={'center'}
+                        my={5}
+                    >
+                        Leaderboard (Balance)</Text>
 
-                    <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={5}
-                    >Top 5</Text>
+                    <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        color='black'
+                        textAlign={'center'}
+                        my={5}
+                    >
+                        Top 5</Text>
 
                     {
-                        <>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >1. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >2. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >3. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >4. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >5. dummy (234423 tk)</Text>
-                        </>
+                        <Box
+                            fontSize="md"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                        >
+                            <Text>1. dummy (234423 tk)</Text>
+                            <Text>2. dummy (234423 tk)</Text>
+                            <Text>3. dummy (234423 tk)</Text>
+                            <Text>4. dummy (234423 tk)</Text>
+                            <Text>5. dummy (234423 tk)</Text>
+                        </Box>
                     }
 
-                    <Text w="" fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} my={5}
-                    >Next Top 5</Text>
+                    <Text
+                        fontSize="lg"
+                        fontWeight="semibold"
+                        color='black'
+                        textAlign={'center'}
+                        my={5}
+                    >
+                        Next Top 5</Text>
 
                     {
-                        <>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >6. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >7. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >8. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >9. dummy (234423 tk)</Text>
-                            <Text w="" fontSize="md" fontWeight="bold" color='black' textAlign={'center'}
-                            >10. dummy (234423 tk)</Text>
-                        </>
+                        <Box
+                            fontSize="md"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                        >
+                            <Text>6. dummy (234423 tk)</Text>
+                            <Text>7. dummy (234423 tk)</Text>
+                            <Text>8. dummy (234423 tk)</Text>
+                            <Text>9. dummy (234423 tk)</Text>
+                            <Text>10. dummy (234423 tk)</Text>
+                        </Box>
                     }
 
-                    <Text w="" fontSize="md" fontWeight="bold" color='blue' textAlign={'center'} mt={10} _hover={{ textDecoration: 'underline' }}>
+                    <Text
+                        fontSize="md"
+                        fontWeight="bold"
+                        color='blue'
+                        textAlign={'center'}
+                        mt={10}
+                        _hover={{ textDecoration: 'underline' }}
+                    >
                         <ChakraLink as={ReactRouterLink} to='/leaderboard' >
                             See Full List
                         </ChakraLink>
@@ -76,18 +116,45 @@ const Home = () => {
                 </GridItem>
 
                 {/* middle part */}
-                <GridItem rowSpan={3} colSpan={[5, 5, 3, 3, 3]} boxShadow='dark-lg' p='6' rounded='md' >
+                <GridItem
+                    rowSpan={3}
+                    colSpan={[5, 5, 3, 3, 3]}
+                    boxShadow='dark-lg'
+                    p='6'
+                    rounded='md'
+                >
 
                     {
                         !start &&
                         <>
-                            <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} mb={2}
-                            >Welcome,</Text>
-                            <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={2}
-                            >Click "Start" to start translate.</Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color='black'
+                                textAlign={'center'}
+                                mb={2}
+                            >
+                                Welcome,</Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color='black'
+                                textAlign={'center'}
+                                my={2}
+                            >
+                                Click "Start" to start translate.</Text>
 
                             <Text textAlign={'center'} my={2}>
-                                <Button rightIcon={<IoArrowForwardCircleOutline />} size="lg" bg={"blue"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} onClick={() => setStart(!start)}
+                                <Button
+                                    rightIcon={<IoArrowForwardCircleOutline />}
+                                    size="lg"
+                                    bg={"blue"}
+                                    color={"white"}
+                                    _hover={{ bg: "blue.500" }}
+                                    px={4}
+                                    py={1}
+                                    borderRadius={'lg'}
+                                    onClick={() => setStart(!start)}
                                 >
                                     Start
                                 </Button>
@@ -98,36 +165,84 @@ const Home = () => {
                     {
                         start &&
                         <Box>
-                            <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={4}
-                            >Line 1</Text>
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color='black'
+                                textAlign={'center'}
+                                my={4}
+                            >
+                                Line 1</Text>
 
-                            <Text border='2px' borderColor='gray' borderRadius="md" fontSize="lg" fontWeight="semibold" bg={'gray'} color='white' textAlign={'center'} my={2} p={3} h={[null, '150px', '150px', '100px']}
-                            >.........................................
+                            <Text
+                                border='2px'
+                                borderColor='gray'
+                                borderRadius="md"
+                                fontSize="lg"
+                                fontWeight="semibold"
+                                bg={'gray'}
+                                color='white'
+                                textAlign={'center'}
+                                my={2}
+                                p={3}
+                                h={[null, '150px', '150px', '100px']}
+                            >
+                                .........................................
                                 ..........................................................
                                 ....................................................</Text>
 
                             {/* <Form onSubmit={handleSubmit}> */}
                             <Form>
-                                <Input name="input" id="input" variant='filled' width='100%' p={3} my={3} placeholder='Type your input here..' onChange={handleInputChange} required value={input} h={[null, '150px', '150px', '100px']} />
+                                <Input
+                                    name="input"
+                                    id="input"
+                                    variant='filled'
+                                    width='100%'
+                                    p={3}
+                                    my={3}
+                                    placeholder='Type your input here..'
+                                    onChange={handleInputChange}
+                                    required
+                                    value={input}
+                                    h={[null, '150px', '150px', '100px']}
+                                />
 
                                 <HStack justify={'space-evenly'}>
                                     <Text textAlign={'center'} my={2}>
-                                        <Button size="lg" bg={"blue"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} type='submit' onClick={(event) => {
-                                            if (input) {
-                                                handleSubmit(event);
-                                            }
-                                        }}
+                                        <Button
+                                            size="lg"
+                                            bg={"blue"}
+                                            color={"white"}
+                                            _hover={{ bg: "blue.500" }}
+                                            px={4}
+                                            py={1}
+                                            borderRadius={'lg'}
+                                            type='submit'
+                                            onClick={(event) => {
+                                                if (input) {
+                                                    handleSubmit(event);
+                                                }
+                                            }}
                                         >
                                             Submit
                                         </Button>
                                     </Text>
 
                                     <Text textAlign={'end'} my={2}>
-                                        <Button size="lg" bg={"blue"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} type='submit' onClick={(event) => {
-                                            if (input) {
-                                                handleSubmitNext(event);
-                                            }
-                                        }}
+                                        <Button
+                                            size="lg"
+                                            bg={"blue"}
+                                            color={"white"}
+                                            _hover={{ bg: "blue.500" }}
+                                            px={4}
+                                            py={1}
+                                            borderRadius={'lg'}
+                                            type='submit'
+                                            onClick={(event) => {
+                                                if (input) {
+                                                    handleSubmitNext(event);
+                                                }
+                                            }}
                                         >
                                             Submit & Next
                                         </Button>
@@ -139,34 +254,65 @@ const Home = () => {
                 </GridItem>
 
                 {/* right side part */}
-                <GridItem rowSpan={3} colSpan={[5, 5, 2, 2, 1]} bg='papayawhip' boxShadow='2xl' p='6' rounded='md' >
-                    <Text w="" fontSize="lg" fontWeight="bold" color='blue' textAlign={'center'} my={5}>Profile</Text>
+                <GridItem
+                    rowSpan={3}
+                    colSpan={[5, 5, 2, 2, 1]}
+                    bg='papayawhip'
+                    boxShadow='2xl'
+                    p='6'
+                    rounded='md'
+                >
+                    <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        color='blue'
+                        textAlign={'center'}
+                        my={5}
+                    >
+                        Profile</Text>
 
-                    <Image borderRadius='full' boxSize='50px' mx={'auto'}
-                        src='https://bit.ly/dan-abramov' alt='Dan Abram'
+                    <Image
+                        borderRadius='full'
+                        boxSize='50px'
+                        mx={'auto'}
+                        src='https://bit.ly/dan-abramov'
+                        alt='Dan Abram'
                     />
 
-                    <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={1}>dummy </Text>
+                    <Text
+                        fontSize="lg"
+                        fontWeight="bold"
+                        color='black'
+                        textAlign={'center'}
+                        my={1}
+                    >
+                        dummy </Text>
 
-                    <Text w="" fontSize="sm" fontWeight="bold" color='black' textAlign={'center'}
-                    >Date of Join: 22 March, 2022</Text>
-                    <Text w="" fontSize="sm" fontWeight="bold" color='black' textAlign={'center'}
-                    >Total Working Days: 356 Days</Text>
+                    <Box
+                        fontSize="sm"
+                        fontWeight="bold"
+                        color='black'
+                        textAlign={'center'}
+                    >
+                        <Text>Date of Join: 22 March, 2022</Text>
+                        <Text >Total Working Days: 356 Days</Text>
+                    </Box>
 
-                    <Text w="" fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} mt={6}
-                    >Balance</Text>
-                    <Text w="" fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} my={1}
-                    >::: Tk. 345.56 :::</Text>
+                    <Box
+                        fontSize="lg"
+                        fontWeight="semibold"
+                        color='black'
+                        textAlign={'center'}
+                    >
+                        <Text mt={6}>Balance</Text>
+                        <Text my={1}>::: Tk. 345.56 :::</Text>
 
-                    <Text w="" fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} mt={6}
-                    >For Approve</Text>
-                    <Text w="" fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} my={1}
-                    >::: Tk. 35.56 :::</Text>
+                        <Text mt={6}>For Approve</Text>
+                        <Text my={1}>::: Tk. 35.56 :::</Text>
 
-                    <Text w="" fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} mt={6}
-                    >Today's Contribution</Text>
-                    <Text w="" fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} my={1}
-                    >::: Tk. 5.56 :::</Text>
+                        <Text mt={6}>Today's Contribution</Text>
+                        <Text my={1}>::: Tk. 5.56 :::</Text>
+                    </Box>
                 </GridItem>
             </Grid>
         </Container>
