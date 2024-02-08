@@ -1,14 +1,10 @@
 import './App.css';
 import { RouterProvider } from 'react-router-dom';
+import { ChakraBaseProvider } from '@chakra-ui/react';
 
 import { routes } from './Routes/Routes';
 
-// import {
-//   ChakraBaseProvider,
-//   extendBaseTheme,
-//   theme as chakraTheme,
-// } from '@chakra-ui/react';
-import { ChakraBaseProvider } from '@chakra-ui/react';
+
 
 // const { Button } = chakraTheme.components
 
