@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, } from "react-router-dom";
 
 import Main from "../Layouts/Main";
 import Home from "../Pages/Home";
@@ -9,6 +9,7 @@ import Dashboard from "../Pages/Dashboard";
 import Leaderboard from "../Pages/Leaderboard";
 import Profile from "../Pages/Profile";
 import Withdraw from "../Pages/Withdraw";
+import WithdrawalHistory from "../Pages/WithdrawalHistory";
 
 
 export const routes = createBrowserRouter([
@@ -47,6 +48,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/dashboard/withdraw/history/:id',
+                element: <WithdrawalHistory></WithdrawalHistory>
             },
             // {
             //     path: '/dashboard/payment/:id',

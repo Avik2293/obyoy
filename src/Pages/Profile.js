@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Heading, Container, Image, HStack, VStack, Text, Flex, Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { Form, Link as ReactRouterLink } from 'react-router-dom';
+import { Form, } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -13,7 +13,6 @@ const Profile = () => {
 
     // image upload 
     const [img, setImg] = useState(false);
-
     const [file, setFile] = useState();
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -51,7 +50,6 @@ const Profile = () => {
         setBirthday('');
         console.log(name, email, address, birthday);
         setStart(!start);
-
     };
 
     return (
