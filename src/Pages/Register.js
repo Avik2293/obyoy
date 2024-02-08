@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from "react";
 
 import { Flex, Box, FormControl, FormLabel, Input, InputGroup, HStack, InputRightElement, Stack, Button, Heading, useColorModeValue, chakra, Text, Link } from "@chakra-ui/react";
-import { Form, Link as ReactRouterLink } from 'react-router-dom';
+import { Form, } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const Logo = (props) => (

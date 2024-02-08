@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Container, HStack, Text, Box, GridItem, Grid, Link as ChakraLink, Image, Button, Input, } from '@chakra-ui/react'
-// import { Link } from 'react-router-dom';
 import { Form, Link as ReactRouterLink } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 

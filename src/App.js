@@ -1,27 +1,13 @@
-import './App.css';
 import { RouterProvider } from 'react-router-dom';
 import { ChakraBaseProvider } from '@chakra-ui/react';
 
 import { routes } from './Routes/Routes';
 
-
-
-// const { Button } = chakraTheme.components
-
-// const theme = extendBaseTheme({
-//   components: {
-//     Button,
-//   },
-// })
-
 function App() {
   return (
-    // <ChakraBaseProvider theme={theme}>
+    // <ChakraBaseProvider theme={theme}> 
     <ChakraBaseProvider>
-      {/* <div className="App"> */}
-      <div>
-        <RouterProvider router={routes}></RouterProvider>
-      </div>
+    	<RouterProvider router={routes}></RouterProvider>
     </ChakraBaseProvider >
   )
 }
