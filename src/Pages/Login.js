@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { forwardRef, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { chakra, createIcon, IconButton, InputGroup, InputRightElement, useDisclosure, useMergeRefs, Button, ButtonGroup, VisuallyHidden, Box, Checkbox, Container, Divider, FormControl, FormLabel, Heading, HStack, Input, Link, Stack, Text, } from '@chakra-ui/react';
 import { Form } from 'react-router-dom';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
+
+import { login } from '../Redux/Thunk/Login';
+import { selectIsLoggedIn } from '../Redux/Reducer';
 
 
 const Logo = (props) => (
@@ -97,6 +101,9 @@ const OAuthButtonGroup = () => (
 
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -115,6 +122,9 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         // event.preventDefault();
+
+        dispatch(login(email, password));
+
         setEmail('');
         setPassword('');
         console.log(email);
