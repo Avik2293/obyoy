@@ -3,14 +3,27 @@ import { Container, HStack, Text, Box, GridItem, Grid, Link as ChakraLink, Image
 import { Form, Link as ReactRouterLink } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
+// import { useDispatch, useSelector } from 'react-redux';
+// import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
+// import { selectIsLoggedIn, selectProfile } from '../Redux/Reducer';
+
 
 const Home = () => {
+    // const dispatch = useDispatch();
+    // const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+    // const profile = useSelector(state => selectProfile(state));
+    // dispatch(leaderboard());
+    // dispatch(newLine());
+
     const [start, setStart] = useState(false);
     const [input, setInput] = useState('')
     const handleInputChange = (e) => setInput(e.target.value)
 
     const handleSubmit = event => {
         // event.preventDefault();
+
+        // dispatch(translatedLine(newLine.id, input));
+
         setInput('');
         console.log(input);
         setStart(!start);

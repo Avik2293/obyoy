@@ -18,10 +18,15 @@ import {
 
 const initialState = {
     login: {
-        token: "",
-        user_id: "",
+        token: "1|233764s455teu8",
+        user_id: 2234,
         userName: "Tarif Ezaz",
-        profile: "",
+        profile: {
+            user_id: 2234,
+            userName: "Tarif Ezaz",
+            leaderboard_place: 45,
+            
+        },
         session_expiry: 0,
     },
     isFetching: false,
