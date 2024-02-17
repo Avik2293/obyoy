@@ -7,20 +7,6 @@ import { Provider } from 'react-redux';
 import { routes } from './Routes/Routes';
 import { configureStore } from './Redux/store';
 
-// import {
-//   ChakraBaseProvider,
-//   extendBaseTheme,
-//   theme as chakraTheme,
-// } from '@chakra-ui/react';
-
-// const { Button } = chakraTheme.components
-
-// const theme = extendBaseTheme({
-//   components: {
-//     Button,
-//   },
-// })
-
 function App() {
   const { store, persistor } = configureStore();
 
