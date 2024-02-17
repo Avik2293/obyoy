@@ -257,6 +257,7 @@ const Dashboard = () => {
             // rejecting the line 
         }
         setLineNo('');
+        console.log(lineNo);
         console.log(event);
         setStart(!start);
     };
@@ -269,6 +270,7 @@ const Dashboard = () => {
             // rejecting the line 
         }
         setLineNo('');
+        console.log(lineNo);
         console.log(event);
         // new line call 
     };
@@ -306,9 +308,21 @@ const Dashboard = () => {
 
 
     return (
-        <Container pb={{ base: '2', md: '4', }} px={{ base: '3', md: '8', }} maxWidth={"1400px"} mx={'auto'} >
-            <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={2} p={3}
-            >Admin Dashboard</Text>
+        <Container
+            pb={{ base: '2', md: '4', }}
+            px={{ base: '3', md: '8', }}
+            maxWidth={"1400px"}
+            mx={'auto'}
+        >
+            <Text
+                fontSize="lg"
+                fontWeight="bold"
+                color='black'
+                textAlign={'center'}
+                my={2}
+                p={3}
+            >
+                Admin Dashboard</Text>
 
             {/* specific user show modal */}
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -316,13 +330,42 @@ const Dashboard = () => {
                     bg='blackAlpha.300'
                     backdropFilter='blur(10px) hue-rotate(90deg)'
                 />
-                <ModalContent bg={'gray'} maxWidth={'400px'} mx={'auto'} my={'auto'} borderRadius={10} padding={5}>
-                    <ModalHeader fontSize='lg' fontWeight='bold' textAlign={'center'} color={'white'}>User Data for User No. : {selectedUserInfo?.user_id}</ModalHeader>
+                <ModalContent
+                    bg={'gray'}
+                    maxWidth={'400px'}
+                    mx={'auto'}
+                    my={'auto'}
+                    borderRadius={10}
+                    padding={5}
+                >
+                    <ModalHeader
+                        fontSize='lg'
+                        fontWeight='bold'
+                        textAlign={'center'}
+                        color={'white'}
+                    >
+                        User Data for User No. : {selectedUserInfo?.user_id}</ModalHeader>
+
                     {/* <ModalCloseButton /> */}
-                    <ModalBody fontWeight='semibold' textAlign={'center'} my={3}>
-                        <VStack justify={'space-evenly'} textAlign={'center'} whiteSpace="break-spaces">
+
+                    <ModalBody
+                        fontWeight='semibold'
+                        textAlign={'center'}
+                        my={3}
+                    >
+                        <VStack
+                            justify={'space-evenly'}
+                            textAlign={'center'}
+                            whiteSpace="break-spaces"
+                        >
                             <Text>
-                                <Image boxSize='50px' objectFit='cover' borderRadius='full' src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
+                                <Image
+                                    boxSize='50px'
+                                    objectFit='cover'
+                                    borderRadius='full'
+                                    src='https://bit.ly/dan-abramov'
+                                    alt='Dan Abramov'
+                                />
                             </Text>
                             <Text>Name: {selectedUserInfo?.name}</Text>
                             <Text>Email : {selectedUserInfo?.email}</Text>
@@ -331,21 +374,47 @@ const Dashboard = () => {
                             <Text>Joining Date : {selectedUserInfo?.joining_date}</Text>
                             <Text>Balance : {selectedUserInfo?.balance}</Text>
                             <Text>Remarks : {selectedUserInfo?.remarks}</Text>
+
                             <HStack justify={'space-between'}>
                                 <Text >
-                                    <Button bgColor={'blue'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleView(selectedUserInfo.user_id)}
-                                    >View Withdraw History</Button>
+                                    <Button
+                                        bgColor={'blue'}
+                                        p={1}
+                                        px={2}
+                                        mt={0}
+                                        borderRadius={'lg'}
+                                        color={'white'}
+                                        onClick={() => handleView(selectedUserInfo.user_id)}
+                                    >
+                                        View Withdraw History</Button>
                                 </Text>
+
                                 <Text w={'60px'} gap={1}>
-                                    <Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleDelete(selectedUserInfo.user_id)}
-                                    >Delete</Button>
+                                    <Button
+                                        bgColor={'red'}
+                                        p={1}
+                                        px={2}
+                                        mt={0}
+                                        borderRadius={'lg'}
+                                        color={'white'}
+                                        onClick={() => handleDelete(selectedUserInfo.user_id)}
+                                    >
+                                        Delete</Button>
                                 </Text>
                             </HStack>
                         </VStack>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button bgColor={'black'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={onClose}>
+                        <Button
+                            bgColor={'black'}
+                            p={1}
+                            px={2}
+                            mt={0}
+                            borderRadius={'lg'}
+                            color={'white'}
+                            onClick={onClose}
+                        >
                             Close
                         </Button>
                         {/* <Button variant='ghost'>Secondary Action</Button> */}
@@ -359,11 +428,34 @@ const Dashboard = () => {
                     bg='blackAlpha.300'
                     backdropFilter='blur(10px) hue-rotate(90deg)'
                 />
-                <ModalContent bg={'gray'} maxWidth={'400px'} mx={'auto'} my={'auto'} borderRadius={10} padding={5}>
-                    <ModalHeader fontSize='lg' fontWeight='bold' textAlign={'center'} color={'white'}>User Data for User No. : {selectedWithdrawInfo?.withdraw_id}</ModalHeader>
+                <ModalContent
+                    bg={'gray'}
+                    maxWidth={'400px'}
+                    mx={'auto'}
+                    my={'auto'}
+                    borderRadius={10}
+                    padding={5}
+                >
+                    <ModalHeader
+                        fontSize='lg'
+                        fontWeight='bold'
+                        textAlign={'center'}
+                        color={'white'}
+                    >
+                        User Data for User No. : {selectedWithdrawInfo?.withdraw_id}</ModalHeader>
+
                     {/* <ModalCloseButton /> */}
-                    <ModalBody fontWeight='semibold' textAlign={'center'} my={3}>
-                        <VStack justify={'space-evenly'} textAlign={'center'} whiteSpace="break-spaces">
+
+                    <ModalBody
+                        fontWeight='semibold'
+                        textAlign={'center'}
+                        my={3}
+                    >
+                        <VStack
+                            justify={'space-evenly'}
+                            textAlign={'center'}
+                            whiteSpace="break-spaces"
+                        >
                             <Text>Withdraw Date : {selectedWithdrawInfo?.withdraw_date}</Text>
                             <Text>Previous Balance : {selectedWithdrawInfo?.prev_balance}</Text>
                             <Text>Withdraw Amount : {selectedWithdrawInfo?.withdraw_amount}</Text>
@@ -374,18 +466,58 @@ const Dashboard = () => {
                             <Text>Remarks : {selectedWithdrawInfo?.remarks}</Text>
 
                             <HStack justify={'space-between'}>
-                                <Text><Button bgColor={'green'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleWithdrawApprove(selectedWithdrawInfo.withdraw_id)}
-                                >Approve</Button></Text>
-                                <Text><Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleWithdrawReject(selectedWithdrawInfo.withdraw_id)}
-                                >Reject</Button></Text>
-                                <Text><Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleWithdrawDelete(selectedWithdrawInfo.withdraw_id)}
-                                >Delete</Button></Text>
+                                <Text>
+                                    <Button
+                                        bgColor={'green'}
+                                        p={1}
+                                        px={2}
+                                        mt={0}
+                                        borderRadius={'lg'}
+                                        color={'white'}
+                                        onClick={() => handleWithdrawApprove(selectedWithdrawInfo.withdraw_id)}
+                                    >
+                                        Approve</Button>
+                                </Text>
+
+                                <Text>
+                                    <Button
+                                        bgColor={'red'}
+                                        p={1}
+                                        px={2}
+                                        mt={0}
+                                        borderRadius={'lg'}
+                                        color={'white'}
+                                        onClick={() => handleWithdrawReject(selectedWithdrawInfo.withdraw_id)}
+                                    >
+                                        Reject</Button>
+                                </Text>
+
+                                <Text>
+                                    <Button
+                                        bgColor={'red'}
+                                        p={1}
+                                        px={2}
+                                        mt={0}
+                                        borderRadius={'lg'}
+                                        color={'white'}
+                                        onClick={() => handleWithdrawDelete(selectedWithdrawInfo.withdraw_id)}
+                                    >
+                                        Delete</Button>
+                                </Text>
                             </HStack>
                         </VStack>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button bgColor={'black'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={onWithdrawClose}>
+                        <Button
+                            bgColor={'black'}
+                            p={1}
+                            px={2}
+                            mt={0}
+                            borderRadius={'lg'}
+                            color={'white'}
+                            onClick={onWithdrawClose}
+                        >
                             Close
                         </Button>
                         {/* <Button variant='ghost'>Secondary Action</Button> */}
@@ -400,24 +532,60 @@ const Dashboard = () => {
                 onClose={onDeleteClose}
             >
                 <AlertDialogOverlay bg='blackAlpha.300'
-                    backdropFilter='blur(10px) hue-rotate(90deg)'>
+                    backdropFilter='blur(10px) hue-rotate(90deg)'
+                >
 
-                    <AlertDialogContent bg={'gray'} maxWidth={'400px'} mx={'auto'} my={'auto'} borderRadius={10} padding={5}>
-                        <AlertDialogHeader fontSize='lg' fontWeight='bold' textAlign={'center'} color={'white'}>
+                    <AlertDialogContent
+                        bg={'gray'}
+                        maxWidth={'400px'}
+                        mx={'auto'}
+                        my={'auto'}
+                        borderRadius={10}
+                        padding={5}
+                    >
+                        <AlertDialogHeader
+                            fontSize='lg'
+                            fontWeight='bold'
+                            textAlign={'center'}
+                            color={'white'}
+                        >
                             Delete Customer
                         </AlertDialogHeader>
 
-                        <AlertDialogBody fontWeight='semibold' textAlign={'center'} my={3}>
+                        <AlertDialogBody
+                            fontWeight='semibold'
+                            textAlign={'center'}
+                            my={3}
+                        >
                             <Text>Are you sure?</Text>
                             <Text>You want to delete this?</Text>
                             <Text>You can't undo this action afterwards.</Text>
                         </AlertDialogBody>
 
                         <AlertDialogFooter>
-                            <Button ref={cancelRef} bgColor={'black'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={onDeleteClose}>
+                            <Button
+                                ref={cancelRef}
+                                bgColor={'black'}
+                                p={1}
+                                px={2}
+                                mt={0}
+                                borderRadius={'lg'}
+                                color={'white'}
+                                onClick={onDeleteClose}
+                            >
                                 Cancel
                             </Button>
-                            <Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={onDeleteClose} ml={3}>
+
+                            <Button
+                                bgColor={'red'}
+                                p={1}
+                                px={2}
+                                mt={0}
+                                borderRadius={'lg'}
+                                color={'white'}
+                                onClick={onDeleteClose}
+                                ml={3}
+                            >
                                 Delete
                             </Button>
                         </AlertDialogFooter>
@@ -427,31 +595,118 @@ const Dashboard = () => {
 
             <Tabs >
                 <TabList mb='1em'>
-                    <Tab px={[null, 3, 12,]} py={2} _selected={{ px: 12, py: 2, borderX: '2px', borderTop: '2px', borderColor: 'gray', borderRadius: 7 }}>All User</Tab>
-                    <Tab px={[null, 3, 12,]} py={2} _selected={{ px: 12, py: 2, borderX: '2px', borderTop: '2px', borderColor: 'gray', borderRadius: 7 }}>File Input</Tab>
-                    <Tab px={[null, 3, 12,]} py={2} _selected={{ px: 12, py: 2, borderX: '2px', borderTop: '2px', borderColor: 'gray', borderRadius: 7 }}>Approve Translate</Tab>
-                    <Tab px={[null, 3, 12,]} py={2} _selected={{ px: 12, py: 2, borderX: '2px', borderTop: '2px', borderColor: 'gray', borderRadius: 7 }}>Withdraw Request</Tab>
+                    <Tab
+                        px={[null, 3, 12,]}
+                        py={2}
+                        _selected={{
+                            px: 12,
+                            py: 2,
+                            borderX: '2px',
+                            borderTop: '2px',
+                            borderColor: 'gray',
+                            borderRadius: 7
+                        }}
+                    >
+                        All User</Tab>
+
+                    <Tab
+                        px={[null, 3, 12,]}
+                        py={2}
+                        _selected={{
+                            px: 12,
+                            py: 2,
+                            borderX: '2px',
+                            borderTop: '2px',
+                            borderColor: 'gray',
+                            borderRadius: 7
+                        }}
+                    >
+                        File Input</Tab>
+
+                    <Tab
+                        px={[null, 3, 12,]}
+                        py={2}
+                        _selected={{
+                            px: 12,
+                            py: 2,
+                            borderX: '2px',
+                            borderTop: '2px',
+                            borderColor: 'gray',
+                            borderRadius: 7
+                        }}
+                    >
+                        Approve Translate</Tab>
+
+                    <Tab
+                        px={[null, 3, 12,]}
+                        py={2}
+                        _selected={{
+                            px: 12,
+                            py: 2,
+                            borderX: '2px',
+                            borderTop: '2px',
+                            borderColor: 'gray',
+                            borderRadius: 7
+                        }}
+                    >
+                        Withdraw Request</Tab>
                 </TabList>
 
                 <TabPanels>
                     {/* All user  */}
                     <TabPanel>
-                        <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={1} p={1}
-                        >User Management</Text>
+                        <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                            my={1}
+                            p={1}
+                        >
+                            User Management</Text>
 
                         {/* for search  */}
-                        <Box p={'4'} mb={6} boxShadow={'md'} maxWidth={'500px'} mx={'auto'}>
-                            <Text fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} my={1} p={1}
-                            >Search for Specific User</Text>
+                        <Box
+                            p={'4'}
+                            mb={6}
+                            boxShadow={'md'}
+                            maxWidth={'500px'}
+                            mx={'auto'}
+                        >
+                            <Text
+                                fontSize="lg"
+                                fontWeight="semibold"
+                                color='black'
+                                textAlign={'center'}
+                                my={1}
+                                p={1}
+                            >
+                                Search for Specific User</Text>
 
                             <Form>
                                 <FormControl isRequired>
                                     <HStack>
                                         <FormLabel htmlFor="selectedUser" fontWeight={'bold'} >User ID</FormLabel>
-                                        <Input id="selectedUser" type="text" placeholder='User ID' px={2} w={'300px'} onChange={(e) => setSelectedUser(e.target.value)} value={selectedUser} isRequired />
+                                        <Input
+                                            id="selectedUser"
+                                            type="text"
+                                            placeholder='User ID'
+                                            px={2}
+                                            w={'300px'}
+                                            onChange={(e) => setSelectedUser(e.target.value)}
+                                            value={selectedUser}
+                                            isRequired
+                                        />
 
-                                        <Button bgColor={selectedUser ? 'blue' : 'gray'} p={1} borderRadius={'lg'} color={'white'} isDisabled={selectedUser ? false : true} onClick={() => handleUserView(selectedUser)}
-                                        >Show</Button>
+                                        <Button
+                                            bgColor={selectedUser ? 'blue' : 'gray'}
+                                            p={1}
+                                            borderRadius={'lg'}
+                                            color={'white'}
+                                            isDisabled={selectedUser ? false : true}
+                                            onClick={() => handleUserView(selectedUser)}
+                                        >
+                                            Show</Button>
                                     </HStack>
                                 </FormControl>
                             </Form>
@@ -460,7 +715,13 @@ const Dashboard = () => {
                         {/* user table  */}
                         <TableContainer >
                             <VStack mx={'auto'} minWidth={"1200px"}>
-                                <HStack justify={'space-evenly'} textAlign={'center'} fontWeight={'bold'} gap={6} whiteSpace="break-spaces">
+                                <HStack
+                                    justify={'space-evenly'}
+                                    textAlign={'center'}
+                                    fontWeight={'bold'}
+                                    gap={6}
+                                    whiteSpace="break-spaces"
+                                >
                                     <Text w={'70px'} >No.</Text>
                                     <Text w={'60px'} >User ID</Text>
                                     <Text w={'60px'} >Photo</Text>
@@ -477,11 +738,22 @@ const Dashboard = () => {
 
                                 {
                                     userTableData.map((td, i) =>
-                                        <HStack key={i} justify={'space-evenly'} textAlign={'center'} gap={6} whiteSpace="break-spaces">
+                                        <HStack key={i}
+                                            justify={'space-evenly'}
+                                            textAlign={'center'}
+                                            gap={6}
+                                            whiteSpace="break-spaces"
+                                        >
                                             <Text w={'70px'}>{i + 1}</Text>
                                             <Text w={'60px'} >{td?.user_id}</Text>
                                             <Text w={'60px'} >
-                                                <Image boxSize='50px' objectFit='cover' borderRadius='full' src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
+                                                <Image
+                                                    boxSize='50px'
+                                                    objectFit='cover'
+                                                    borderRadius='full'
+                                                    src='https://bit.ly/dan-abramov'
+                                                    alt='Dan Abramov'
+                                                />
                                             </Text>
                                             <Text w={'120px'} >{td?.name}</Text>
                                             <Text w={'130px'} >{td?.email}</Text>
@@ -492,13 +764,30 @@ const Dashboard = () => {
                                             <Text w={'120px'} >{td?.remarks}</Text>
                                             <Text w={'60px'} gap={1}>
                                                 {/* <Link href='/dashboard/withdraw/history/:id'> */}
-                                                <Button bgColor={'blue'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleView(td.user_id)}
-                                                >View</Button>
+                                                <Button
+                                                    bgColor={'blue'}
+                                                    p={1}
+                                                    px={2}
+                                                    mt={0}
+                                                    borderRadius={'lg'}
+                                                    color={'white'}
+                                                    onClick={() => handleView(td.user_id)}
+                                                >
+                                                    View</Button>
                                                 {/* </Link> */}
                                             </Text>
+
                                             <Text w={'60px'} gap={1}>
-                                                <Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleDelete(td.user_id)}
-                                                >Delete</Button>
+                                                <Button
+                                                    bgColor={'red'}
+                                                    p={1}
+                                                    px={2}
+                                                    mt={0}
+                                                    borderRadius={'lg'}
+                                                    color={'white'}
+                                                    onClick={() => handleDelete(td.user_id)}
+                                                >
+                                                    Delete</Button>
                                             </Text>
                                         </HStack>
                                     )
@@ -509,30 +798,66 @@ const Dashboard = () => {
 
                     {/* file input  */}
                     <TabPanel>
-                        <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={1} p={1}
-                        >Upload a File Translate</Text>
+                        <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                            my={1}
+                            p={1}
+                        >
+                            Upload a File Translate</Text>
 
                         {/* for Upload  */}
-                        <Box p={'4'} mb={6} boxShadow={'md'} maxWidth={'500px'} mx={'auto'}>
+                        <Box
+                            p={'4'}
+                            mb={6}
+                            boxShadow={'md'}
+                            maxWidth={'500px'}
+                            mx={'auto'}
+                        >
 
                             <Box>
-                                <Input type="file" onChange={handleFileChange} />
+                                <Input type="file"
+                                    onChange={handleFileChange}
+                                />
+
                                 <div>
                                     {file && `${file.name} - ${file.type}`}
                                 </div>
 
-                                <Button bgColor={file ? 'blue' : 'gray'} p={1} mt={2} borderRadius={'lg'} color={'white'} isDisabled={file ? false : true} onClick={handleUploadClick}>Upload</Button>
-
+                                <Button
+                                    bgColor={file ? 'blue' : 'gray'}
+                                    p={1} mt={2}
+                                    borderRadius={'lg'}
+                                    color={'white'}
+                                    isDisabled={file ? false : true}
+                                    onClick={handleUploadClick}
+                                >
+                                    Upload</Button>
                             </Box>
                         </Box>
 
-                        <Text fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} my={1} p={1}
-                        >All files Info</Text>
+                        <Text
+                            fontSize="lg"
+                            fontWeight="semibold"
+                            color='black'
+                            textAlign={'center'}
+                            my={1}
+                            p={1}
+                        >
+                            All files Info</Text>
 
                         {/* file table  */}
                         <TableContainer >
                             <VStack mx={'auto'} minWidth={"1200px"}>
-                                <HStack justify={'space-evenly'} textAlign={'center'} fontWeight={'bold'} gap={6} whiteSpace="break-spaces">
+                                <HStack
+                                    justify={'space-evenly'}
+                                    textAlign={'center'}
+                                    fontWeight={'bold'}
+                                    gap={6}
+                                    whiteSpace="break-spaces"
+                                >
                                     <Text w={'30px'} >No.</Text>
                                     <Text w={'70px'} >File ID</Text>
                                     <Text w={'70px'} >Name</Text>
@@ -547,7 +872,12 @@ const Dashboard = () => {
 
                                 {
                                     fileTableData.map((td, i) =>
-                                        <HStack key={i} justify={'space-evenly'} textAlign={'center'} gap={6} whiteSpace="break-spaces">
+                                        <HStack key={i}
+                                            justify={'space-evenly'}
+                                            textAlign={'center'}
+                                            gap={6}
+                                            whiteSpace="break-spaces"
+                                        >
                                             <Text w={'30px'} >{i + 1}</Text>
                                             <Text w={'70px'} >{td?.file_id}</Text>
                                             <Text w={'70px'} >{td?.file_name}</Text>
@@ -558,8 +888,16 @@ const Dashboard = () => {
                                             <Text w={'70px'} >{td?.finished_line}</Text>
                                             <Text w={'120px'} >{td?.remarks}</Text>
                                             <Text w={'60px'} gap={1}>
-                                                <Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleDeleteFile(td.file_id)}
-                                                >Delete</Button>
+                                                <Button
+                                                    bgColor={'red'}
+                                                    p={1}
+                                                    px={2}
+                                                    mt={0}
+                                                    borderRadius={'lg'}
+                                                    color={'white'}
+                                                    onClick={() => handleDeleteFile(td.file_id)}
+                                                >
+                                                    Delete</Button>
                                             </Text>
                                         </HStack>
                                     )
@@ -570,19 +908,48 @@ const Dashboard = () => {
 
                     {/* approve translate  */}
                     <TabPanel>
-                        <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={1} p={1}
-                        >Translate Management</Text>
+                        <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                            my={1}
+                            p={1}
+                        >
+                            Translate Management</Text>
 
                         {
                             !start &&
                             <>
-                                <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} mb={2}
-                                >...</Text>
-                                <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={2}
-                                >Click "Start" to start approving translate.</Text>
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    mb={2}
+                                >
+                                    ...</Text>
+
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    my={2}
+                                >
+                                    Click "Start" to start approving translate.</Text>
 
                                 <Text textAlign={'center'} my={2}>
-                                    <Button rightIcon={<IoArrowForwardCircleOutline />} size="lg" bg={"blue"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} onClick={() => setStart(!start)}
+                                    <Button
+                                        rightIcon={<IoArrowForwardCircleOutline />}
+                                        size="lg"
+                                        bg={"blue"}
+                                        color={"white"}
+                                        _hover={{ bg: "blue.500" }}
+                                        px={4}
+                                        py={1}
+                                        borderRadius={'lg'}
+                                        onClick={() => setStart(!start)}
                                     >
                                         Start
                                     </Button>
@@ -593,49 +960,124 @@ const Dashboard = () => {
                         {
                             start &&
                             <Box>
-                                <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={4}
-                                >Line 1</Text>
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    my={4}
+                                >
+                                    Line 1</Text>
 
-                                <Text border='2px' borderColor='gray' borderRadius="md" fontSize="lg" fontWeight="semibold" bg={'gray'} color='white' textAlign={'center'} my={2} p={3} h={[null, '150px', '150px', '100px']}
-                                >.........................................
+                                <Text
+                                    border='2px'
+                                    borderColor='gray'
+                                    borderRadius="md"
+                                    fontSize="lg"
+                                    fontWeight="semibold"
+                                    bg={'gray'}
+                                    color='white'
+                                    textAlign={'center'}
+                                    my={2}
+                                    p={3}
+                                    h={[null, '150px', '150px', '100px']}
+                                >
+                                    .........................................
                                     ..........................................................
                                     ....................................................</Text>
 
-                                <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={4}
-                                >Translated Line</Text>
-                                <Text w="" fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={4}
-                                >Translated By: dummy (ID: 345)</Text>
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    my={4}
+                                >
+                                    Translated Line</Text>
 
-                                <Text border='2px' borderColor='gray' borderRadius="md" fontSize="lg" fontWeight="semibold" bg={'gray'} color='white' textAlign={'center'} my={2} p={3} h={[null, '150px', '150px', '100px']}
-                                >.........................................
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    my={4}
+                                >
+                                    Translated By: dummy (ID: 345)</Text>
+
+                                <Text
+                                    border='2px'
+                                    borderColor='gray'
+                                    borderRadius="md"
+                                    fontSize="lg"
+                                    fontWeight="semibold"
+                                    bg={'gray'}
+                                    color='white'
+                                    textAlign={'center'}
+                                    my={2}
+                                    p={3}
+                                    h={[null, '150px', '150px', '100px']}
+                                >
+                                    .........................................
                                     ..........................................................
                                     ....................................................</Text>
 
 
                                 <HStack justify={'space-evenly'}>
                                     <Text textAlign={'center'} my={2}>
-                                        <Button size="lg" bg={"green"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} onClick={() => handleSubmit(1)}
+                                        <Button
+                                            size="lg"
+                                            bg={"green"}
+                                            color={"white"}
+                                            _hover={{ bg: "blue.500" }}
+                                            px={4}
+                                            py={1}
+                                            borderRadius={'lg'}
+                                            onClick={() => handleSubmit(1)}
                                         >
                                             Approve
                                         </Button>
                                     </Text>
 
                                     <Text textAlign={'end'} my={2}>
-                                        <Button size="lg" bg={"green"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} onClick={() => handleSubmitNext(1)}
+                                        <Button
+                                            size="lg"
+                                            bg={"green"}
+                                            color={"white"}
+                                            _hover={{ bg: "blue.500" }}
+                                            px={4}
+                                            py={1}
+                                            borderRadius={'lg'}
+                                            onClick={() => handleSubmitNext(1)}
                                         >
                                             Approve & Next
                                         </Button>
                                     </Text>
 
                                     <Text textAlign={'center'} my={2}>
-                                        <Button size="lg" bg={"red"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} onClick={() => handleSubmit(0)}
+                                        <Button
+                                            size="lg"
+                                            bg={"red"}
+                                            color={"white"}
+                                            _hover={{ bg: "blue.500" }}
+                                            px={4}
+                                            py={1}
+                                            borderRadius={'lg'}
+                                            onClick={() => handleSubmit(0)}
                                         >
                                             Reject
                                         </Button>
                                     </Text>
 
                                     <Text textAlign={'end'} my={2}>
-                                        <Button size="lg" bg={"red"} color={"white"} _hover={{ bg: "blue.500" }} px={4} py={1} borderRadius={'lg'} onClick={() => handleSubmitNext(0)}
+                                        <Button
+                                            size="lg"
+                                            bg={"red"}
+                                            color={"white"}
+                                            _hover={{ bg: "blue.500" }}
+                                            px={4}
+                                            py={1}
+                                            borderRadius={'lg'}
+                                            onClick={() => handleSubmitNext(0)}
                                         >
                                             Reject & Next
                                         </Button>
@@ -647,22 +1089,63 @@ const Dashboard = () => {
 
                     {/* withdraw approve  */}
                     <TabPanel>
-                        <Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={1} p={1}
-                        >Withdraw Management</Text>
+                        <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                            my={1}
+                            p={1}
+                        >
+                            Withdraw Management</Text>
 
                         {/* for search  */}
-                        <Box p={'4'} mb={6} boxShadow={'md'} maxWidth={'500px'} mx={'auto'}>
-                            <Text fontSize="lg" fontWeight="semibold" color='black' textAlign={'center'} my={1} p={1}
-                            >Search for Specific Withdraw</Text>
+                        <Box
+                            p={'4'}
+                            mb={6}
+                            boxShadow={'md'}
+                            maxWidth={'500px'}
+                            mx={'auto'}
+                        >
+                            <Text
+                                fontSize="lg"
+                                fontWeight="semibold"
+                                color='black'
+                                textAlign={'center'}
+                                my={1}
+                                p={1}
+                            >
+                                Search for Specific Withdraw</Text>
 
                             <Form>
                                 <FormControl isRequired>
                                     <HStack>
-                                        <FormLabel htmlFor="selectedWithdraw" fontWeight={'bold'} >Withdraw ID</FormLabel>
-                                        <Input id="selectedWithdraw" type="text" placeholder='Withdraw ID' px={2} w={'250px'} onChange={(e) => setSelectedWithdraw(e.target.value)} value={selectedWithdraw} isRequired />
+                                        <FormLabel
+                                            htmlFor="selectedWithdraw"
+                                            fontWeight={'bold'}
+                                        >
+                                            Withdraw ID</FormLabel>
 
-                                        <Button bgColor={selectedWithdraw ? 'blue' : 'gray'} p={1} borderRadius={'lg'} color={'white'} isDisabled={selectedWithdraw ? false : true} onClick={() => handleWithdrawView(selectedWithdraw)}
-                                        >History</Button>
+                                        <Input
+                                            id="selectedWithdraw"
+                                            type="text"
+                                            placeholder='Withdraw ID'
+                                            px={2}
+                                            w={'250px'}
+                                            onChange={(e) => setSelectedWithdraw(e.target.value)}
+                                            value={selectedWithdraw}
+                                            isRequired
+                                        />
+
+                                        <Button
+                                            bgColor={selectedWithdraw ? 'blue' : 'gray'}
+                                            p={1}
+                                            borderRadius={'lg'}
+                                            color={'white'}
+                                            isDisabled={selectedWithdraw ? false : true}
+                                            onClick={() => handleWithdrawView(selectedWithdraw)}
+                                        >
+                                            History</Button>
                                     </HStack>
                                 </FormControl>
                             </Form>
@@ -671,7 +1154,13 @@ const Dashboard = () => {
                         {/* withdraw table  */}
                         <TableContainer >
                             <VStack mx={'auto'} minWidth={"1200px"}>
-                                <HStack justify={'space-evenly'} textAlign={'center'} fontWeight={'bold'} gap={6} whiteSpace="break-spaces">
+                                <HStack
+                                    justify={'space-evenly'}
+                                    textAlign={'center'}
+                                    fontWeight={'bold'}
+                                    gap={6}
+                                    whiteSpace="break-spaces"
+                                >
                                     <Text w={'30px'} >No.</Text>
                                     <Text w={'80px'} >Withdraw ID</Text>
                                     <Text w={'120px'} >Withdraw Date</Text>
@@ -689,7 +1178,12 @@ const Dashboard = () => {
 
                                 {
                                     withdrawTableData.map((td, i) =>
-                                        <HStack key={i} justify={'space-evenly'} textAlign={'center'} gap={6} whiteSpace="break-spaces">
+                                        <HStack key={i}
+                                            justify={'space-evenly'}
+                                            textAlign={'center'}
+                                            gap={6}
+                                            whiteSpace="break-spaces"
+                                        >
                                             <Text w={'30px'}>{i + 1}</Text>
                                             <Text w={'80px'} >{td?.withdraw_id}</Text>
                                             <Text w={'120px'} >{td?.withdraw_date}</Text>
@@ -700,12 +1194,44 @@ const Dashboard = () => {
                                             <Text w={'170px'} >{td?.withdraw_info}</Text>
                                             <Text w={'80px'} >{td?.status}</Text>
                                             <Text w={'130px'} >{td?.remarks}</Text>
-                                            <Text w={'60px'} ><Button bgColor={'green'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleWithdrawApprove(td.withdraw_id)}
-                                            >Approve</Button></Text>
-                                            <Text w={'40px'} ><Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleWithdrawReject(td.withdraw_id)}
-                                            >Reject</Button></Text>
-                                            <Text w={'40px'} ><Button bgColor={'red'} p={1} px={2} mt={0} borderRadius={'lg'} color={'white'} onClick={() => handleWithdrawDelete(td.withdraw_id)}
-                                            >Delete</Button></Text>
+                                            <Text w={'60px'} >
+                                                <Button
+                                                    bgColor={'green'}
+                                                    p={1}
+                                                    px={2}
+                                                    mt={0}
+                                                    borderRadius={'lg'}
+                                                    color={'white'}
+                                                    onClick={() => handleWithdrawApprove(td.withdraw_id)}
+                                                >
+                                                    Approve</Button>
+                                            </Text>
+
+                                            <Text w={'40px'} >
+                                                <Button
+                                                    bgColor={'red'}
+                                                    p={1}
+                                                    px={2}
+                                                    mt={0}
+                                                    borderRadius={'lg'}
+                                                    color={'white'}
+                                                    onClick={() => handleWithdrawReject(td.withdraw_id)}
+                                                >
+                                                    Reject</Button>
+                                            </Text>
+
+                                            <Text w={'40px'} >
+                                                <Button
+                                                    bgColor={'red'}
+                                                    p={1}
+                                                    px={2}
+                                                    mt={0}
+                                                    borderRadius={'lg'}
+                                                    color={'white'}
+                                                    onClick={() => handleWithdrawDelete(td.withdraw_id)}
+                                                >
+                                                    Delete</Button>
+                                            </Text>
                                         </HStack>
                                     )
                                 }

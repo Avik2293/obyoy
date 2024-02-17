@@ -6,7 +6,6 @@ import { TiThMenuOutline } from "react-icons/ti";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-
     const toggle = () => setIsOpen(!isOpen);
 
     const handleLogOut = () => {
@@ -17,10 +16,25 @@ const Navbar = () => {
 
     return (
         <Box bg='gray'>
-            <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" mb={3} px={5} py='3' maxWidth={"1350px"} mx={'auto'}>
-
-                <Text w="100px" fontSize="lg" fontWeight="bold" color='white'
-                >Logo</Text>
+            <Flex
+                as="nav"
+                align="center"
+                justify="space-between"
+                wrap="wrap"
+                w="100%"
+                mb={3}
+                px={5}
+                py='3'
+                maxWidth={"1350px"}
+                mx={'auto'}
+            >
+                <Text
+                    w="100px"
+                    fontSize="lg"
+                    fontWeight="bold"
+                    color='white'
+                >
+                    Logo</Text>
 
                 <Box display={{ base: "block", md: "none" }} onClick={toggle}>
                     {
@@ -31,10 +45,16 @@ const Navbar = () => {
                     }
                 </Box>
 
-                <Box display={{ base: isOpen ? "block" : "none", md: "block" }}
+                <Box
+                    display={{ base: isOpen ? "block" : "none", md: "block" }}
                     flexBasis={{ base: "100%", md: "auto" }}
                 >
-                    <Stack spacing={8} align="center" pt={[4, 4, 0, 0]} justify={["center", "space-between", "flex-end", "flex-end"]} direction={["column", "row", "row", "row"]}
+                    <Stack
+                        spacing={8}
+                        align="center"
+                        pt={[4, 4, 0, 0]}
+                        justify={["center", "space-between", "flex-end", "flex-end"]}
+                        direction={["column", "row", "row", "row"]}
                     >
                         {/* if logged in  */}
                         <Link href='/'>
@@ -89,7 +109,13 @@ const Navbar = () => {
 
                         {/* if not logged in  */}
                         <Link href="/login">
-                            <Button size="sm" fontWeight='bold' rounded="md" color='green' p='1' bg="white"
+                            <Button
+                                size="sm"
+                                fontWeight='bold'
+                                rounded="md"
+                                color='green'
+                                p='1'
+                                bg="white"
                                 _hover={{ bg: "green", color: "white" }}
                             >
                                 Login
