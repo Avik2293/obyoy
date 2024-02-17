@@ -22,7 +22,7 @@ export const leaderboard = () => async (dispatch, getState) => {
         .then((response) => {
             dispatch(leaderboardSuccess(response.data));
         }, error => {
-            dispatch(leaderboardFailure())
+            dispatch(leaderboardFailure(error))
         })
 }
 export const newLine = () => async (dispatch, getState) => {
@@ -32,7 +32,7 @@ export const newLine = () => async (dispatch, getState) => {
         .then((response) => {
             dispatch(fetchNewlineSuccess(response.data));
         }, error => {
-            dispatch(fetchNewlineFailure())
+            dispatch(fetchNewlineFailure(error))
         })
 }
 export const translatedLine = ({ line_id, input }) => async (dispatch, getState) => {
@@ -45,6 +45,6 @@ export const translatedLine = ({ line_id, input }) => async (dispatch, getState)
         .then((response) => {
             dispatch(submitTranslatedlineSuccess(response.data));
         }, error => {
-            dispatch(submitTranslatedlineFailure())
+            dispatch(submitTranslatedlineFailure(error))
         })
 }

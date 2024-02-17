@@ -1,39 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, HStack, Text, Box, GridItem, Grid, Link as ChakraLink, Image, Button, Input, } from '@chakra-ui/react'
 import { Form, Link as ReactRouterLink } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
-// import { useDispatch, useSelector } from 'react-redux';
-// import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
-// import { selectIsLoggedIn, selectProfile } from '../Redux/Reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
+import { selectIsLoggedIn, selectProfile } from '../Redux/Reducer';
 
 
 const Home = () => {
-    // const dispatch = useDispatch();
-    // const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-    // const profile = useSelector(state => selectProfile(state));
-    // dispatch(leaderboard());
-    // dispatch(newLine());
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+    const profile = useSelector(state => selectProfile(state));
+    const [count, setCount] = useState(0);
+
 
     const [start, setStart] = useState(false);
     const [input, setInput] = useState('')
     const handleInputChange = (e) => setInput(e.target.value)
 
+    useEffect(() => {
+        dispatch(leaderboard());
+        // console.log('fsgsfsf');
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(newLine());
+    }, [count, dispatch]);
+
     const handleSubmit = event => {
         // event.preventDefault();
-
-        // dispatch(translatedLine(newLine.id, input));
-
+        dispatch(translatedLine(newLine.id, input));
         setInput('');
-        console.log(input);
         setStart(!start);
+        // console.log(input);
     };
 
     const handleSubmitNext = event => {
         // event.preventDefault();
+        dispatch(translatedLine(newLine.id, input));
+        setCount(count + 1);
         setInput('');
-        console.log(input);
-        // new line call 
+        // console.log(input);
     };
 
     return (
@@ -167,7 +175,10 @@ const Home = () => {
                                     px={4}
                                     py={1}
                                     borderRadius={'lg'}
-                                    onClick={() => setStart(!start)}
+                                    onClick={() => {
+                                        setStart(!start);
+                                        setCount(count + 1);
+                                    }}
                                 >
                                     Start
                                 </Button>

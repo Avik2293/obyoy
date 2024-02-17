@@ -20,11 +20,13 @@ import {
 export const requestLeaderboard = () => ({
     type: REQUEST_FETCH_LEADERBOARD,
 })
-export const leaderboardSuccess = () => ({
+export const leaderboardSuccess = (data) => ({
     type: SUCCESS_FETCH_LEADERBOARD,
+    payload: data,
 })
-export const leaderboardFailure = () => ({
+export const leaderboardFailure = (error) => ({
     type: FAILURE_FETCH_LEADERBOARD,
+    payload: error,
 })
 // export const requestFetchProfile = (user_id) => ({
 //     type: REQUEST_FETCH_PROFILE,
@@ -34,22 +36,26 @@ export const requestFetchNewline = (user_id) => ({
     type: REQUEST_FETCH_NEWLINE,
     payload: user_id,
 })
-export const fetchNewlineSuccess = () => ({
+export const fetchNewlineSuccess = (data) => ({
     type: SUCCESS_FETCH_NEWLINE,
+    payload: data,
 })
-export const fetchNewlineFailure = () => ({
+export const fetchNewlineFailure = (error) => ({
     type: FAILURE_FETCH_NEWLINE,
+    payload: error,
 })
 
 export const requestSubmitTranslatedline = (line_id, input) => ({
     type: REQUEST_SUBMIT_TRANSLATEDLINE,
     payload: { line_id, input },
 })
-export const submitTranslatedlineSuccess = () => ({
+export const submitTranslatedlineSuccess = (data) => ({
     type: SUCCESS_SUBMIT_TRANSLATEDLINE,
+    payload: data,
 })
-export const submitTranslatedlineFailure = () => ({
+export const submitTranslatedlineFailure = (error) => ({
     type: FAILURE_SUBMIT_TRANSLATEDLINE,
+    payload: error,
 })
 // export const logout = () => ({
 //     type: SUCCESS_LOGOUT,

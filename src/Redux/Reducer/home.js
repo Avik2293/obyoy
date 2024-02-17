@@ -39,17 +39,23 @@ const topTen = (state = initialState.leaderboard, action) => {
         case REQUEST_FETCH_LEADERBOARD:
             return {
                 ...state,
+                isFetching: true,
                 topTen: {},
+                error: '',
             }
         case SUCCESS_FETCH_LEADERBOARD:
             return {
                 ...state,
-                topTen: action.top_ten,
+                isFetching: false,
+                topTen: action.payload,
+                error: '',
             }
         case FAILURE_FETCH_LEADERBOARD:
             return {
                 ...state,
+                isFetching: false,
                 topTen: {},
+                error: action.payload,
             }
         default:
             return state;
@@ -61,33 +67,45 @@ const lines = (state = initialState.lines, action) => {
         case REQUEST_FETCH_NEWLINE:
             return {
                 ...state,
+                isFetching: true,
                 newLine: '',
+                error: '',
             }
         case SUCCESS_FETCH_NEWLINE:
             return {
                 ...state,
-                newLine: action.newLine,
+                isFetching: false,
+                newLine: action.payload,
+                error: '',
             }
         case FAILURE_FETCH_NEWLINE:
             return {
                 ...state,
                 newLine: "",
+                isFetching: false,
+                error: action.payload,
             }
 
         case REQUEST_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
+                isFetching: true,
                 translatedLine: '',
+                error: '',
             }
         case SUCCESS_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                translatedLine: action.translatedLine,
+                isFetching: false,
+                translatedLine: action.payload,
+                error: '',
             }
         case FAILURE_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
+                isFetching: false,
                 translatedLine: "",
+                error: action.payload,
             }
 
         default:
