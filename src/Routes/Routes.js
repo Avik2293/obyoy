@@ -10,6 +10,7 @@ import Leaderboard from "../Pages/Leaderboard";
 import Profile from "../Pages/Profile";
 import Withdraw from "../Pages/Withdraw";
 import WithdrawalHistory from "../Pages/WithdrawalHistory";
+import CustomDataset from "../Pages/CustomDataset";
 
 
 export const routes = createBrowserRouter([
@@ -34,6 +35,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/withdraw',
                 element: <Withdraw />
+            },
+            {
+                path: '/custom',
+                element: <CustomDataset />
             },
         ]
     },

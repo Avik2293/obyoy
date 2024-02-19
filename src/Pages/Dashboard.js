@@ -67,6 +67,7 @@ const Dashboard = () => {
             details: 'dummy, dummmy, dddddmmmuuuyy',
             total_line: 2022,
             finished_line: 366,
+            for_approve: 36,
             remarks: 'asda, dhjsdjj',
         },
         {
@@ -77,6 +78,7 @@ const Dashboard = () => {
             details: 'dumy, dummy, dddddmmuuuyy',
             total_line: 25,
             finished_line: 36,
+            for_approve: 3,
             remarks: 'ada, dhsdjj',
         },
         {
@@ -87,6 +89,7 @@ const Dashboard = () => {
             details: 'dumm, dummm, dddddmmmuuuy',
             total_line: 252022,
             finished_line: 766,
+            for_approve: 316,
             remarks: 'sda, dhsdjj',
         },
         {
@@ -97,6 +100,7 @@ const Dashboard = () => {
             details: 'dummy, dummmy, dddddmmmuuuyy',
             total_line: 22022,
             finished_line: 66,
+            for_approve: 6,
             remarks: 'asda, dhjsdjj',
         },
         {
@@ -107,6 +111,7 @@ const Dashboard = () => {
             details: 'dummy, dummmy, dddddmmmuuuyy',
             total_line: 22,
             finished_line: 3,
+            for_approve: 3,
             remarks: 'asda, dhjjj',
         },
     ]);
@@ -239,6 +244,7 @@ const Dashboard = () => {
 
         //     alert(`Selected file - ${this.fileInput.current.files[0].name}`);
     };
+    
     // delete file 
     const handleDeleteFile = (file_id) => {
         console.log(file_id);
@@ -866,6 +872,7 @@ const Dashboard = () => {
                                     <Text w={'130px'} >Details</Text>
                                     <Text w={'70px'} >Total Line</Text>
                                     <Text w={'70px'} >Finished Line</Text>
+                                    <Text w={'70px'} >Line For Approve</Text>
                                     <Text w={'120px'} >Remarks</Text>
                                     <Text w={'60px'} >Action</Text>
                                 </HStack>
@@ -886,6 +893,7 @@ const Dashboard = () => {
                                             <Text w={'130px'} >{td?.details}</Text>
                                             <Text w={'70px'} >{td?.total_line}</Text>
                                             <Text w={'70px'} >{td?.finished_line}</Text>
+                                            <Text w={'70px'} >{td?.for_approve}</Text>
                                             <Text w={'120px'} >{td?.remarks}</Text>
                                             <Text w={'60px'} gap={1}>
                                                 <Button
