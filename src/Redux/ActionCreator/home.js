@@ -22,7 +22,7 @@ export const requestLeaderboard = () => ({
 })
 export const leaderboardSuccess = (data) => ({
     type: SUCCESS_FETCH_LEADERBOARD,
-    payload: data,
+    payload: data.topTens,
 })
 export const leaderboardFailure = (error) => ({
     type: FAILURE_FETCH_LEADERBOARD,

@@ -18,8 +18,10 @@ import { BASE_URL } from "../../Constant/home";
 export const leaderboard = () => async (dispatch, getState) => {
     dispatch(requestLeaderboard())
 
-    axios.get(BASE_URL + "/api/v1/leaderboard")
+    // axios.get(BASE_URL + "/api/v1/leaderboard")
+    axios.get("/api/v1/leaderboard/topTen")
         .then((response) => {
+            // console.log(response.data);
             dispatch(leaderboardSuccess(response.data));
         }, error => {
             dispatch(leaderboardFailure(error))
