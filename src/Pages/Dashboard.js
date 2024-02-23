@@ -1,8 +1,37 @@
 import React, { useState } from 'react';
-import { Container, HStack, Text, TableContainer, VStack, Tabs, TabList, TabPanels, Tab, TabPanel, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, useDisclosure, Image, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, FormControl, FormLabel, Input, Box, } from '@chakra-ui/react';
+import { 
+	Container, 
+	HStack, 
+	Text, 
+	TableContainer, 
+	VStack, 
+	Tabs, 
+	TabList, 
+	TabPanels, 
+	Tab, 
+	TabPanel, 
+	Button, 
+	Modal, 
+	ModalOverlay, 
+	ModalContent, 
+	ModalHeader, 
+	ModalFooter, 
+	ModalBody, 
+	useDisclosure, 
+	Image, 
+	AlertDialog, 
+	AlertDialogBody, 
+	AlertDialogFooter, 
+	AlertDialogHeader, 
+	AlertDialogContent, 
+	AlertDialogOverlay, 
+	FormControl, 
+	FormLabel, 
+	Input, 
+	Box, 
+} from '@chakra-ui/react';
 import { Form, } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
-
 
 const Dashboard = () => {
 
