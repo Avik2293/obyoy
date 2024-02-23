@@ -5,13 +5,14 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
-import { selectIsLoggedIn, selectProfile } from '../Redux/Reducer';
+import { selectIsLoggedIn, selectProfile, selectLeaderboardTop } from '../Redux/Reducer';
 
 
 const Home = () => {
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-    const profile = useSelector(state => selectProfile(state));
+    // const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+    // const profile = useSelector(state => selectProfile(state));
+    const topTen = useSelector(state => selectLeaderboardTop(state));
     const [count, setCount] = useState(0);
 
 
@@ -90,6 +91,9 @@ const Home = () => {
                             color='black'
                             textAlign={'center'}
                         >
+                            {
+                                console.log(topTen)
+                            }
                             <Text>1. dummy (234423 tk)</Text>
                             <Text>2. dummy (234423 tk)</Text>
                             <Text>3. dummy (234423 tk)</Text>

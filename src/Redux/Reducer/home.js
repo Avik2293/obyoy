@@ -39,23 +39,23 @@ const topTen = (state = initialState.leaderboard, action) => {
         case REQUEST_FETCH_LEADERBOARD:
             return {
                 ...state,
-                isFetching: true,
+                // isFetching: true,
                 topTen: {},
-                error: '',
+                // error: '',
             }
         case SUCCESS_FETCH_LEADERBOARD:
             return {
                 ...state,
-                isFetching: false,
+                // isFetching: false,
                 topTen: action.payload,
-                error: '',
+                // error: '',
             }
         case FAILURE_FETCH_LEADERBOARD:
             return {
                 ...state,
-                isFetching: false,
+                // isFetching: false,
                 topTen: {},
-                error: action.payload,
+                // error: action.payload,
             }
         default:
             return state;
@@ -153,6 +153,6 @@ export default combineReducers({
 // export const selectIsLoggedIn = state => (state.login.token !== '' && state.login.user_id !== '') ? true : false;
 
 
-export const selectLeaderboard = state => state.leaderboard;
+export const selectLeaderboard = state => state.topTen.topTen;
 export const selectNewLine = state => state.lines;
 export const selectTranslatedLine = state => state.lines;
