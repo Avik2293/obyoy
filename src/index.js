@@ -6,6 +6,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
+
+// for mirage 
+import { makeServer } from "./server"
+if (process.env.NODE_ENV === "development") {
+  makeServer({ environment: "development" })
+}
+
 const colors = {
   brand: {
     900: '#1a365d',
@@ -17,6 +25,7 @@ const colors = {
 const theme = extendTheme({ colors })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
 	<React.StrictMode>
 		<ChakraProvider theme={theme}>

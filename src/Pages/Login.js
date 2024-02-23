@@ -4,6 +4,10 @@ import { chakra, createIcon, IconButton, InputGroup, InputRightElement, useDiscl
 import { Form } from 'react-router-dom';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../Redux/Thunk/Login';
+import { selectIsLoggedIn } from '../Redux/Reducer';
+
 
 const Logo = (props) => (
 	<chakra.svg
