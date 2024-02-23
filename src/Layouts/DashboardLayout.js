@@ -5,16 +5,15 @@ import Footer from '../Components/Footer';
 
 
 const DashboardLayout = () => {
+	return (
+		<div>
+			<Navbar></Navbar>
 
-    return (
-        <div>
-            <Navbar></Navbar>
+			<Outlet></Outlet>
 
-            <Outlet></Outlet>
-
-            <Footer></Footer>
-        </div>
-    );
+			<Footer></Footer>
+		</div>
+	);
 };
 
 export default DashboardLayout;
