@@ -73,10 +73,8 @@ const isFetching = (state = initialState.isFetching, action) => {
         case REQUEST_SUBMIT_TRANSLATEDLINE:
             return true;
 
-        case SUCCESS_FETCH_LEADERBOARD:
         case SUCCESS_FETCH_NEWLINE:
         case SUCCESS_SUBMIT_TRANSLATEDLINE:
-        case FAILURE_FETCH_LEADERBOARD:
         case FAILURE_FETCH_NEWLINE:
         case FAILURE_SUBMIT_TRANSLATEDLINE:
             return false;
