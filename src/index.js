@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';     
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 
 const colors = {
   brand: {
@@ -18,11 +18,11 @@ const theme = extendTheme({ colors })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
-  </React.StrictMode>
+	<React.StrictMode>
+		<ChakraProvider theme={theme}>
+			<App />
+		</ChakraProvider>
+	</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
