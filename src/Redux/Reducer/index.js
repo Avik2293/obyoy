@@ -1,16 +1,12 @@
 import { combineReducers } from "redux";
 import user, * as fromUser from "./login";
-// import topTen, lines, * as fromHome from "./home";
-// import topTen, * as fromTopTen from "./home";
 import leaderboard, * as fromLeaderboard from "./home";
-// import lines, * as fromLines from "./home";
+import translation, * as fromTranslation from "./translation";
 
 export const rootReducer = combineReducers({
     "user": user,
-    // "leaderboard": topTen,
     "leaderboard": leaderboard,
-    // "lines": lines,
-    // "error": '',
+    "translation": translation,
 });
 
 const reducerFunction = (state, action) => rootReducer(state, action);
