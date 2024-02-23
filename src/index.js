@@ -6,8 +6,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { extendTheme, ChakraProvider } from '@chakra-ui/react';
-
 // for mirage 
 import { makeServer } from "./server"
 if (process.env.NODE_ENV === "development") {
