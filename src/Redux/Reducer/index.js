@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import user, * as fromUser from "./login";
-import leaderboard, * as fromLeaderboard from "./home";
+import leaderboard, * as fromLeaderboard from "./leaderboard";
 import translation, * as fromTranslation from "./translation";
 
 export const rootReducer = combineReducers({
