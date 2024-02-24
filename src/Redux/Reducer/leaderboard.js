@@ -19,10 +19,6 @@ const initialState = {
             'fdgr gdf': 345,
         },
     },
-    lines: {
-        newLine: "What you want to know ?",
-        translatedLine: '',
-    },
     error: '',
     isFetching: false,
 }
