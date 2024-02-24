@@ -48,12 +48,6 @@ export function makeServer({ environment = "test" } = {}) {
         routes() {
             this.namespace = "api/v1"
 
-            // this.get("/movies")
-            // this.get("/movies/:id")
-            // this.post("/movies")
-            // this.patch("/movies/:id")
-            // this.del("/movies/:id")
-
             // Using the `timing` option to slow down the response
             this.get("/leaderboard/topTen", (schema, request) => {
                 return schema.topTens.all()
@@ -98,12 +92,3 @@ export function makeServer({ environment = "test" } = {}) {
 
     return server
 }
-
-// let [users, setUsers] = useState([])
-
-// useEffect(() => {
-//     fetch("/api/users")
-//         .then((response) => response.json())
-//         .then((json) => setUsers(json))
-// }, [])
-// console.log(users);
