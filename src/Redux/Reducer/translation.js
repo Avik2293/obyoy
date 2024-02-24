@@ -12,6 +12,7 @@ const initialState = {
     lines: {
         newLine: "What you want to know ?",
         translatedLine: '',
+        error: "",
     },
     isFetching: false,
 }
@@ -21,14 +22,12 @@ const lines = (state = initialState.lines, action) => {
         case REQUEST_FETCH_NEWLINE:
             return {
                 ...state,
-                isFetching: true,
                 newLine: '',
                 error: '',
             }
         case SUCCESS_FETCH_NEWLINE:
             return {
                 ...state,
-                isFetching: false,
                 newLine: action.payload,
                 error: '',
             }
@@ -36,28 +35,24 @@ const lines = (state = initialState.lines, action) => {
             return {
                 ...state,
                 newLine: "",
-                isFetching: false,
                 error: action.payload,
             }
 
         case REQUEST_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                isFetching: true,
                 translatedLine: '',
                 error: '',
             }
         case SUCCESS_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                isFetching: false,
                 translatedLine: action.payload,
                 error: '',
             }
         case FAILURE_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                isFetching: false,
                 translatedLine: "",
                 error: action.payload,
             }
@@ -89,3 +84,4 @@ export default combineReducers({
     isFetching,
 });
 
+export const selectLine = state => state.topTen.topTen;
