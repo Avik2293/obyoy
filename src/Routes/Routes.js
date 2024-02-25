@@ -35,6 +35,10 @@ export const routes = createBrowserRouter([
 				path: '/withdraw',
 				element: <Withdraw />
 			},
+			{
+				path: '/custom',
+				element: <CustomDataset />
+			},
 		]
 	},
 	{

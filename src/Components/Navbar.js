@@ -66,6 +66,12 @@ const Navbar = () => {
 										</MenuItem>
 
 										<MenuItem px={3} py={1}>
+											<Link href='/custom'>
+												<Text display="block" color='white'>Custom</Text>
+											</Link>
+										</MenuItem>
+
+										<MenuItem px={3} py={1}>
 											<Link href='/dashboard'>
 												<Text display="block" color='white'>Dashboard</Text>
 											</Link>

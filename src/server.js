@@ -12,21 +12,21 @@ export function makeServer({ environment = "test" } = {}) {
 
         seeds(server) {
             server.create("topTen", {
-                //  {name: 'gdgdgf hfg', balance: 454} ,
-                //  {name: 'gdggf hfg', balance: 54} ,
-                // topTen: {
-                    'fdgdr gdf': 5345,
-                    'fddr gdf': 545,
-                    'fdgr gdf': 345,
-                    'fdhgdr gdf': 345,
-                    'fdegr gdf': 35,
-                    'fdgar gdf': 45,
-                    'fdgfar gdf': 34,
-                    'fdgjr gdf': 335,
-                    'fedgr gdf': 355,
-                    'fydgr gdf': 315,
-                // }
-        })
+                firstFive: [
+                    { name: 'fdgdr gdf', balance: 5345 },
+                    { name: 'fddr gdf', balance: 545 },
+                    { name: 'fdgr gdf', balance: 355 },
+                    { name: 'fdhgdr gdf', balance: 345 },
+                    { name: 'fdegr gdf', balance: 35 },
+                ],
+                nextFive: [
+                    { name: 'fdgdr gdf', balance: 5345 },
+                    { name: 'fddr gdf', balance: 545 },
+                    { name: 'fdgr gdf', balance: 355 },
+                    { name: 'fdhgdr gdf', balance: 345 },
+                    { name: 'fdegr gdf', balance: 35 },
+                ]
+            })
             server.create("line", {
                 newLine: "What you want to know ?",
                 translatedLine: '',
@@ -34,12 +34,12 @@ export function makeServer({ environment = "test" } = {}) {
             server.create("login", {
                 token: "1|233764s455teu8",
                 user_id: 2234,
-                userName: "Tarif Ezaz",
+                userName:  "Tarif Ezaz",
                 profile: {
                     user_id: 2234,
                     userName: "Tarif Ezaz",
                     leaderboard_place: 45,
-
+                    image_url: 'https://media.licdn.com/dms/image/D5635AQExQkEPINGiKw/profile-framedphoto-shrink_200_200/0/1689965016077?e=1709398800&v=beta&t=zPvLCTrvM4qowRj5spvZElIaJvFvPR7TRYkyAucaNfA',
                 },
                 session_expiry: 0,
             })
@@ -54,7 +54,7 @@ export function makeServer({ environment = "test" } = {}) {
             })
             // }, { timing: 4000 })
 
-            this.get("/movies/:id", (schema, request) => {
+            this.get("/profile/:id", (schema, request) => {
                 let id = request.params.id
 
                 return schema.movies.find(id)

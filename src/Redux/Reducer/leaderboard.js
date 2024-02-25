@@ -3,21 +3,11 @@ import {
     REQUEST_FETCH_LEADERBOARD,
     SUCCESS_FETCH_LEADERBOARD,
     FAILURE_FETCH_LEADERBOARD,
-    REQUEST_FETCH_NEWLINE,
-    SUCCESS_FETCH_NEWLINE,
-    FAILURE_FETCH_NEWLINE,
-    REQUEST_SUBMIT_TRANSLATEDLINE,
-    SUCCESS_SUBMIT_TRANSLATEDLINE,
-    FAILURE_SUBMIT_TRANSLATEDLINE,
 } from "../Constant/home";
 
 const initialState = {
     leaderboard: {
-        topTen: {
-            'fdgdr gdf': 5345,
-            'fddr gdf': 545,
-            'fdgr gdf': 345,
-        },
+        topTen: {},
     },
     error: '',
     isFetching: false,
@@ -48,16 +38,10 @@ const topTen = (state = initialState.leaderboard, action) => {
 const isFetching = (state = initialState.isFetching, action) => {
     switch (action.type) {
         case REQUEST_FETCH_LEADERBOARD:
-        case REQUEST_FETCH_NEWLINE:
-        case REQUEST_SUBMIT_TRANSLATEDLINE:
             return true;
 
         case SUCCESS_FETCH_LEADERBOARD:
-        case SUCCESS_FETCH_NEWLINE:
-        case SUCCESS_SUBMIT_TRANSLATEDLINE:
         case FAILURE_FETCH_LEADERBOARD:
-        case FAILURE_FETCH_NEWLINE:
-        case FAILURE_SUBMIT_TRANSLATEDLINE:
             return false;
 
         default:
@@ -71,5 +55,3 @@ export default combineReducers({
 });
 
 export const selectLeaderboard = state => state.topTen.topTen;
-export const selectNewLine = state => state.lines;
-export const selectTranslatedLine = state => state.lines;
