@@ -1,9 +1,9 @@
 import {
-    SUCCESS_LOGIN,
     REQUEST_LOGIN,
+    SUCCESS_LOGIN,
     FAILURE_LOGIN,
-    UPDATE_SESSION_EXPIRY,
     SUCCESS_LOGOUT,
+    UPDATE_SESSION_EXPIRY,
 } from "../Constant/login";
  
 export const requestLogin = () => ({

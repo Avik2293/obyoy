@@ -4,6 +4,8 @@ import {
     leaderboardSuccess,
     leaderboardFailure,
     // requestFetchProfile,
+    // fetchProfileSuccess,
+    // fetchProfileFailure,
     requestFetchNewline,
     fetchNewlineSuccess,
     fetchNewlineFailure,
@@ -27,6 +29,7 @@ export const leaderboard = () => async (dispatch, getState) => {
             dispatch(leaderboardFailure(error))
         })
 }
+
 export const newLine = () => async (dispatch, getState) => {
     dispatch(requestFetchNewline())
 
@@ -37,6 +40,7 @@ export const newLine = () => async (dispatch, getState) => {
             dispatch(fetchNewlineFailure(error))
         })
 }
+
 export const translatedLine = ({ line_id, input }) => async (dispatch, getState) => {
     dispatch(requestSubmitTranslatedline())
 

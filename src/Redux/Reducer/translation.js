@@ -84,4 +84,6 @@ export default combineReducers({
     isFetching,
 });
 
-export const selectLine = state => state.topTen.topTen;
+export const selectLine = state => state.lines;
+// export const selectNewLine = state => state.lines;
+// export const selectTranslatedLine = state => state.lines;

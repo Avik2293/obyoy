@@ -11,10 +11,9 @@ import { selectIsLoggedIn, selectProfile, selectLeaderboardTop } from '../Redux/
 const Home = () => {
 	const dispatch = useDispatch();
 	// const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-	// const profile = useSelector(state => selectProfile(state));
+	const profile = useSelector(state => selectProfile(state));
 	const topTen = useSelector(state => selectLeaderboardTop(state));
 	const [count, setCount] = useState(0);
-
 
 	const [start, setStart] = useState(false);
 	const [input, setInput] = useState('')
@@ -26,12 +25,12 @@ const Home = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(newLine());
+		// dispatch(newLine());
 	}, [count, dispatch]);
 
 	const handleSubmit = event => {
 		// event.preventDefault();
-		dispatch(translatedLine(newLine.id, input));
+		// dispatch(translatedLine(newLine.id, input));
 		setInput('');
 		setStart(!start);
 		// console.log(input);
@@ -39,8 +38,8 @@ const Home = () => {
 
 	const handleSubmitNext = event => {
 		// event.preventDefault();
-		dispatch(translatedLine(newLine.id, input));
-		setCount(count + 1);
+		// dispatch(translatedLine(newLine.id, input));
+		// setCount(count + 1);
 		setInput('');
 		// console.log(input);
 	};
@@ -92,13 +91,10 @@ const Home = () => {
 							textAlign={'center'}
 						>
 							{
-								console.log(topTen)
+								topTen?.firstFive?.map((value, key) =>
+									<Text key={key}>{key + 1}. {value?.name} ({value?.balance} tk)</Text>
+								)
 							}
-							<Text>1. dummy (234423 tk)</Text>
-							<Text>2. dummy (234423 tk)</Text>
-							<Text>3. dummy (234423 tk)</Text>
-							<Text>4. dummy (234423 tk)</Text>
-							<Text>5. dummy (234423 tk)</Text>
 						</Box>
 					}
 
@@ -118,11 +114,11 @@ const Home = () => {
 							color='black'
 							textAlign={'center'}
 						>
-							<Text>6. dummy (234423 tk)</Text>
-							<Text>7. dummy (234423 tk)</Text>
-							<Text>8. dummy (234423 tk)</Text>
-							<Text>9. dummy (234423 tk)</Text>
-							<Text>10. dummy (234423 tk)</Text>
+							{
+								topTen?.nextFive?.map((value, key) =>
+									<Text key={key}>{key + 6}. {value?.name} ({value?.balance} tk)</Text>
+								)
+							}
 						</Box>
 					}
 
@@ -306,7 +302,7 @@ const Home = () => {
 						src='https://bit.ly/dan-abramov'
 						alt='Dan Abram'
 					/>
-
+					{console.log(profile)}
 					<Text
 						fontSize="lg"
 						fontWeight="bold"
