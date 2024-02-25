@@ -115,7 +115,13 @@ const Profile = () => {
 
 			{
 				start &&
-				<Flex mx={'auto'} my={3} align={"center"} justify={"space-evenly"} direction={[null, 'column-reverse', 'row',]}>
+				<Flex 
+                    mx={'auto'} 
+                    my={3} 
+                    align={"center"} 
+                    justify={"space-evenly"} 
+                    direction={[null, 'column-reverse', 'row',]}
+                >
 					<Form onSubmit={handleSubmit}>
 						<VStack my={[null, 1, 8]}>
 							<Heading fontWeight={'bold'} as='h2' fontSize='2xl'>
