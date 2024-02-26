@@ -5,41 +5,50 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
-import { selectIsLoggedIn, selectProfile, selectLeaderboardTop } from '../Redux/Reducer';
+import { selectIsLoggedIn, selectProfile, selectLeaderboardTop, selectLine } from '../Redux/Reducer';
 
 
 const Home = () => {
 	const dispatch = useDispatch();
-	// const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-	const profile = useSelector(state => selectProfile(state));
-	const topTen = useSelector(state => selectLeaderboardTop(state));
-	const [count, setCount] = useState(0);
 
+	// for redirect to login page
+	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+	if (!isLoggedIn) {
+		window.location.href = '/login';
+	};
+
+	const topTen = useSelector(state => selectLeaderboardTop(state));
+	const profile = useSelector(state => selectProfile(state));
+
+	const [count, setCount] = useState(0);
 	const [start, setStart] = useState(false);
+	const line = useSelector(state => selectLine(state));
+
 	const [input, setInput] = useState('')
 	const handleInputChange = (e) => setInput(e.target.value)
 
+
 	useEffect(() => {
 		dispatch(leaderboard());
-		// console.log('fsgsfsf');
 	}, [dispatch]);
 
 	useEffect(() => {
-		// dispatch(newLine());
+		dispatch(newLine());
 	}, [count, dispatch]);
 
 	const handleSubmit = event => {
 		// event.preventDefault();
-		// dispatch(translatedLine(newLine.id, input));
+
+		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id));
 		setInput('');
 		setStart(!start);
-		// console.log(input);
+		// console.log(line.dataset_id, line.line_id, line.line, input, profile.user_id);
 	};
 
 	const handleSubmitNext = event => {
 		// event.preventDefault();
-		// dispatch(translatedLine(newLine.id, input));
-		// setCount(count + 1);
+		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id));
+		setCount(count + 1);
 		setInput('');
 		// console.log(input);
 	};
@@ -196,7 +205,25 @@ const Home = () => {
 								textAlign={'center'}
 								my={4}
 							>
-								Line 1</Text>
+								Dataset Name: {line?.dataset_name}</Text>
+
+							<Text
+								fontSize="lg"
+								fontWeight="bold"
+								color='black'
+								textAlign={'center'}
+								my={4}
+							>
+								Dataset Id: {line?.dataset_id}</Text>
+
+							<Text
+								fontSize="lg"
+								fontWeight="bold"
+								color='black'
+								textAlign={'center'}
+								my={4}
+							>
+								Line ID.: {line?.line_id}</Text>
 
 							<Text
 								border='2px'
@@ -209,11 +236,9 @@ const Home = () => {
 								textAlign={'center'}
 								my={2}
 								p={3}
-								h={[null, '150px', '150px', '100px']}
+							// h={[null, '150px', '150px', '100px']}
 							>
-								.........................................
-								..........................................................
-								....................................................</Text>
+								{line?.line}</Text>
 
 							{/* <Form onSubmit={handleSubmit}> */}
 							<Form>
@@ -228,7 +253,7 @@ const Home = () => {
 									onChange={handleInputChange}
 									required
 									value={input}
-									h={[null, '150px', '150px', '100px']}
+								// h={[null, '150px', '150px', '100px']}
 								/>
 
 								<HStack justify={'space-evenly'}>
@@ -299,10 +324,10 @@ const Home = () => {
 						borderRadius='full'
 						boxSize='50px'
 						mx={'auto'}
-						src='https://bit.ly/dan-abramov'
+						src={profile?.image_url}
 						alt='Dan Abram'
 					/>
-					{console.log(profile)}
+
 					<Text
 						fontSize="lg"
 						fontWeight="bold"
@@ -310,7 +335,7 @@ const Home = () => {
 						textAlign={'center'}
 						my={1}
 					>
-						dummy </Text>
+						{profile?.userName} </Text>
 
 					<Box
 						fontSize="sm"
@@ -318,8 +343,8 @@ const Home = () => {
 						color='black'
 						textAlign={'center'}
 					>
-						<Text>Date of Join: 22 March, 2022</Text>
-						<Text >Total Working Days: 356 Days</Text>
+						<Text>Date of Join: {profile?.join_date}</Text>
+						<Text >Total Working Days: {profile?.total_working_days} days</Text>
 					</Box>
 
 					<Box
@@ -329,13 +354,13 @@ const Home = () => {
 						textAlign={'center'}
 					>
 						<Text mt={6}>Balance</Text>
-						<Text my={1}>::: Tk. 345.56 :::</Text>
+						<Text my={1}>::: Tk. {profile?.total_balance} :::</Text>
 
 						<Text mt={6}>For Approve</Text>
-						<Text my={1}>::: Tk. 35.56 :::</Text>
+						<Text my={1}>::: Tk. {profile?.for_approve} :::</Text>
 
 						<Text mt={6}>Today's Contribution</Text>
-						<Text my={1}>::: Tk. 5.56 :::</Text>
+						<Text my={1}>::: Tk. {profile?.today_contribution} :::</Text>
 					</Box>
 				</GridItem>
 			</Grid>

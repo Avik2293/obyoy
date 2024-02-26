@@ -10,8 +10,12 @@ import {
 
 const initialState = {
     lines: {
-        newLine: "What you want to know ?",
-        translatedLine: '',
+        dataset_id: 0,
+        dataset_name: '',
+        line_id: 0,
+        line: "",
+        translated_line: '',
+        translator_id: 0,
         error: "",
     },
     isFetching: false,
@@ -22,38 +26,62 @@ const lines = (state = initialState.lines, action) => {
         case REQUEST_FETCH_NEWLINE:
             return {
                 ...state,
-                newLine: '',
-                error: '',
+                dataset_id: 0,
+                dataset_name: '',
+                line_id: 0,
+                line: "",
+                translated_line: '',
+                translator_id: 0,
+                error: "",
             }
         case SUCCESS_FETCH_NEWLINE:
             return {
                 ...state,
-                newLine: action.payload,
-                error: '',
+                dataset_id: action.payload.dataset_id,
+                dataset_name: action.payload.dataset_name,
+                line_id: action.payload.remaining_lines[0].line_id,
+                line: action.payload.remaining_lines[0].line,
+                translated_line: '',
+                translator_id: 0,
+                error: "",
             }
         case FAILURE_FETCH_NEWLINE:
             return {
                 ...state,
-                newLine: "",
+                dataset_id: 0,
+                dataset_name: '',
+                line_id: 0,
+                line: "",
+                translated_line: '',
+                translator_id: 0,
                 error: action.payload,
             }
 
         case REQUEST_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                translatedLine: '',
+                // dataset_name: action.payload.dataset_name,
+                // dataset_id: action.payload.dataset_id,
+                // line_id: action.payload.line_id,
+                // line: action.payload.line,
+                // translated_line: action.payload.input,
+                // translator_id: action.payload.translator_id,
                 error: '',
             }
         case SUCCESS_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                translatedLine: action.payload,
                 error: '',
             }
         case FAILURE_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                translatedLine: "",
+                dataset_id: 0,
+                dataset_name: '',
+                line_id: 0,
+                line: "",
+                translated_line: '',
+                translator_id: 0,
                 error: action.payload,
             }
 

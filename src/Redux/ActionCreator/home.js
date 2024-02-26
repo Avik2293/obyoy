@@ -32,6 +32,7 @@ export const leaderboardFailure = (error) => ({
 //     type: REQUEST_FETCH_PROFILE,
 //     payload: user_id,
 // })
+
 export const requestFetchNewline = (user_id) => ({
     type: REQUEST_FETCH_NEWLINE,
     payload: user_id,
@@ -45,9 +46,10 @@ export const fetchNewlineFailure = (error) => ({
     payload: error,
 })
 
-export const requestSubmitTranslatedline = (line_id, input) => ({
+// export const requestSubmitTranslatedline = (dataset_id, line_id, line, input, translator_id) => ({
+export const requestSubmitTranslatedline = () => ({
     type: REQUEST_SUBMIT_TRANSLATEDLINE,
-    payload: { line_id, input },
+    // payload: { dataset_id, line_id, line, input, translator_id },
 })
 export const submitTranslatedlineSuccess = (data) => ({
     type: SUCCESS_SUBMIT_TRANSLATEDLINE,
