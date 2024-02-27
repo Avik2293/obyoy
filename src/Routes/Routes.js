@@ -11,6 +11,7 @@ import Profile from "../Pages/Profile";
 import Withdraw from "../Pages/Withdraw";
 import WithdrawalHistory from "../Pages/WithdrawalHistory";
 import CustomDataset from "../Pages/CustomDataset";
+import AdminRoute from "./AdminRoute";
 
 export const routes = createBrowserRouter([
 	{
@@ -43,7 +44,7 @@ export const routes = createBrowserRouter([
 	},
 	{
 		path: '/dashboard',
-		element: <DashboardLayout />,
+		element: <AdminRoute><DashboardLayout /></AdminRoute>,
 		// errorElement: <ErrorPage></ErrorPage>,
 		children: [
 			{

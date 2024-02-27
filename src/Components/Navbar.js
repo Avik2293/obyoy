@@ -3,8 +3,14 @@ import { Link, Box, Flex, Text, Button, Stack, Menu, MenuButton, MenuList, MenuD
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { TiThMenuOutline } from "react-icons/ti";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAdmin } from '../Redux/Reducer';
+
 
 const Navbar = () => {
+	const isAdmin = useSelector(state => selectIsAdmin(state));
+	// console.log(isAdmin);
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggle = () => setIsOpen(!isOpen);
@@ -71,11 +77,14 @@ const Navbar = () => {
 											</Link>
 										</MenuItem>
 
-										<MenuItem px={3} py={1}>
-											<Link href='/dashboard'>
-												<Text display="block" color='white'>Dashboard</Text>
-											</Link>
-										</MenuItem>
+										{
+											isAdmin &&
+											<MenuItem px={3} py={1}>
+												<Link href='/dashboard'>
+													<Text display="block" color='white'>Dashboard</Text>
+												</Link>
+											</MenuItem>
+										}
 									</>
 								}
 								{/* </MenuGroup> */}
@@ -83,22 +92,22 @@ const Navbar = () => {
 								<MenuDivider />
 
 								{/* <MenuGroup title='Help'> */}
-								<MenuItem px={3} py={2}>
+								{/* <MenuItem px={3} py={2}>
 									<Link onClick={handleLogOut}>
 										<Text display="block" color='pink'>Logout</Text>
 									</Link>
-								</MenuItem>
+								</MenuItem> */}
 
 								{/* </MenuGroup> */}
 							</MenuList>
 						</Menu>
 
-						{/* if not logged in  */}
-						<Link href="/login">
+						{/* if logged in  */}
+						<Link onClick={handleLogOut}>
 							<Button size="sm" fontWeight='bold' rounded="md" color='green' p='1' bg="white"
 								_hover={{ bg: "green", color: "white" }}
 							>
-								Login
+								Log Out
 							</Button>
 						</Link>
 					</Stack>

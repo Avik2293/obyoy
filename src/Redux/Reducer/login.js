@@ -21,6 +21,8 @@ const initialState = {
         token: "1|233764s455teu8",
         user_id: 2234,
         isLoggedIn: true,
+        user_type: 'translator',
+        // user_type: 'admin',
         profile: {
             user_id: 2234,
             userName: "Tarif Ezaz",
@@ -114,11 +116,11 @@ export default combineReducers({
     isFetching,
 });
 
-export const selectLoginIsFetching = state => state.isFetching;
-export const selectToken = state => state.login.token || '';
-export const selectUserName = state => state.login.userName || '';
-export const selectUserID = state => state.login.user_id || '';
-export const selectExpiryTime = state => state.login.session_expiry;
+// export const selectLoginIsFetching = state => state.isFetching;
+// export const selectToken = state => state.login.token || '';
+// export const selectUserName = state => state.login.userName || '';
+// export const selectUserID = state => state.login.user_id || '';
+// export const selectExpiryTime = state => state.login.session_expiry;
 
 // export const selectProfile = state => (state.login.profile && {
 //     ...state.login.profile,
@@ -126,5 +128,6 @@ export const selectExpiryTime = state => state.login.session_expiry;
 // }) || {};
 
 export const selectIsLoggedIn = state => (state.login.token !== '' && state.login.user_id !== '') ? true : false;
-
+export const selectIsAdmin = state => (state.login.user_type === 'admin') ? true : false;
+console.log(selectIsAdmin);
 export const selectProfile = state => state.login.profile;

@@ -7,6 +7,7 @@ export function makeServer({ environment = "test" } = {}) {
         models: {
             topTen: Model,
             line: Model,
+            // dataset: Model,
             login: Model,
         },
 
@@ -27,21 +28,127 @@ export function makeServer({ environment = "test" } = {}) {
                     { name: 'fdegr gdf', balance: 35 },
                 ]
             })
+            server.create("login", {
+                token: "1|233764s455teu8",
+                user_id: 2234,
+                isLoggedIn: true,
+                user_type: 'translator',
+                // user_type: 'admin',
+                profile: {
+                    user_id: 2234,
+                    userName: "Tarif Ezaz",
+                    user_email: "tarif_ezaz@test.com",
+                    user_Password: "123456789",
+                    join_date: "23 May, 2021",
+                    total_working_days: 435,
+                    leaderboard_place: 45,
+                    total_balance: 415,
+                    for_approve: 45.34,
+                    today_contribution: 5.78,
+                    image_url: 'https://media.licdn.com/dms/image/D5635AQExQkEPINGiKw/profile-framedphoto-shrink_200_200/0/1689965016077?e=1709398800&v=beta&t=zPvLCTrvM4qowRj5spvZElIaJvFvPR7TRYkyAucaNfA',
+                },
+                session_expiry: 0,
+            })
             server.create("line", {
                 newLine: "What you want to know ?",
                 translatedLine: '',
             })
-            server.create("login", {
-                token: "1|233764s455teu8",
-                user_id: 2234,
-                userName:  "Tarif Ezaz",
-                profile: {
-                    user_id: 2234,
-                    userName: "Tarif Ezaz",
-                    leaderboard_place: 45,
-                    image_url: 'https://media.licdn.com/dms/image/D5635AQExQkEPINGiKw/profile-framedphoto-shrink_200_200/0/1689965016077?e=1709398800&v=beta&t=zPvLCTrvM4qowRj5spvZElIaJvFvPR7TRYkyAucaNfA',
-                },
-                session_expiry: 0,
+            // server.create("dataset", {
+            //     total_datasets: 5,
+            //     datasets: [
+            //         {
+            //             dataset_id: 1,
+            //             dataset_name: 'dummy dataset 1',
+            //             total_lines: 78,
+            //             total_translated: 45,
+            //             for_review: 24,
+            //             remaining_lines: [
+            //                 { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
+            //                 { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
+            //                 { line_id: 25, translator_id: 0, line: 'Who are they?', translated_line: '' },
+            //             ],
+            //             translated_lines: [
+            //                 { line_id: 3, translator_id: 10, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
+            //                 { line_id: 4, translator_id: 19, line: 'What you?', translated_line: 'dsfr fjur hyet' },
+            //                 { line_id: 5, translator_id: 12, line: 'Are they?', translated_line: 'dfsr jrur dyet' },
+            //             ],
+            //             reviewing_lines: [
+            //                 { line_id: 3, translator_id: 2, line: 'Who are you?', translated_line: 'dsfsr fjrur hdyet' },
+            //                 { line_id: 4, translator_id: 122, line: 'What are you?', translated_line: 'dsfr fjur hyet' },
+            //                 { line_id: 5, translator_id: 162, line: 'Who are they?', translated_line: 'dfsr jrur dyet' },
+            //             ],
+            //         },
+            //         {
+            //             dataset_id: 11,
+            //             dataset_name: 'dummy dataset 11',
+            //             total_lines: 787,
+            //             total_translated: 145,
+            //             for_review: 224,
+            //             remaining_lines: [
+            //                 { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
+            //                 { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
+            //                 { line_id: 25, translator_id: 0, line: 'Who are they?', translated_line: '' },
+            //             ],
+            //             translated_lines: [
+            //                 { line_id: 3, translator_id: 10, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
+            //                 { line_id: 4, translator_id: 19, line: 'What you?', translated_line: 'dsfr fjur hyet' },
+            //                 { line_id: 5, translator_id: 12, line: 'Are they?', translated_line: 'dfsr jrur dyet' },
+            //             ],
+            //             reviewing_lines: [
+            //                 { line_id: 3, translator_id: 2, line: 'Who are you?', translated_line: 'dsfsr fjrur hdyet' },
+            //                 { line_id: 4, translator_id: 122, line: 'What are you?', translated_line: 'dsfr fjur hyet' },
+            //                 { line_id: 5, translator_id: 162, line: 'Who are they?', translated_line: 'dfsr jrur dyet' },
+            //             ],
+            //         }
+            //     ]
+            // })
+            server.db.loadData({
+                datasets: [
+                    {
+                        dataset_id: 1,
+                        dataset_name: 'dummy dataset 1',
+                        total_lines: 78,
+                        total_translated: 45,
+                        for_review: 24,
+                        remaining_lines: [
+                            { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
+                            { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
+                            { line_id: 25, translator_id: 0, line: 'Who are they?', translated_line: '' },
+                        ],
+                        translated_lines: [
+                            { line_id: 3, translator_id: 10, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
+                            { line_id: 4, translator_id: 19, line: 'What you?', translated_line: 'dsfr fjur hyet' },
+                            { line_id: 5, translator_id: 12, line: 'Are they?', translated_line: 'dfsr jrur dyet' },
+                        ],
+                        reviewing_lines: [
+                            { line_id: 3, translator_id: 2, line: 'Who are you?', translated_line: 'dsfsr fjrur hdyet' },
+                            { line_id: 4, translator_id: 122, line: 'What are you?', translated_line: 'dsfr fjur hyet' },
+                            { line_id: 5, translator_id: 162, line: 'Who are they?', translated_line: 'dfsr jrur dyet' },
+                        ],
+                    },
+                    {
+                        dataset_id: 11,
+                        dataset_name: 'dummy dataset 11',
+                        total_lines: 787,
+                        total_translated: 145,
+                        for_review: 224,
+                        remaining_lines: [
+                            { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
+                            { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
+                            { line_id: 25, translator_id: 0, line: 'Who are they?', translated_line: '' },
+                        ],
+                        translated_lines: [
+                            { line_id: 3, translator_id: 10, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
+                            { line_id: 4, translator_id: 19, line: 'What you?', translated_line: 'dsfr fjur hyet' },
+                            { line_id: 5, translator_id: 12, line: 'Are they?', translated_line: 'dfsr jrur dyet' },
+                        ],
+                        reviewing_lines: [
+                            { line_id: 3, translator_id: 2, line: 'Who are you?', translated_line: 'dsfsr fjrur hdyet' },
+                            { line_id: 4, translator_id: 122, line: 'What are you?', translated_line: 'dsfr fjur hyet' },
+                            { line_id: 5, translator_id: 162, line: 'Who are they?', translated_line: 'dfsr jrur dyet' },
+                        ],
+                    }
+                ],
             })
         },
 
@@ -53,6 +160,26 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.topTens.all()
             })
             // }, { timing: 4000 })
+
+            this.get("/new_line", (schema, request) => {
+                return schema.db.datasets[0]
+            })
+
+            this.post("/translated_line", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                console.log(attrs);
+                // return { movie: attrs }
+                // return schema.movies.create(attrs)
+                // return schema.db.datasets[0]
+                // return schema.db.datasets[0].reviewing_lines.insert(attrs)
+                // server.db.datasets[0].insert({ title: "The Dark Knight" })
+
+                let headers = {}
+                let data = { success: ["Added for review"] }
+                return new Response(201, headers, data)
+            })
+
+
 
             this.get("/profile/:id", (schema, request) => {
                 let id = request.params.id
