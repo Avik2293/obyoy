@@ -2,14 +2,30 @@ import React, { useState } from 'react';
 import { Heading, Container, Image, HStack, VStack, Text, Flex, Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { Form, } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { profileUpdate } from '../Redux/Thunk/Login';
+import { selectIsLoggedIn, selectProfile, selectToken } from '../Redux/Reducer';
+
 
 const Profile = () => {
+	const dispatch = useDispatch();
+
+	// for redirect to login page
+	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+	if (!isLoggedIn) {
+		window.location.href = '/login';
+	};
+
+	const token = useSelector(state => selectToken(state));
+	const profile = useSelector(state => selectProfile(state));
+
 	const [start, setStart] = useState(false);
 
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [address, setAddress] = useState('');
-	const [birthday, setBirthday] = useState('');
+	const [name, setName] = useState(profile?.userName);
+	const [email, setEmail] = useState(profile?.user_email);
+	const [phone, setPhone] = useState(profile?.user_phone);
+	const [address, setAddress] = useState(profile?.address);
+	const [birthday, setBirthday] = useState(profile?.birthday);
 
 	// image upload 
 	const [img, setImg] = useState(false);
@@ -38,16 +54,18 @@ const Profile = () => {
 		//     .then((data) => console.log(data))
 		//     .catch((err) => console.error(err));
 
-		//     alert(`Selected file - ${this.fileInput.current.files[0].name}`);
+		    // alert(`Selected file - ${this.fileInput.current.files[0].name}`);
 	};
 
 	const handleSubmit = event => {
 		// event.preventDefault();
+		dispatch(profileUpdate(name, email, phone, address, birthday, token));
 		setName('');
 		setEmail('');
+		setPhone('');
 		setAddress('');
 		setBirthday('');
-		console.log(name, email, address, birthday);
+		// console.log(name, email, phone, address, birthday);
 		setStart(!start);
 	};
 
@@ -63,45 +81,51 @@ const Profile = () => {
 						</Heading>
 
 						<Box>
-							<Text fontWeight={'bold'} >Name : Dummy</Text>
-							<Text fontWeight={'bold'} >Email : Dummy</Text>
-							<Text fontWeight={'bold'} >Address : Dummy</Text>
-							<Text fontWeight={'bold'} >Birthday: 22 March, 1993</Text>
+							<Text fontWeight={'bold'} >Name : {profile?.userName}</Text>
+							<Text fontWeight={'bold'} >Email : {profile?.user_email}</Text>
+							<Text fontWeight={'bold'} >Phone : {profile?.user_phone}</Text>
+							<Text fontWeight={'bold'}>Address : {profile?.address}</Text>
+							<Text fontWeight={'bold'} >Birthday: {profile?.birthday}</Text>
 
 							<Text fontWeight={'bold'} textAlign={'center'} my={1}>:: :: ::</Text>
-							<Text fontWeight={'bold'} >Date of Join : 22 March, 2022</Text>
-							<Text fontWeight={'bold'} >Total Working Days : 356 Days</Text>
-							<Text fontWeight={'bold'} >Balance : Tk. 345.56</Text>
-							<Text fontWeight={'bold'} >Till Now Earning: Tk. 1745.56</Text>
-							<Text fontWeight={'bold'} >Total Withdraw : Tk. 1345.56</Text>
-							<Text fontWeight={'bold'} >For Approve : Tk. 35.56</Text>
-							<Text fontWeight={'bold'} >Today's Contribution : Tk. 5.56</Text>
+							<Text fontWeight={'bold'} >Date of Join : {profile?.join_date}</Text>
+							<Text fontWeight={'bold'} >Total Working Days : {profile?.total_working_days} Days</Text>
+							<Text fontWeight={'bold'} >Balance : Tk. {profile?.balance}</Text>
+							<Text fontWeight={'bold'} >Till Now Earning: Tk. {profile?.total_balance}</Text>
+							<Text fontWeight={'bold'} >Total Withdraw : Tk. {profile?.total_withdraw}</Text>
+							<Text fontWeight={'bold'} >For Approve : Tk. {profile?.for_approve}</Text>
+							<Text fontWeight={'bold'} >Today's Contribution : Tk. {profile?.today_contribution}</Text>
 						</Box>
 					</VStack>
 
 					<VStack>
-						<Image boxSize='200px' objectFit='cover' borderRadius='full' src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
+						<Image boxSize='200px' objectFit='cover' borderRadius='full' src={profile?.image_url} alt={profile?.userName} />
 
 						<Text fontWeight={'bold'} >
-							Learder Board Place : 22
+							Leader Board Place : {profile?.leaderboard_place}
 						</Text>
 
-						<Button bgColor={'teal'} p={2} my={1} borderRadius={'lg'} color={'white'}
-							onClick={() => setImg(!img)}
-						>
-							Change Your Photo
-						</Button>
-
 						{
-							img &&
-							<>
-								<input type="file" onChange={handleFileChange} />
-								<div>{file && `${file.name} - ${file.type}`}</div>
-								<HStack spacing={8}>
-									<button onClick={handleUploadClick}>Upload</button>
-									<button onClick={() => setImg(!img)}>Cancel</button>
-								</HStack>
-							</>
+							img ?
+								<>
+									<Text bgColor={'teal'} p={2} my={1} borderRadius={'lg'} color={'white'}
+									>
+										Choose a Photo file for Upload
+									</Text>
+
+									<input type="file" onChange={handleFileChange} />
+									<div>{file && `${file.name} - ${file.type}`}</div>
+									<HStack spacing={8}>
+										<button onClick={handleUploadClick}>Upload</button>
+										<button onClick={() => setImg(!img)}>Cancel</button>
+									</HStack>
+								</>
+								:
+								<Button bgColor={'teal'} p={2} my={1} borderRadius={'lg'} color={'white'}
+									onClick={() => setImg(!img)}
+								>
+									Change Your Photo
+								</Button>
 						}
 
 						<Button bgColor={'blue'} p={2} my={8} borderRadius={'lg'} color={'white'}
@@ -115,13 +139,13 @@ const Profile = () => {
 
 			{
 				start &&
-				<Flex 
-                    mx={'auto'} 
-                    my={3} 
-                    align={"center"} 
-                    justify={"space-evenly"} 
-                    direction={[null, 'column-reverse', 'row',]}
-                >
+				<Flex
+					mx={'auto'}
+					my={3}
+					align={"center"}
+					justify={"space-evenly"}
+					direction={[null, 'column-reverse', 'row',]}
+				>
 					<Form onSubmit={handleSubmit}>
 						<VStack my={[null, 1, 8]}>
 							<Heading fontWeight={'bold'} as='h2' fontSize='2xl'>
@@ -130,27 +154,35 @@ const Profile = () => {
 
 							<FormControl id="name" >
 								<FormLabel fontWeight={'bold'}>Name</FormLabel>
-								<Input type="name" placeholder='Your Name' px={2} w={'330px'}
+								<Input type="text" placeholder='Your Name' px={2} w={'330px'} required
 									onChange={(e) => setName(e.target.value)} value={name} />
 							</FormControl>
 
 							<FormControl id="email" >
 								<FormLabel fontWeight={'bold'}>Email</FormLabel>
-								<Input type="email" placeholder='Your Email' px={2} w={'330px'}
+								<Input type="email" placeholder='Your Email' px={2} w={'330px'} required
 									onChange={(e) => setEmail(e.target.value)} value={email} />
+							</FormControl>
+
+							<FormControl id="phone" >
+								<FormLabel fontWeight={'bold'}>Phone No.</FormLabel>
+								<Input type="tel" placeholder='Your Phone No.' px={2} w={'330px'} required
+									onChange={(e) => setPhone(e.target.value)} value={phone} />
 							</FormControl>
 
 							<FormControl id="address" >
 								<FormLabel fontWeight={'bold'}>Address</FormLabel>
-								<Input type="address" placeholder='Your Address' px={2} w={'330px'}
+								<Input type="address" placeholder='Your Address' px={2} w={'330px'} required
 									onChange={(e) => setAddress(e.target.value)} value={address} />
 							</FormControl>
 
 							<FormControl id="birthday" >
 								<FormLabel fontWeight={'bold'}>Birthday</FormLabel>
+								<Text>{birthday} (for change, click below calender)</Text>
 								<Input
 									// type="datetime-local"
-									type="date" placeholder='Your Birthday' px={2} w={'330px'}
+									type="date"
+									placeholder='Your Birthday' px={2} w={'330px'}
 									onChange={(e) => setBirthday(e.target.value)} value={birthday} />
 							</FormControl>
 
@@ -166,7 +198,7 @@ const Profile = () => {
 					</Form>
 
 					<VStack>
-						<Image boxSize='200px' objectFit='cover' borderRadius='full' src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
+						<Image boxSize='200px' objectFit='cover' borderRadius='full' src={profile?.image_url} alt={profile?.userName} />
 					</VStack>
 				</Flex>
 			}

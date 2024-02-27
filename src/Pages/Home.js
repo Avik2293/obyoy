@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, HStack, Text, Box, GridItem, Grid, Link as ChakraLink, Image, Button, Input, } from '@chakra-ui/react'
+import { Container, HStack, Text, Box, GridItem, Grid, Link as ChakraLink, Image, Button, Textarea, } from '@chakra-ui/react'
 import { Form, Link as ReactRouterLink } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
-import { selectIsLoggedIn, selectProfile, selectLeaderboardTop, selectLine } from '../Redux/Reducer';
+import { selectIsLoggedIn, selectProfile, selectLeaderboardTop, selectLine, selectToken } from '../Redux/Reducer';
 
 
 const Home = () => {
@@ -16,7 +16,8 @@ const Home = () => {
 	if (!isLoggedIn) {
 		window.location.href = '/login';
 	};
-
+	
+	const token = useSelector(state => selectToken(state));
 	const topTen = useSelector(state => selectLeaderboardTop(state));
 	const profile = useSelector(state => selectProfile(state));
 
@@ -39,7 +40,7 @@ const Home = () => {
 	const handleSubmit = event => {
 		// event.preventDefault();
 
-		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id));
+		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
 		setInput('');
 		setStart(!start);
 		// console.log(line.dataset_id, line.line_id, line.line, input, profile.user_id);
@@ -47,7 +48,7 @@ const Home = () => {
 
 	const handleSubmitNext = event => {
 		// event.preventDefault();
-		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id));
+		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
 		setCount(count + 1);
 		setInput('');
 		// console.log(input);
@@ -242,7 +243,8 @@ const Home = () => {
 
 							{/* <Form onSubmit={handleSubmit}> */}
 							<Form>
-								<Input
+								{/* <Input */}
+								<Textarea
 									name="input"
 									id="input"
 									variant='filled'
@@ -354,7 +356,7 @@ const Home = () => {
 						textAlign={'center'}
 					>
 						<Text mt={6}>Balance</Text>
-						<Text my={1}>::: Tk. {profile?.total_balance} :::</Text>
+						<Text my={1}>::: Tk. {profile?.balance} :::</Text>
 
 						<Text mt={6}>For Approve</Text>
 						<Text my={1}>::: Tk. {profile?.for_approve} :::</Text>

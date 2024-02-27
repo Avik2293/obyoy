@@ -15,7 +15,7 @@ import {
     // updateSessionExpiry,
 } from "../../ActionCreator/home";
 
-import { BASE_URL } from "../../Constant/home";
+// import { BASE_URL } from "../../Constant/home";
 
 export const leaderboard = () => async (dispatch, getState) => {
     dispatch(requestLeaderboard())
@@ -43,7 +43,7 @@ export const newLine = () => async (dispatch, getState) => {
         })
 }
 
-export const translatedLine = (dataset_id, line_id, line, input, translator_id) => async (dispatch, getState) => {
+export const translatedLine = (dataset_id, line_id, line, input, translator_id, token) => async (dispatch, getState) => {
     dispatch(requestSubmitTranslatedline())
 
     // axios.post(BASE_URL + "/api/v1/translated_line", {
@@ -53,6 +53,10 @@ export const translatedLine = (dataset_id, line_id, line, input, translator_id) 
         line: line,
         translated_line: input,
         translator_id: translator_id,
+    }, {
+        headers: {
+            'Authorization' : token,
+        },
     })
         .then((response) => {
             // console.log(response.data);

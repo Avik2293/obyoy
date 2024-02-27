@@ -38,11 +38,16 @@ export function makeServer({ environment = "test" } = {}) {
                     user_id: 2234,
                     userName: "Tarif Ezaz",
                     user_email: "tarif_ezaz@test.com",
-                    user_Password: "123456789",
+                    user_password: "123456789",
+                    user_phone: "+8801723456789",
                     join_date: "23 May, 2021",
+                    birthday: "22 March, 1993",
+                    address: "Bashundhara, Dhaka, Bangladesh",
                     total_working_days: 435,
                     leaderboard_place: 45,
                     total_balance: 415,
+                    total_withdraw: 350,
+                    balance: 45,
                     for_approve: 45.34,
                     today_contribution: 5.78,
                     image_url: 'https://media.licdn.com/dms/image/D5635AQExQkEPINGiKw/profile-framedphoto-shrink_200_200/0/1689965016077?e=1709398800&v=beta&t=zPvLCTrvM4qowRj5spvZElIaJvFvPR7TRYkyAucaNfA',
@@ -167,7 +172,9 @@ export function makeServer({ environment = "test" } = {}) {
 
             this.post("/translated_line", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
+                console.log(authToken);
                 // return { movie: attrs }
                 // return schema.movies.create(attrs)
                 // return schema.db.datasets[0]
@@ -179,8 +186,21 @@ export function makeServer({ environment = "test" } = {}) {
                 return new Response(201, headers, data)
             })
 
+            this.post("/profile_edit", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                // let headers = {}
+                // let data = { success: ["Profile info updated"] }
+                // return new Response(201, headers, data)
+                return schema.logins.all()
+            })
 
 
+
+            
             this.get("/profile/:id", (schema, request) => {
                 let id = request.params.id
 
