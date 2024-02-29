@@ -155,6 +155,36 @@ export function makeServer({ environment = "test" } = {}) {
                     }
                 ],
             })
+            server.db.loadData({
+                customDatasets: [
+                    {
+                        dataset_id: 111,
+                        dataset_name: 'dummy dataset 111',
+                        user_id: 2234,
+                        userName: 'Tarif Ezzaz',
+                        total_lines: 0,
+                        create_date: '22 February, 2024',
+                        approval_status: 'Pending',
+                        approval_date: '',
+                        all_lines: [],
+                    },
+                    {
+                        dataset_id: 112,
+                        dataset_name: 'dummy dataset 112',
+                        user_id: 2234,
+                        userName: 'Tarif',
+                        total_lines: 3,
+                        create_date: '02 February, 2024',
+                        approval_status: 'Approved',
+                        approval_date: '05 February, 2024',
+                        all_lines: [
+                            { line_id: 3, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
+                            { line_id: 4, line: 'What you?', translated_line: 'dsfr fjur hyet' },
+                            { line_id: 5, line: 'Are they?', translated_line: 'dfsr jrur dyet' },
+                        ],
+                    }
+                ],
+            })
         },
 
         routes() {
@@ -198,9 +228,60 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.logins.all()
             })
 
+            this.get("/custom_datasets/:user_id", (schema, request) => {
+                let user_id = request.params.user_id
+                // db.users.where({ name: 'Zelda' });
+                // return {
+                //     data: {
+                //         id: movie.id,
+                //         type: "movies",
+                //         attributes: {
+                //             title: movie.title,
+                //         },
+                //     },
+                // }
+                return schema.db.customDatasets.where({ user_id: user_id })
+
+            })
+
+            this.post("/create_dataset", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+                // let headers = {}
+                // let data = { success: ["New Dataset Created."] }
+                // return new Response(201, headers, data)
+                return schema.db.customDatasets.where({ user_id: attrs.user_id })
+            })
+
+            this.post("/dataset_file_input", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+                // let headers = {}
+                // let data = { success: ["New file input in Dataset successfully."] }
+                // return new Response(201, headers, data)
+                return schema.db.customDatasets.where({ user_id: attrs.user_id })
+            })
+
+            this.post("/dataset_line_input", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+                let headers = {}
+                let data = { success: ["New line input in Dataset successfully."] }
+                return new Response(201, headers, data)
+            })
 
 
-            
+
+
+
+
+
             this.get("/profile/:id", (schema, request) => {
                 let id = request.params.id
 

@@ -1,9 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Text, Box, GridItem, Grid, Input, Button, HStack, VStack } from '@chakra-ui/react';
 import { Form } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDatasets, createNewDataset, datasetFileInput, datasetLineInput } from '../Redux/Thunk/Custom';
+import { selectIsLoggedIn, selectToken, selectID, selectCustomDatasets } from '../Redux/Reducer';
 
 const CustomDataset = () => {
+    const dispatch = useDispatch();
+
+    // for redirect to login page
+    const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+    if (!isLoggedIn) {
+        window.location.href = '/login';
+    };
+
+    const token = useSelector(state => selectToken(state));
+    const user_id = useSelector(state => selectID(state));
+
+    useEffect(() => {
+        dispatch(fetchDatasets(user_id));
+    }, [dispatch, user_id]);
+
+    const customDatasets = useSelector(state => selectCustomDatasets(state));
 
     // file upload 
     const [file, setFile] = useState();
@@ -38,26 +57,35 @@ const CustomDataset = () => {
     const [newDatasetName, setNewDatasetName] = useState('');
     const handleNewDatasetNameChange = (e) => setNewDatasetName(e.target.value);
 
-    // for dataset line input 
+    const handleSubmitNewDatasetName = event => {
+        // event.preventDefault();
+        dispatch(createNewDataset(user_id, newDatasetName, token));
+        setNewDatasetName('');
+        // console.log(newDatasetName);
+    };
+
+    // for dataset selection
     const [start, setStart] = useState(false);
+    const [datasetId, setDatasetId] = useState();
+    const [datasetName, setDatasetName] = useState('');
+
+    const handleFetchDataset = (dataset_id, dataset_name) => {
+        setDatasetId(dataset_id);
+        setDatasetName(dataset_name);
+        setStart(true);
+    };
+
+    // for dataset line input 
     const [lineInput, setLineInput] = useState('');
     const handleLineInputChange = (e) => setLineInput(e.target.value);
     const [translatedLineInput, setTranslatedLineInput] = useState('');
     const handleTranslatedLineInputChange = (e) => setTranslatedLineInput(e.target.value);
 
-    const handleFetchDataset = (e) => {
-        setStart(true);
-    };
-
-    const handleSubmitNewDatasetName = event => {
-        // event.preventDefault();
-        setNewDatasetName('');
-        console.log(newDatasetName);
-    };
-
     const handleSubmit = event => {
         // event.preventDefault();
-        // dispatch(translatedLine(newLine.id, input));
+        dispatch(datasetLineInput(user_id, datasetId, datasetName, lineInput, translatedLineInput, token));
+        setDatasetId();
+        setDatasetName('');
         setLineInput('');
         setTranslatedLineInput('');
         setStart(!start);
@@ -67,8 +95,7 @@ const CustomDataset = () => {
 
     const handleSubmitNext = event => {
         // event.preventDefault();
-        // dispatch(translatedLine(newLine.id, input));
-        // setCount(count + 1);
+        dispatch(datasetLineInput(user_id, datasetId, datasetName, lineInput, translatedLineInput, token));
         setLineInput('');
         setTranslatedLineInput('');
         // console.log(lineInput);
@@ -114,11 +141,18 @@ const CustomDataset = () => {
                             mt={2}
 
                         >
-                            <Button _hover={{ textDecoration: 'underline' }} onClick={handleFetchDataset}>1. dummy Dataset 1</Button>
-                            <Button _hover={{ textDecoration: 'underline' }} onClick={handleFetchDataset}>2. dummy Dataset 2</Button>
-                            <Button _hover={{ textDecoration: 'underline' }} onClick={handleFetchDataset}>3. dummy Dataset 3</Button>
-                            <Button _hover={{ textDecoration: 'underline' }} onClick={handleFetchDataset}>4. dummy Dataset 4</Button>
-                            <Button _hover={{ textDecoration: 'underline' }} onClick={handleFetchDataset}>5. dummy Dataset 5</Button>
+                            {
+                                // console.log(customDatasets)
+                                customDatasets &&
+                                customDatasets.map((value, key) =>
+                                    <Button key={key}
+                                        _hover={{ textDecoration: 'underline' }}
+                                        onClick={() => handleFetchDataset(value.dataset_id, value.dataset_name)}
+                                    >
+                                        {key + 1}. {value.dataset_name}
+                                    </Button>
+                                )
+                            }
                         </VStack>
                     }
 
@@ -281,7 +315,7 @@ const CustomDataset = () => {
                                 textAlign={'center'}
                                 my={4}
                             >
-                                Line 1</Text>
+                                New Line Input for {datasetName}</Text>
 
                             {/* <Form onSubmit={handleSubmit}> */}
                             <Form>
