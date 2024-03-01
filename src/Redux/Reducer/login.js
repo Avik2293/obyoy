@@ -144,7 +144,6 @@ export default combineReducers({
 
 // export const selectLoginIsFetching = state => state.isFetching;
 // export const selectUserName = state => state.login.userName || '';
-// export const selectUserID = state => state.login.user_id || '';
 // export const selectExpiryTime = state => state.login.session_expiry;
 
 // export const selectProfile = state => (state.login.profile && {
@@ -152,6 +151,8 @@ export default combineReducers({
 //     address: Array.isArray(state.login.profile.address) ? state.login.profile.address.join(', ') : ''
 // }) || {};
 
+
+export const selectUserID = state => state.login.user_id || '';
 export const selectToken = state => state.login.token || '';
 export const selectIsLoggedIn = state => (state.login.token !== '' && state.login.user_id !== '') ? true : false;
 export const selectIsAdmin = state => (state.login.user_type === 'admin') ? true : false;
