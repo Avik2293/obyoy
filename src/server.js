@@ -45,9 +45,9 @@ export function makeServer({ environment = "test" } = {}) {
                     address: "Bashundhara, Dhaka, Bangladesh",
                     total_working_days: 435,
                     leaderboard_place: 45,
-                    total_balance: 415,
-                    total_withdraw: 350,
                     balance: 45,
+                    total_balance: 395,
+                    total_withdraw: 350,
                     for_approve: 45.34,
                     today_contribution: 5.78,
                     image_url: 'https://media.licdn.com/dms/image/D5635AQExQkEPINGiKw/profile-framedphoto-shrink_200_200/0/1689965016077?e=1709398800&v=beta&t=zPvLCTrvM4qowRj5spvZElIaJvFvPR7TRYkyAucaNfA',
@@ -185,6 +185,70 @@ export function makeServer({ environment = "test" } = {}) {
                     }
                 ],
             })
+            server.db.loadData({
+                withdraws:[
+                    {
+                        user_id: 2234,
+                        withdraw_id: 533,
+                        withdraw_date: '25 January, 2022',
+                        prev_balance: 5233,
+                        withdraw_amount: 233,
+                        update_balance: 0,
+                        withdraw_system: 'Bkash',
+                        withdraw_info: '01758727366',
+                        status: 'Pending',
+                        remarks: 'okay',
+                    },
+                    {
+                        user_id: 2234,
+                        withdraw_id: 534,
+                        withdraw_date: '26 January, 2022',
+                        prev_balance: 523,
+                        withdraw_amount: 33,
+                        update_balance: 523,
+                        withdraw_system: 'bank',
+                        withdraw_info: 'Bank Asia - 23234017343458727366',
+                        status: 'Rejected',
+                        remarks: 'Fault input',
+                    },
+                    {
+                        user_id: 2234,
+                        withdraw_id: 543,
+                        withdraw_date: '25 March, 2022',
+                        prev_balance: 5323,
+                        withdraw_amount: 533,
+                        update_balance: 5856,
+                        withdraw_system: 'Nagad',
+                        withdraw_info: '01755723366',
+                        status: 'Completed',
+                        remarks: 'Problem was two times, but then.',
+                    },
+                    {
+                        user_id: 234,
+                        withdraw_id: 57342423343,
+                        withdraw_date: '25 April, 2022',
+                        prev_balance: 5232323,
+                        withdraw_amount: 233,
+                        update_balance: 0,
+                        withdraw_system: 'Devit-card',
+                        withdraw_info: '323dfdd501758727366',
+                        status: 'Pending',
+                        remarks: '',
+                    },
+                    {
+                        user_id: 224,
+                        withdraw_id: 593,
+                        withdraw_date: '25 June, 2022',
+                        prev_balance: 5233,
+                        withdraw_amount: 23343433433,
+                        update_balance: 5233,
+                        withdraw_system: 'Credit-Card',
+                        withdraw_info: 'adhadud, adasdis, 01758727366',
+                        status: 'Rejected',
+                        remarks: 'okay',
+                    },
+                ]
+            })
         },
 
         routes() {
@@ -226,6 +290,32 @@ export function makeServer({ environment = "test" } = {}) {
                 // let data = { success: ["Profile info updated"] }
                 // return new Response(201, headers, data)
                 return schema.logins.all()
+            })
+
+            this.get("/withdraws/:user_id", (schema, request) => {
+                let user_id = request.params.user_id
+                // db.users.where({ name: 'Zelda' });
+                // return {
+                //     data: {
+                //         id: movie.id,
+                //         type: "movies",
+                //         attributes: {
+                //             title: movie.title,
+                //         },
+                //     },
+                // }
+                return schema.db.withdraws.where({ user_id: user_id })
+            })
+
+            this.post("/withdraw_request", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+                // let headers = {}
+                // let data = { success: ["New Dataset Created."] }
+                // return new Response(201, headers, data)
+                return schema.db.withdraws.where({ user_id: attrs.user_id })
             })
 
             this.get("/custom_datasets/:user_id", (schema, request) => {
