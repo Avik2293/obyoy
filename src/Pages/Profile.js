@@ -54,7 +54,7 @@ const Profile = () => {
 		//     .then((data) => console.log(data))
 		//     .catch((err) => console.error(err));
 
-		    // alert(`Selected file - ${this.fileInput.current.files[0].name}`);
+		// alert(`Selected file - ${this.fileInput.current.files[0].name}`);
 	};
 
 	const handleSubmit = event => {
@@ -70,11 +70,22 @@ const Profile = () => {
 	};
 
 	return (
-		<Container maxWidth={"1200px"} mx={'auto'} border='4px' borderColor='green' borderRadius={15} my={3} >
-
+		<Container
+			maxWidth={"1200px"}
+			mx={'auto'}
+			border='4px'
+			borderColor='green'
+			borderRadius={15} my={3}
+		>
 			{
 				!start &&
-				<Flex mx={'auto'} my={3} align={"center"} justify={"space-evenly"} direction={[null, 'column-reverse', 'row',]}>
+				<Flex
+					mx={'auto'}
+					my={3}
+					align={"center"}
+					justify={"space-evenly"}
+					direction={[null, 'column-reverse', 'row',]}
+				>
 					<VStack my={[null, 1, 8]}>
 						<Heading fontWeight={'bold'} as='h2' fontSize='2xl'>
 							Profile Details
@@ -99,7 +110,13 @@ const Profile = () => {
 					</VStack>
 
 					<VStack>
-						<Image boxSize='200px' objectFit='cover' borderRadius='full' src={profile?.image_url} alt={profile?.userName} />
+						<Image
+							boxSize='200px'
+							objectFit='cover'
+							borderRadius='full'
+							src={profile?.image_url}
+							alt={profile?.userName}
+						/>
 
 						<Text fontWeight={'bold'} >
 							Leader Board Place : {profile?.leaderboard_place}
@@ -108,27 +125,44 @@ const Profile = () => {
 						{
 							img ?
 								<>
-									<Text bgColor={'teal'} p={2} my={1} borderRadius={'lg'} color={'white'}
+									<Text
+										bgColor={'teal'}
+										p={2}
+										my={1}
+										borderRadius={'lg'}
+										color={'white'}
 									>
 										Choose a Photo file for Upload
 									</Text>
 
 									<input type="file" onChange={handleFileChange} />
+
 									<div>{file && `${file.name} - ${file.type}`}</div>
+
 									<HStack spacing={8}>
 										<button onClick={handleUploadClick}>Upload</button>
 										<button onClick={() => setImg(!img)}>Cancel</button>
 									</HStack>
 								</>
 								:
-								<Button bgColor={'teal'} p={2} my={1} borderRadius={'lg'} color={'white'}
+								<Button
+									bgColor={'teal'}
+									p={2}
+									my={1}
+									borderRadius={'lg'}
+									color={'white'}
 									onClick={() => setImg(!img)}
 								>
 									Change Your Photo
 								</Button>
 						}
 
-						<Button bgColor={'blue'} p={2} my={8} borderRadius={'lg'} color={'white'}
+						<Button
+							bgColor={'blue'}
+							p={2}
+							my={8}
+							borderRadius={'lg'}
+							color={'white'}
 							onClick={() => setStart(!start)}
 						>
 							Edit Personal Info
@@ -148,32 +182,64 @@ const Profile = () => {
 				>
 					<Form onSubmit={handleSubmit}>
 						<VStack my={[null, 1, 8]}>
-							<Heading fontWeight={'bold'} as='h2' fontSize='2xl'>
+							<Heading
+								fontWeight={'bold'}
+								as='h2'
+								fontSize='2xl'
+							>
 								Profile Details
 							</Heading>
 
 							<FormControl id="name" >
 								<FormLabel fontWeight={'bold'}>Name</FormLabel>
-								<Input type="text" placeholder='Your Name' px={2} w={'330px'} required
-									onChange={(e) => setName(e.target.value)} value={name} />
+								<Input
+									type="text"
+									placeholder='Your Name'
+									px={2}
+									w={'330px'}
+									required
+									onChange={(e) => setName(e.target.value)}
+									value={name}
+								/>
 							</FormControl>
 
 							<FormControl id="email" >
 								<FormLabel fontWeight={'bold'}>Email</FormLabel>
-								<Input type="email" placeholder='Your Email' px={2} w={'330px'} required
-									onChange={(e) => setEmail(e.target.value)} value={email} />
+								<Input
+									type="email"
+									placeholder='Your Email'
+									px={2}
+									w={'330px'}
+									required
+									onChange={(e) => setEmail(e.target.value)}
+									value={email}
+								/>
 							</FormControl>
 
 							<FormControl id="phone" >
 								<FormLabel fontWeight={'bold'}>Phone No.</FormLabel>
-								<Input type="tel" placeholder='Your Phone No.' px={2} w={'330px'} required
-									onChange={(e) => setPhone(e.target.value)} value={phone} />
+								<Input
+									type="tel"
+									placeholder='Your Phone No.'
+									px={2}
+									w={'330px'}
+									required
+									onChange={(e) => setPhone(e.target.value)}
+									value={phone}
+								/>
 							</FormControl>
 
 							<FormControl id="address" >
 								<FormLabel fontWeight={'bold'}>Address</FormLabel>
-								<Input type="address" placeholder='Your Address' px={2} w={'330px'} required
-									onChange={(e) => setAddress(e.target.value)} value={address} />
+								<Input
+									type="address"
+									placeholder='Your Address'
+									px={2}
+									w={'330px'}
+									required
+									onChange={(e) => setAddress(e.target.value)}
+									value={address}
+								/>
 							</FormControl>
 
 							<FormControl id="birthday" >
@@ -182,15 +248,30 @@ const Profile = () => {
 								<Input
 									// type="datetime-local"
 									type="date"
-									placeholder='Your Birthday' px={2} w={'330px'}
-									onChange={(e) => setBirthday(e.target.value)} value={birthday} />
+									placeholder='Your Birthday'
+									px={2}
+									w={'330px'}
+									onChange={(e) => setBirthday(e.target.value)}
+									value={birthday}
+								/>
 							</FormControl>
 
 							<HStack justify={'space-between'} spacing={16}>
-								<Button bgColor={'blue'} p={2} my={8} borderRadius={'lg'} color={'white'} type='submit'
+								<Button
+									bgColor={'blue'}
+									p={2}
+									my={8}
+									borderRadius={'lg'}
+									color={'white'}
+									type='submit'
 								>Submit</Button>
 
-								<Button bgColor={'black'} p={2} my={8} borderRadius={'lg'} color={'white'}
+								<Button
+									bgColor={'black'}
+									p={2}
+									my={8}
+									borderRadius={'lg'}
+									color={'white'}
 									onClick={() => setStart(!start)}
 								>Cancel</Button>
 							</HStack>
@@ -198,11 +279,16 @@ const Profile = () => {
 					</Form>
 
 					<VStack>
-						<Image boxSize='200px' objectFit='cover' borderRadius='full' src={profile?.image_url} alt={profile?.userName} />
+						<Image
+							boxSize='200px'
+							objectFit='cover'
+							borderRadius='full'
+							src={profile?.image_url}
+							alt={profile?.userName}
+						/>
 					</VStack>
 				</Flex>
 			}
-
 		</Container >
 	);
 };

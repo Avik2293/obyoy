@@ -37,7 +37,7 @@ const initialState = {
             address: "Bashundhara, Dhaka, Bangladesh",
             total_working_days: 435,
             leaderboard_place: 45,
-            total_balance: 415,
+            total_balance: 395,
             total_withdraw: 350,
             balance: 45,
             for_approve: 45.34,

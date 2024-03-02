@@ -3,11 +3,13 @@ import user, * as fromUser from "./login";
 import leaderboard, * as fromLeaderboard from "./leaderboard";
 import translation, * as fromTranslation from "./translation";
 import customDatasets, * as fromCustomDatasets from "./custom";
+import withdraws, * as fromWithdraws from "./withdraw";
 
 export const rootReducer = combineReducers({
     "user": user,
     "leaderboard": leaderboard,
     "translation": translation,
+    "withdraws": withdraws,
     "customDatasets": customDatasets,
 });
 
@@ -24,7 +26,6 @@ export default reducerFunction;
 // );
 
 
-
 export const selectID = state => fromUser.selectUserID(state.user);
 export const selectToken = state => fromUser.selectToken(state.user);
 export const selectIsLoggedIn = state => fromUser.selectIsLoggedIn(state.user);
@@ -33,5 +34,7 @@ export const selectProfile = state => fromUser.selectProfile(state.user);
 
 export const selectLeaderboardTop = state => fromLeaderboard.selectLeaderboard(state.leaderboard);
 export const selectLine = state => fromTranslation.selectLine(state.translation);
+
+export const selectWithdraws = state => fromWithdraws.selectWithdraws(state.withdraws);
 
 export const selectCustomDatasets = state => fromCustomDatasets.selectCustomDatasets(state.customDatasets);
