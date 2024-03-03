@@ -32,8 +32,8 @@ export function makeServer({ environment = "test" } = {}) {
                 token: "1|233764s455teu8",
                 user_id: 2234,
                 isLoggedIn: true,
-                user_type: 'translator',
-                // user_type: 'admin',
+                // user_type: 'translator',
+                user_type: 'admin',
                 profile: {
                     user_id: 2234,
                     userName: "Tarif Ezaz",
@@ -50,7 +50,7 @@ export function makeServer({ environment = "test" } = {}) {
                     total_withdraw: 350,
                     for_approve: 45.34,
                     today_contribution: 5.78,
-                    image_url: 'https://media.licdn.com/dms/image/D5635AQExQkEPINGiKw/profile-framedphoto-shrink_200_200/0/1689965016077?e=1709398800&v=beta&t=zPvLCTrvM4qowRj5spvZElIaJvFvPR7TRYkyAucaNfA',
+                    image_url: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png',
                 },
                 session_expiry: 0,
             })
@@ -186,7 +186,7 @@ export function makeServer({ environment = "test" } = {}) {
                 ],
             })
             server.db.loadData({
-                withdraws:[
+                withdraws: [
                     {
                         user_id: 2234,
                         withdraw_id: 533,
@@ -253,6 +253,52 @@ export function makeServer({ environment = "test" } = {}) {
 
         routes() {
             this.namespace = "api/v1"
+
+            this.post("/signup", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+                // return { movie: attrs }
+                // return schema.movies.create(attrs)
+                // return schema.db.datasets[0]
+                // return schema.db.datasets[0].reviewing_lines.insert(attrs)
+                // server.db.datasets[0].insert({ title: "The Dark Knight" })
+
+                let headers = {}
+                let data = { success: ["Added for review"] }
+                return new Response(201, headers, data)
+            })
+
+            this.post("/login", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                // let authToken = request.re/questHeaders.Authorization
+                console.log(attrs);
+                // console.log(authToken);
+
+                // let a= attrs.user_email;
+
+                // let headers = {}
+                // let data = { success: ["Added for review"] }
+                // return new Response(201, headers, data)
+                // return schema.logins.find({user_email:attrs.user_email, user_password: attrs.user_password})
+                return schema.logins.all()
+            })
+
+            this.delete("/logout", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                let headers = {}
+                let data = { success: ["Logout Successfully"] }
+                return new Response(201, headers, data)
+
+                // let id = request.params.id
+                // return schema.movies.find(id).destroy()
+            })
+
 
             // Using the `timing` option to slow down the response
             this.get("/leaderboard/topTen", (schema, request) => {

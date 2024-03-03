@@ -1,41 +1,48 @@
 import {
-    // REQUEST_LOGIN,
-    // SUCCESS_LOGIN,
-    // FAILURE_LOGIN,
-    // SUCCESS_LOGOUT,
+    REQUEST_LOGIN,
+    SUCCESS_LOGIN,
+    FAILURE_LOGIN,
+    REQUEST_LOGOUT,
+    SUCCESS_LOGOUT,
+    FAILURE_LOGOUT,
     REQUEST_UPDATE_PROFILE,
     SUCCESS_UPDATE_PROFILE,
     FAILURE_UPDATE_PROFILE,
     // UPDATE_SESSION_EXPIRY,
 } from "../Constant/login";
 
-// export const requestLogin = () => ({
-//     type : REQUEST_LOGIN,
-// })
+export const requestLogin = () => ({
+    type : REQUEST_LOGIN,
+})
+export const loginSuccess = (data) => ({
+    type: SUCCESS_LOGIN,
+    payload: data.logins[0],
+})
+export const loginFailure = (error) => ({
+    type : FAILURE_LOGIN,
+    payload: error,
+})
 
-// export const loginSuccess = (token) => ({
-//     type: SUCCESS_LOGIN,
-//     payload: token,
-// })
-
-// export const loginFailure = () => ({
-//     type : FAILURE_LOGIN,
-// })
-
-// export const logout = () => ({
-//     type: SUCCESS_LOGOUT,
-// })
+export const requestLogout = () => ({
+    type : REQUEST_LOGOUT,
+})
+export const logoutSuccess = (data) => ({
+    type: SUCCESS_LOGOUT,
+    payload: data,
+})
+export const logoutFailure = (error) => ({
+    type : FAILURE_LOGOUT,
+    payload: error,
+})
 
 export const requestUpdateProfile = () => ({
     type: REQUEST_UPDATE_PROFILE,
     // payload: token,
 })
-
 export const updateProfileSuccess = (data) => ({
     type: SUCCESS_UPDATE_PROFILE,
     payload: data.logins[0],
 })
-
 export const updateProfileFailure = (error) => ({
     type: FAILURE_UPDATE_PROFILE,
     payload: error,

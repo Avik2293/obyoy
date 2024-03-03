@@ -95,6 +95,14 @@ const OAuthButtonGroup = () => (
 
 
 const Login = () => {
+	const dispatch = useDispatch();
+
+	// after sign in direct to home page 
+	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+	if (isLoggedIn) {
+		window.location.href = '/';
+	};
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -113,20 +121,29 @@ const Login = () => {
 
 	const handleSubmit = (event) => {
 		// event.preventDefault();
+		dispatch(login(email, password));
 		setEmail('');
 		setPassword('');
-		console.log(email);
-		console.log(password);
-
-		//  after sign in direct to home page 
-		window.location.href = '/';
+		// console.log(email);
+		// console.log(password);
 	};
 
-    return (
+	return (
 		<Box bg={'gray'}>
-			<Container maxW="lg" mx={'auto'} py={{ base: '12', md: '12', }} px={{ base: '0', sm: '8', }}
+			<Container
+				maxW="lg"
+				mx={'auto'}
+				py={{ base: '12', md: '12', }}
+				px={{ base: '0', sm: '8', }}
 			>
-				<Stack spacing="4" border='2px' borderColor='green' pt={3} bg={'teal'} borderRadius={15}>
+				<Stack
+					spacing="4"
+					border='2px'
+					borderColor='green'
+					pt={3}
+					bg={'teal'}
+					borderRadius={15}
+				>
 					<Stack spacing="6">
 						<Logo />
 
@@ -144,24 +161,55 @@ const Login = () => {
 						</Stack>
 					</Stack>
 
-					<Box py={{ base: '0', sm: '8', }} px={{ base: '4', sm: '10', }} bg={{ base: 'transparent', sm: 'bg.surface', }} boxShadow={{ base: 'none', sm: 'md', }} borderRadius={{ base: 'none', sm: 'xl', }}>
+					<Box
+						py={{ base: '0', sm: '8', }}
+						px={{ base: '4', sm: '10', }}
+						bg={{ base: 'transparent', sm: 'bg.surface', }}
+						boxShadow={{ base: 'none', sm: 'md', }}
+						borderRadius={{ base: 'none', sm: 'xl', }}
+					>
 						<Form onSubmit={handleSubmit}>
 							<Stack spacing="4">
 								<Stack spacing="2" >
 									<FormControl isRequired>
 										<FormLabel htmlFor="email" fontWeight={'bold'} >Email</FormLabel>
-										<Input id="email" type="email" placeholder='Your Email Address' px={2} w={'360px'} onChange={(e) => setEmail(e.target.value)} value={email} isRequired />
+										<Input
+											id="email"
+											type="email"
+											placeholder='Your Email Address'
+											px={2} w={'360px'}
+											onChange={(e) => setEmail(e.target.value)}
+											value={email}
+											isRequired
+										/>
 									</FormControl>
 
 									<FormControl isRequired>
 										<FormLabel htmlFor="password" fontWeight={'bold'}>Password</FormLabel>
 
 										<InputGroup>
-											<InputRightElement color={'white'} p={1} >
-												<IconButton variant="text" aria-label={isOpen ? 'Mask password' : 'Reveal password'} icon={isOpen ? <HiEyeOff /> : <HiEye />} onClick={onClickReveal} />
+											<InputRightElement color={'black'} p={1} >
+												<IconButton
+													variant="text"
+													aria-label={isOpen ? 'Mask password' : 'Reveal password'}
+													icon={isOpen ? <HiEyeOff /> : <HiEye />}
+													onClick={onClickReveal}
+												/>
 											</InputRightElement>
 
-											<Input id="password" ref={mergeRef} name="password" type={isOpen ? 'text' : 'password'} autoComplete="current-password" placeholder='Type your Password here' px={2} w={'330px'} onChange={(e) => setPassword(e.target.value)} value={password} isRequired />
+											<Input
+												id="password"
+												ref={mergeRef}
+												name="password"
+												type={isOpen ? 'text' : 'password'}
+												autoComplete="current-password"
+												placeholder='Type your Password here'
+												px={2}
+												w={'330px'}
+												onChange={(e) => setPassword(e.target.value)}
+												value={password}
+												isRequired
+											/>
 										</InputGroup>
 									</FormControl>
 								</Stack>
@@ -175,8 +223,14 @@ const Login = () => {
 								</HStack>
 
 								<Stack spacing="4">
-									<Button bgColor={'blue'} p={1} borderRadius={'lg'} color={'white'} type='submit'
-									>Sign in</Button>
+									<Button
+										bgColor={'blue'}
+										p={1}
+										borderRadius={'lg'}
+										color={'white'}
+										type='submit'
+									>
+										Sign in</Button>
 
 									<HStack>
 										<Divider />

@@ -4,31 +4,52 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { TiThMenuOutline } from "react-icons/ti";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAdmin } from '../Redux/Reducer';
+import { logout, } from '../Redux/Thunk/Login';
+import { selectIsAdmin, selectToken, selectID } from '../Redux/Reducer';
 
 
 const Navbar = () => {
+	const dispatch = useDispatch();
+
 	const isAdmin = useSelector(state => selectIsAdmin(state));
-	// console.log(isAdmin);
+	const token = useSelector(state => selectToken(state));
+	const user_id = useSelector(state => selectID(state));
 
 	const [isOpen, setIsOpen] = useState(false);
-
 	const toggle = () => setIsOpen(!isOpen);
 
 	const handleLogOut = () => {
-		// logOut()
-		//     .then(() => { })
-		//     .catch(error => console.error(error))
+		dispatch(logout(user_id, token));
 	};
 
 	return (
 		<Box bg='gray'>
-			<Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" mb={3} px={5} py='3' maxWidth={"1350px"} mx={'auto'}>
+			<Flex
+				as="nav"
+				align="center"
+				justify="space-between"
+				wrap="wrap"
+				w="100%"
+				mb={3}
+				px={5}
+				py='3'
+				maxWidth={"1350px"}
+				mx={'auto'}
+			>
 
-				<Text w="100px" fontSize="lg" fontWeight="bold" color='white'
-				>Logo</Text>
+				<Text
+					w="100px"
+					fontSize="lg"
+					fontWeight="bold"
+					color='white'
+				>
+					Logo
+				</Text>
 
-				<Box display={{ base: "block", md: "none" }} onClick={toggle}>
+				<Box
+					display={{ base: "block", md: "none" }}
+					onClick={toggle}
+				>
 					{
 						isOpen ?
 							<IoMdCloseCircleOutline size="35" color='white' title='Close' />
@@ -37,10 +58,16 @@ const Navbar = () => {
 					}
 				</Box>
 
-				<Box display={{ base: isOpen ? "block" : "none", md: "block" }}
+				<Box
+					display={{ base: isOpen ? "block" : "none", md: "block" }}
 					flexBasis={{ base: "100%", md: "auto" }}
 				>
-					<Stack spacing={8} align="center" pt={[4, 4, 0, 0]} justify={["center", "space-between", "flex-end", "flex-end"]} direction={["column", "row", "row", "row"]}
+					<Stack
+						spacing={8}
+						align="center"
+						pt={[4, 4, 0, 0]}
+						justify={["center", "space-between", "flex-end", "flex-end"]}
+						direction={["column", "row", "row", "row"]}
 					>
 						{/* if logged in  */}
 						<Link href='/'>
@@ -97,14 +124,19 @@ const Navbar = () => {
 										<Text display="block" color='pink'>Logout</Text>
 									</Link>
 								</MenuItem> */}
-
 								{/* </MenuGroup> */}
 							</MenuList>
 						</Menu>
 
 						{/* if logged in  */}
 						<Link onClick={handleLogOut}>
-							<Button size="sm" fontWeight='bold' rounded="md" color='green' p='1' bg="white"
+							<Button
+								size="sm"
+								fontWeight='bold'
+								rounded="md"
+								color='green'
+								p='1'
+								bg="white"
 								_hover={{ bg: "green", color: "white" }}
 							>
 								Log Out
