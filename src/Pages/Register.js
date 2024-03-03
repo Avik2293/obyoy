@@ -4,6 +4,10 @@ import { Flex, Box, FormControl, FormLabel, Input, InputGroup, HStack, InputRigh
 import { Form, } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
+import { useDispatch } from 'react-redux';
+import { signup } from '../Redux/Thunk/Login';
+// import { selectIsLoggedIn } from '../Redux/Reducer';
+
 const Logo = (props) => (
 	<chakra.svg color="white" height="12" width="auto" viewBox="0 0 89 89" xmlns="http://www.w3.org/2000/svg" {...props}
 	>
@@ -15,44 +19,74 @@ const Logo = (props) => (
 
 
 const Register = () => {
+	const dispatch = useDispatch();
+
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 
+	const name = firstName + ' ' + lastName;
+
 	const handleSubmit = (event) => {
 		// event.preventDefault();
+		dispatch(signup(name, email, password));
 		setFirstName('');
 		setLastName('');
 		setEmail('');
 		setPassword('');
-		console.log(firstName, lastName, email, password);
+		// console.log(firstName, lastName, email, password);
 
 		//  after sign up direct to login page 
 		window.location.href = '/login';
 	};
 
-    return (
-		<Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray", "gray.800")}
+	return (
+		<Flex
+			minH={"100vh"}
+			align={"center"}
+			justify={"center"}
+			bg={useColorModeValue("gray", "gray.800")}
 		>
-			<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} bg={'teal'} borderRadius={15}>
+			<Stack
+				spacing={8}
+				mx={"auto"}
+				maxW={"lg"}
+				py={12}
+				px={6}
+				bg={'teal'}
+				borderRadius={15}
+			>
 				<Stack align={"center"}>
 					<Logo />
 
 					<Text color="fg.muted">
 						Have an account?
-						<Button bgColor={'black'} p={1} borderRadius={'lg'} ml={3}>
+						<Button
+							bgColor={'black'}
+							p={1}
+							borderRadius={'lg'}
+							ml={3}
+						>
 							<Link href="/login" color={'white'}> Log in</Link>
 						</Button>
 					</Text>
 
-					<Heading fontSize={"2xl"} fontWeight={'bold'} textAlign={"center"}>
-						Sign up
+					<Heading
+						fontSize={"2xl"}
+						fontWeight={'bold'}
+						textAlign={"center"}
+					>
+						Sign Up
 					</Heading>
 				</Stack>
 
-				<Box rounded={"lg"} bg={useColorModeValue("teal", "gray.700")} boxShadow={"lg"} p={8}
+				<Box
+					rounded={"lg"}
+					bg={useColorModeValue("teal", "gray.700")}
+					boxShadow={"lg"}
+					p={8}
 				>
 					<Form onSubmit={handleSubmit}>
 						<Stack spacing={4}>
@@ -60,31 +94,65 @@ const Register = () => {
 								<Box>
 									<FormControl id="firstName" isRequired>
 										<FormLabel fontWeight={'bold'}>First Name</FormLabel>
-										<Input type="text" placeholder='Your First Name' px={2} onChange={(e) => setFirstName(e.target.value)} value={firstName} isRequired />
+										<Input
+											type="text"
+											placeholder='Your First Name'
+											px={2}
+											onChange={(e) => setFirstName(e.target.value)}
+											value={firstName}
+											isRequired
+										/>
 									</FormControl>
 								</Box>
 
 								<Box>
 									<FormControl id="lastName">
 										<FormLabel fontWeight={'bold'}>Last Name</FormLabel>
-										<Input type="text" placeholder='Your Last Name' px={2} onChange={(e) => setLastName(e.target.value)} value={lastName} />
+										<Input
+											type="text"
+											placeholder='Your Last Name'
+											px={2}
+											onChange={(e) => setLastName(e.target.value)}
+											value={lastName}
+										/>
 									</FormControl>
 								</Box>
 							</HStack>
 
 							<FormControl id="email" isRequired>
 								<FormLabel fontWeight={'bold'}>Email address</FormLabel>
-								<Input type="email" placeholder='Your Email Address' px={2} w={'330px'} onChange={(e) => setEmail(e.target.value)} value={email} isRequired />
+								<Input
+									type="email"
+									placeholder='Your Email Address'
+									px={2}
+									w={'400px'}
+									onChange={(e) => setEmail(e.target.value)}
+									value={email}
+									isRequired
+								/>
 							</FormControl>
 
 							<FormControl id="password" isRequired>
 								<FormLabel fontWeight={'bold'}>Password</FormLabel>
 								<InputGroup>
-									<Input type={showPassword ? "text" : "password"} placeholder='Type your Password here' px={2} w={'330px'} value={password} isRequired onChange={(e) => setPassword(e.target.value)} />
+									<Input
+										type={showPassword ? "text" : "password"}
+										placeholder='Type your Password here'
+										px={2}
+										w={'360px'}
+										value={password}
+										isRequired
+										onChange={(e) => setPassword(e.target.value)}
+									/>
 
-									<InputRightElement h={"full"} color={'white'} px={7}>
-										<Button variant={"ghost"} 
-										onClick={() => setShowPassword((showPassword) => !showPassword)}
+									<InputRightElement
+										h={"full"}
+										color={'white'}
+										px={2}
+									>
+										<Button
+											variant={"ghost"}
+											onClick={() => setShowPassword((showPassword) => !showPassword)}
 										>
 											{showPassword ? <ViewIcon /> : <ViewOffIcon />}
 										</Button>
@@ -93,7 +161,16 @@ const Register = () => {
 							</FormControl>
 
 							<Stack spacing={10} pt={2}>
-								<Button loadingText="Submitting" size="lg" bg={"blue.400"} color={"white"} _hover={{ bg: "blue.500" }} bgColor={'blue'} p={1} borderRadius={'lg'} type='submit'
+								<Button
+									loadingText="Submitting"
+									size="lg"
+									bg={"blue.400"}
+									color={"white"}
+									_hover={{ bg: "blue.500" }}
+									bgColor={'blue'}
+									p={1}
+									borderRadius={'lg'}
+									type='submit'
 								>
 									Sign up
 								</Button>

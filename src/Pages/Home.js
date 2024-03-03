@@ -13,12 +13,10 @@ const Home = () => {
 
 	// for redirect to login page
 	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-	// console.log(isLoggedIn);
-	/*
 	if (!isLoggedIn) {
 		window.location.href = '/login';
 	};
-	*/
+	
 	const token = useSelector(state => selectToken(state));
 	const topTen = useSelector(state => selectLeaderboardTop(state));
 	const profile = useSelector(state => selectProfile(state));
@@ -40,7 +38,6 @@ const Home = () => {
 
 	const handleSubmit = event => {
 		// event.preventDefault();
-
 		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
 		setInput('');
 		setStart(!start);

@@ -1,6 +1,9 @@
 import { combineReducers } from "redux";
 
 import {
+    REQUEST_SIGNUP,
+    SUCCESS_SIGNUP,
+    FAILURE_SIGNUP,
     REQUEST_LOGIN,
     SUCCESS_LOGIN,
     FAILURE_LOGIN,
@@ -26,29 +29,7 @@ const initialState = {
         isLoggedIn: '',
         user_type: '',
         profile: {},
-        // token: "1|233764s455teu8",
-        // user_id: 2234,
-        // isLoggedIn: true,
-        // // user_type: 'translator',
-        // user_type: 'admin',
-        // profile: {
-        //     user_id: 2234,
-        //     userName: "Tarif Ezaz",
-        //     user_email: "tarif_ezaz@test.com",
-        //     user_password: "123456789",
-        //     user_phone: "+8801723456789",
-        //     join_date: "23 May, 2021",
-        //     birthday: "22 March, 1993",
-        //     address: "Bashundhara, Dhaka, Bangladesh",
-        //     total_working_days: 435,
-        //     leaderboard_place: 45,
-        //     total_balance: 395,
-        //     total_withdraw: 350,
-        //     balance: 45,
-        //     for_approve: 45.34,
-        //     today_contribution: 5.78,
-        //     image_url: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png',
-        // },
+
         session_expiry: 0,
     },
     error: '',
@@ -57,6 +38,22 @@ const initialState = {
 
 const login = (state = initialState.login, action) => {
     switch (action.type) {
+        case REQUEST_SIGNUP:
+            return {
+                ...state,
+                error: '',
+            }
+        case SUCCESS_SIGNUP:
+            return {
+                ...state,
+                error: '',
+            }
+        case FAILURE_SIGNUP:
+            return {
+                ...state,
+                error: action.payload,
+            }
+
         case REQUEST_LOGIN:
             return {
                 ...state,
@@ -66,7 +63,7 @@ const login = (state = initialState.login, action) => {
             return {
                 ...state,
                 token: action.payload.token,
-                user_id: action.payload.id,
+                user_id: action.payload.user_id,
                 isLoggedIn: action.payload.isLoggedIn,
                 user_type: action.payload.user_type,
                 profile: action.payload.profile,
@@ -140,6 +137,7 @@ const isFetching = (state = initialState.isFetching, action) => {
     switch (action.type) {
         // case REQUEST_FETCH_ID:
         // case REQUEST_FETCH_PROFILE:
+        case REQUEST_SIGNUP:
         case REQUEST_LOGIN:
         case REQUEST_LOGOUT:
         case REQUEST_UPDATE_PROFILE:
@@ -149,9 +147,11 @@ const isFetching = (state = initialState.isFetching, action) => {
         // case SUCCESS_FETCH_PROFILE:
         // case FAILURE_FETCH_ID:
         // case FAILURE_FETCH_PROFILE:
+        case SUCCESS_SIGNUP:
         case SUCCESS_LOGIN:
         case SUCCESS_LOGOUT:
         case SUCCESS_UPDATE_PROFILE:
+        case FAILURE_SIGNUP:
         case FAILURE_LOGIN:
         case FAILURE_LOGOUT:
         case FAILURE_UPDATE_PROFILE:

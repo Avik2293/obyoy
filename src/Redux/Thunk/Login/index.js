@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+    requestSignup,
+    signupSuccess,
+    signupFailure,
     requestLogin,
     loginSuccess,
     loginFailure,
@@ -13,6 +16,23 @@ import {
 } from "../../ActionCreator/login";
 
 // import { BASE_URL } from "../../Constant/login";
+
+export const signup = (name, email, password) => async (dispatch, getState) => {
+    dispatch(requestSignup())
+
+    // axios.post(BASE_URL + "/api/v1/users/login", {
+    axios.post("/api/v1/signup", {
+        userName: name,
+        user_email: email,
+        user_password: password,
+    })
+        .then((response) => {
+            dispatch(signupSuccess(response.data));
+            // dispatch(updateSessionExpiry(nextDate));
+        }, error => {
+            dispatch(signupFailure(error))
+        })
+}
 
 export const login = (email, password) => async (dispatch, getState) => {
     dispatch(requestLogin())
