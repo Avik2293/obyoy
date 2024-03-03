@@ -8,6 +8,7 @@ import {
 	persistStore,
 	persistReducer
 } from 'redux-persist';
+import storage from "redux-persist/lib/storage";
 import { thunk } from 'redux-thunk';
 import expireReducer from 'redux-persist-expire';
 
@@ -17,7 +18,10 @@ export const configureStore = () => {
 
 	const persistConfig = {
 		key: 'root',
-		storage: AsyncStorage,
+		storage: storage,
+		whitelist: ['user', 'translation', 'withdraws'],
+		blacklist: ['leaderboard', 'customDatasets'],
+
 		transforms: [
 			// Create a transformer by passing the reducer key and configuration. Values
 			// shown below are the available configurations with default values
@@ -41,17 +45,10 @@ export const configureStore = () => {
 	const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 	const store = createStore(
-		// persistedReducer, 
-		rootReducer,
+		persistedReducer, 
+//		rootReducer,
 		applyMiddleware(thunk, createLogger())
 	);
-
-	/*
-	const state = createStore(
-		rootReducer, 
-		applyMiddleware(thunk, ...middleware)
-	);
-	*/
 
 	const persistor = persistStore(store);
 
