@@ -89,8 +89,6 @@ const CustomDataset = () => {
         setLineInput('');
         setTranslatedLineInput('');
         setStart(!start);
-        // console.log(lineInput);
-        // console.log(translatedLineInput);
     };
 
     const handleSubmitNext = event => {
@@ -98,8 +96,6 @@ const CustomDataset = () => {
         dispatch(datasetLineInput(user_id, datasetId, datasetName, lineInput, translatedLineInput, token));
         setLineInput('');
         setTranslatedLineInput('');
-        // console.log(lineInput);
-        // console.log(translatedLineInput);
     };
 
     return (
