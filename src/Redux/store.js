@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
 	createStore,
 	applyMiddleware
@@ -19,8 +19,8 @@ export const configureStore = () => {
 	const persistConfig = {
 		key: 'root',
 		storage: storage,
-		whitelist: ['user', 'translation', 'withdraws'],
-		blacklist: ['leaderboard', 'customDatasets'],
+		whitelist: ['user'],
+		blacklist: ['leaderboard', 'translation', 'withdraws', 'customDatasets'],
 
 		transforms: [
 			// Create a transformer by passing the reducer key and configuration. Values
@@ -45,8 +45,8 @@ export const configureStore = () => {
 	const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 	const store = createStore(
-		persistedReducer, 
-//		rootReducer,
+		persistedReducer,
+		//		rootReducer,
 		applyMiddleware(thunk, createLogger())
 	);
 

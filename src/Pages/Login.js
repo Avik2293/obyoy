@@ -148,7 +148,7 @@ const Login = () => {
 						<Logo />
 
 						<Stack spacing={{ base: '2', md: '3', }} textAlign="center">
-							<Heading size={{ base: 'xs', md: 'sm', }} fontWeight={'bold'}>
+							<Heading fontSize={{ base: 'lg', md: 'xl', }} fontWeight={'bold'}>
 								Log in to your account
 							</Heading>
 
@@ -188,7 +188,7 @@ const Login = () => {
 										<FormLabel htmlFor="password" fontWeight={'bold'}>Password</FormLabel>
 
 										<InputGroup>
-											<InputRightElement color={'black'} p={1} >
+											<InputRightElement color={'white'} p={1} >
 												<IconButton
 													variant="text"
 													aria-label={isOpen ? 'Mask password' : 'Reveal password'}

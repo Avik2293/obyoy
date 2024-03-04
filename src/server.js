@@ -58,55 +58,7 @@ export function makeServer({ environment = "test" } = {}) {
                 newLine: "What you want to know ?",
                 translatedLine: '',
             })
-            // server.create("dataset", {
-            //     total_datasets: 5,
-            //     datasets: [
-            //         {
-            //             dataset_id: 1,
-            //             dataset_name: 'dummy dataset 1',
-            //             total_lines: 78,
-            //             total_translated: 45,
-            //             for_review: 24,
-            //             remaining_lines: [
-            //                 { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
-            //                 { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
-            //                 { line_id: 25, translator_id: 0, line: 'Who are they?', translated_line: '' },
-            //             ],
-            //             translated_lines: [
-            //                 { line_id: 3, translator_id: 10, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
-            //                 { line_id: 4, translator_id: 19, line: 'What you?', translated_line: 'dsfr fjur hyet' },
-            //                 { line_id: 5, translator_id: 12, line: 'Are they?', translated_line: 'dfsr jrur dyet' },
-            //             ],
-            //             reviewing_lines: [
-            //                 { line_id: 3, translator_id: 2, line: 'Who are you?', translated_line: 'dsfsr fjrur hdyet' },
-            //                 { line_id: 4, translator_id: 122, line: 'What are you?', translated_line: 'dsfr fjur hyet' },
-            //                 { line_id: 5, translator_id: 162, line: 'Who are they?', translated_line: 'dfsr jrur dyet' },
-            //             ],
-            //         },
-            //         {
-            //             dataset_id: 11,
-            //             dataset_name: 'dummy dataset 11',
-            //             total_lines: 787,
-            //             total_translated: 145,
-            //             for_review: 224,
-            //             remaining_lines: [
-            //                 { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
-            //                 { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
-            //                 { line_id: 25, translator_id: 0, line: 'Who are they?', translated_line: '' },
-            //             ],
-            //             translated_lines: [
-            //                 { line_id: 3, translator_id: 10, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
-            //                 { line_id: 4, translator_id: 19, line: 'What you?', translated_line: 'dsfr fjur hyet' },
-            //                 { line_id: 5, translator_id: 12, line: 'Are they?', translated_line: 'dfsr jrur dyet' },
-            //             ],
-            //             reviewing_lines: [
-            //                 { line_id: 3, translator_id: 2, line: 'Who are you?', translated_line: 'dsfsr fjrur hdyet' },
-            //                 { line_id: 4, translator_id: 122, line: 'What are you?', translated_line: 'dsfr fjur hyet' },
-            //                 { line_id: 5, translator_id: 162, line: 'Who are they?', translated_line: 'dfsr jrur dyet' },
-            //             ],
-            //         }
-            //     ]
-            // })
+        
             server.db.loadData({
                 datasets: [
                     {
@@ -256,17 +208,12 @@ export function makeServer({ environment = "test" } = {}) {
 
             this.post("/signup", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
-                let authToken = request.requestHeaders.Authorization
+                // let authToken = request.re/questHeaders.Authorization
                 console.log(attrs);
-                console.log(authToken);
-                // return { movie: attrs }
-                // return schema.movies.create(attrs)
-                // return schema.db.datasets[0]
-                // return schema.db.datasets[0].reviewing_lines.insert(attrs)
-                // server.db.datasets[0].insert({ title: "The Dark Knight" })
+                // console.log(authToken);
 
                 let headers = {}
-                let data = { success: ["Added for review"] }
+                let data = { success: ["User SignUp Successfully."] }
                 return new Response(201, headers, data)
             })
 
@@ -275,8 +222,6 @@ export function makeServer({ environment = "test" } = {}) {
                 // let authToken = request.re/questHeaders.Authorization
                 console.log(attrs);
                 // console.log(authToken);
-
-                // let a= attrs.user_email;
 
                 // let headers = {}
                 // let data = { success: ["Added for review"] }

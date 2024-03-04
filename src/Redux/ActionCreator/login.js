@@ -1,4 +1,7 @@
 import {
+    REQUEST_SIGNUP,
+    SUCCESS_SIGNUP,
+    FAILURE_SIGNUP,
     REQUEST_LOGIN,
     SUCCESS_LOGIN,
     FAILURE_LOGIN,
@@ -10,6 +13,19 @@ import {
     FAILURE_UPDATE_PROFILE,
     // UPDATE_SESSION_EXPIRY,
 } from "../Constant/login";
+
+
+export const requestSignup = () => ({
+    type : REQUEST_SIGNUP,
+})
+export const signupSuccess = (data) => ({
+    type: SUCCESS_SIGNUP,
+    payload: data,
+})
+export const signupFailure = (error) => ({
+    type : FAILURE_SIGNUP,
+    payload: error,
+})
 
 export const requestLogin = () => ({
     type : REQUEST_LOGIN,
