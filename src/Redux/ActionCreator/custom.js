@@ -16,7 +16,6 @@ import {
 
 export const requestFetchDatasets = () => ({
     type: REQUEST_FETCH_DATASETS,
-    // payload: user_id,
 })
 export const fetchDatasetsSuccess = (data) => ({
     type: SUCCESS_FETCH_DATASETS,
@@ -29,7 +28,6 @@ export const fetchDatasetsFailure = (error) => ({
 
 export const requestCreateDataset = () => ({
     type: REQUEST_CREATE_DATASET,
-    // payload: user_id,
 })
 export const createDatasetSuccess = (data) => ({
     type: SUCCESS_CREATE_DATASET,
@@ -42,7 +40,6 @@ export const createDatasetFailure = (error) => ({
 
 export const requestFileInput = () => ({
     type: REQUEST_FILE_INPUT,
-    // payload: user_id,
 })
 export const fileInputSuccess = (data) => ({
     type: SUCCESS_FILE_INPUT,
@@ -55,7 +52,6 @@ export const fileInputFailure = (error) => ({
 
 export const requestLineInput = () => ({
     type: REQUEST_LINE_INPUT,
-    // payload: user_id,
 })
 export const lineInputSuccess = (data) => ({
     type: SUCCESS_LINE_INPUT,
