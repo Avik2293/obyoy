@@ -10,7 +10,6 @@ import {
 
 export const requestFetchWithdraws = () => ({
     type: REQUEST_FETCH_WITHDRAWS,
-    // payload: user_id,
 })
 export const fetchWithdrawsSuccess = (data) => ({
     type: SUCCESS_FETCH_WITHDRAWS,
@@ -23,7 +22,6 @@ export const fetchWithdrawsFailure = (error) => ({
 
 export const requestWithdrawRequest = () => ({
     type: REQUEST_WITHDRAW_REQUEST,
-    // payload: user_id,
 })
 export const withdrawRequestSuccess = (data) => ({
     type: SUCCESS_WITHDRAW_REQUEST,
