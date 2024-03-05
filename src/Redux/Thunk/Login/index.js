@@ -85,7 +85,6 @@ export const profileUpdate = (userName, user_email, user_phone, address, birthda
         },
     })
         .then((response) => {
-            // console.log(response.data);
             dispatch(updateProfileSuccess(response.data));
         }, error => {
             dispatch(updateProfileFailure(error))
