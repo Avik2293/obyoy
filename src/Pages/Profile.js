@@ -40,21 +40,6 @@ const Profile = () => {
 			return;
 		}
 
-		// 👇 Uploading the file using the fetch API to the server
-		// fetch('https://httpbin.org/post', {
-		//     method: 'POST',
-		//     body: file,
-		//     // 👇 Set headers manually for single file upload
-		//     headers: {
-		//         'content-type': file.type,
-		//         'content-length': `${file.size}`, // 👈 Headers need to be a string
-		//     },
-		// })
-		//     .then((res) => res.json())
-		//     .then((data) => console.log(data))
-		//     .catch((err) => console.error(err));
-
-		// alert(`Selected file - ${this.fileInput.current.files[0].name}`);
 	};
 
 	const handleSubmit = event => {
@@ -65,7 +50,6 @@ const Profile = () => {
 		setPhone('');
 		setAddress('');
 		setBirthday('');
-		// console.log(name, email, phone, address, birthday);
 		setStart(!start);
 	};
 
