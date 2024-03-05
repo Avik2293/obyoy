@@ -24,7 +24,6 @@ export const leaderboardFailure = (error) => ({
 
 export const requestFetchNewline = () => ({
     type: REQUEST_FETCH_NEWLINE,
-    // payload: user_id,
 })
 export const fetchNewlineSuccess = (data) => ({
     type: SUCCESS_FETCH_NEWLINE,
