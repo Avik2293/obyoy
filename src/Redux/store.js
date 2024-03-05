@@ -46,7 +46,6 @@ export const configureStore = () => {
 
 	const store = createStore(
 		persistedReducer,
-		//		rootReducer,
 		applyMiddleware(thunk, createLogger())
 	);
 
@@ -54,5 +53,3 @@ export const configureStore = () => {
 
 	return { store, persistor };
 }
-
-//export const configureStore;
