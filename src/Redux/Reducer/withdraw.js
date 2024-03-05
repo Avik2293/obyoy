@@ -53,7 +53,6 @@ const withdraws = (state = initialState.withdraws, action) => {
         case FAILURE_WITHDRAW_REQUEST:
             return {
                 ...state,
-                // customDatasets: [],
                 error: action.payload,
             }
 
