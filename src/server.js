@@ -58,7 +58,89 @@ export function makeServer({ environment = "test" } = {}) {
                 newLine: "What you want to know ?",
                 translatedLine: '',
             })
-        
+
+            server.db.loadData({
+                usersData: [
+                    {
+                        token: "1|233764s455teu8",
+                        user_id: 2234,
+                        isLoggedIn: true,
+                        // user_type: 'translator',
+                        user_type: 'admin',
+                        profile: {
+                            user_id: 2234,
+                            userName: "Tarif Ezaz",
+                            user_email: "tarif_ezaz@test.com",
+                            user_password: "123456789",
+                            user_phone: "+8801723456789",
+                            join_date: "23 May, 2021",
+                            birthday: "22 May, 1983",
+                            address: "Bashundhara, Dhaka, Bangladesh",
+                            total_working_days: 435,
+                            leaderboard_place: 45,
+                            balance: 45,
+                            total_balance: 395,
+                            total_withdraw: 350,
+                            for_approve: 45.34,
+                            today_contribution: 5.78,
+                            image_url: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png',
+                        },
+                        session_expiry: 0,
+                    },
+                    {
+                        token: "1|23373s4s455teu8",
+                        user_id: 234,
+                        isLoggedIn: true,
+                        // user_type: 'translator',
+                        user_type: 'admin',
+                        profile: {
+                            user_id: 234,
+                            userName: "Avik Sarker",
+                            user_email: "avik22@test.com",
+                            user_password: "123456789",
+                            user_phone: "+8801745687764",
+                            join_date: "03 June, 2022",
+                            birthday: "22 March, 1993",
+                            address: "Badda, Dhaka, Bangladesh",
+                            total_working_days: 45,
+                            leaderboard_place: 49,
+                            balance: 5,
+                            total_balance: 195,
+                            total_withdraw: 190,
+                            for_approve: 5.4,
+                            today_contribution: 1.78,
+                            image_url: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png',
+                        },
+                        session_expiry: 0,
+                    },
+                    {
+                        token: "1|23dd3764s455teu8",
+                        user_id: 224,
+                        isLoggedIn: true,
+                        user_type: 'translator',
+                        // user_type: 'admin',
+                        profile: {
+                            user_id: 224,
+                            userName: "Shahid Alom",
+                            user_email: "shahid@test.com",
+                            user_password: "123456789",
+                            user_phone: "+8801793763789",
+                            join_date: "03 May, 2023",
+                            birthday: "02 March, 1995",
+                            address: "Mirpur, Dhaka, Bangladesh",
+                            total_working_days: 35,
+                            leaderboard_place: 55,
+                            balance: 4,
+                            total_balance: 395,
+                            total_withdraw: 391,
+                            for_approve: 4.34,
+                            today_contribution: 7.78,
+                            image_url: 'https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/corporate-user-icon.png',
+                        },
+                        session_expiry: 0,
+                    },
+                ],
+            })
             server.db.loadData({
                 datasets: [
                     {
@@ -215,6 +297,7 @@ export function makeServer({ environment = "test" } = {}) {
                 let headers = {}
                 let data = { success: ["User SignUp Successfully."] }
                 return new Response(201, headers, data)
+                // db.users.insert({ name: 'Link', age: 173 });
             })
 
             this.post("/login", (schema, request) => {
@@ -223,11 +306,9 @@ export function makeServer({ environment = "test" } = {}) {
                 console.log(attrs);
                 // console.log(authToken);
 
-                // let headers = {}
-                // let data = { success: ["Added for review"] }
-                // return new Response(201, headers, data)
                 // return schema.logins.find({user_email:attrs.user_email, user_password: attrs.user_password})
                 return schema.logins.all()
+                // return schema.db.usersData.findBy({ user_email: attrs.user_email })
             })
 
             this.delete("/logout", (schema, request) => {
@@ -236,12 +317,63 @@ export function makeServer({ environment = "test" } = {}) {
                 console.log(attrs);
                 console.log(authToken);
 
+                // need to send id with route or post method
                 let headers = {}
                 let data = { success: ["Logout Successfully"] }
                 return new Response(201, headers, data)
 
                 // let id = request.params.id
                 // return schema.movies.find(id).destroy()
+                // db.users.remove({name: 'Zelda'});
+            })
+
+
+            // for admin dashboard
+            // all authToken in admin route is admin's token for check
+            this.post("/admin/all_user", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.usersData
+            })
+
+            this.post("/admin/single_user", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.usersData.findBy({ user_id: attrs.user_id })
+            })
+
+            this.post("/admin/user_withdraws", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.withdraws.where({ user_id: attrs.user_id })
+            })
+
+            // can use delete, but what about admin proof
+            this.post("/admin/user_delete", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                schema.db.usersData.remove({ user_id: attrs.user_id });
+                // let id = request.params.id
+                // schema.db.usersData.find(attrs.user_id).destroy()
+                // schema.db.usersData.delete({user_id: attrs.user_id})
+
+                // let headers = {}
+                // let data = { success: ["User Delete Successfully"] }
+                // return new Response(201, headers, data)
+
+                return schema.db.usersData
             })
 
 
@@ -281,6 +413,7 @@ export function makeServer({ environment = "test" } = {}) {
                 // let data = { success: ["Profile info updated"] }
                 // return new Response(201, headers, data)
                 return schema.logins.all()
+                // db.users.update({name: 'Link'}, {name: 'Epona'});
             })
 
             this.get("/withdraws/:user_id", (schema, request) => {
@@ -362,7 +495,7 @@ export function makeServer({ environment = "test" } = {}) {
 
 
 
-
+            // demu
             this.get("/profile/:id", (schema, request) => {
                 let id = request.params.id
 

@@ -5,7 +5,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 // import { AuthContext } from '../Context/AuthProvider';
 // import useAdmin from '../Hooks/useAdmin';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectIsAdmin } from '../Redux/Reducer';
 
 const AdminRoute = ({ children }) => {

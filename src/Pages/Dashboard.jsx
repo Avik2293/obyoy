@@ -1,92 +1,58 @@
-import React, { useState } from 'react';
-import { 
-	Container, 
-	HStack, 
-	Text, 
-	TableContainer, 
-	VStack, 
-	Tabs, 
-	TabList, 
-	TabPanels, 
-	Tab, 
-	TabPanel, 
-	Button, 
-	Modal, 
-	ModalOverlay, 
-	ModalContent, 
-	ModalHeader, 
-	ModalFooter, 
-	ModalBody, 
-	useDisclosure, 
-	Image, 
-	AlertDialog, 
-	AlertDialogBody, 
-	AlertDialogFooter, 
-	AlertDialogHeader, 
-	AlertDialogContent, 
-	AlertDialogOverlay, 
-	FormControl, 
-	FormLabel, 
-	Input, 
-	Box, 
+import React, { useEffect, useState } from 'react';
+import {
+    Container,
+    HStack,
+    Text,
+    TableContainer,
+    VStack,
+    Tabs,
+    TabList,
+    TabPanels,
+    Tab,
+    TabPanel,
+    Button,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    useDisclosure,
+    Image,
+    // AlertDialog,
+    // AlertDialogBody,
+    // AlertDialogFooter,
+    // AlertDialogHeader,
+    // AlertDialogContent,
+    // AlertDialogOverlay,
+    FormControl,
+    FormLabel,
+    Input,
+    Box,
 } from '@chakra-ui/react';
-import { Form, } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
-const Dashboard = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
+import { selectToken, selectID, selectAllUserData, selectSingleUser } from '../Redux/Reducer';
 
-    const [userTableData, setUserTableData] = useState([
-        {
-            user_id: 53,
-            name: 'dummy ',
-            email: "dummy@dummy.com",
-            birthday: '25 June, 2002',
-            address: 'dummy, dummmy, dddddmmmuuuyy',
-            joining_date: '25 June, 2022',
-            balance: 7366,
-            remarks: 'asda, dhjsdjj',
-        },
-        {
-            user_id: 93,
-            name: 'dummy ',
-            email: "dummy@dummy.com",
-            birthday: '25 June, 2002',
-            address: 'dummy, dummmy, dddddmmmuuuyy',
-            joining_date: '25 June, 2022',
-            balance: 7366,
-            remarks: 'asda, dhjsdjj',
-        },
-        {
-            user_id: 59,
-            name: 'dummy ',
-            email: "dummy@dummy.com",
-            birthday: '25 June, 2002',
-            address: 'dummy, dummmy, dddddmmmuuuyy',
-            joining_date: '25 June, 2022',
-            balance: 7366,
-            remarks: 'asda, dhjsdjj',
-        },
-        {
-            user_id: 593,
-            name: 'dummy ',
-            email: "dummy@dummy.com",
-            birthday: '25 June, 2002',
-            address: 'dummy, dummmy, dddddmmmuuuyy',
-            joining_date: '25 June, 2022',
-            balance: 7366,
-            remarks: 'asda, dhjsdjj',
-        },
-        {
-            user_id: 23,
-            name: 'dummy ',
-            email: "dummy@dummy.com",
-            birthday: '25 June, 2002',
-            address: 'dummy, dummmy, dddddmmmuuuyy',
-            joining_date: '25 June, 2022',
-            balance: 7366,
-            remarks: 'asda, dhjsdjj',
-        },
-    ]);
+
+const Dashboard = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const token = useSelector(state => selectToken(state));
+    const user_id = useSelector(state => selectID(state));
+
+    const userTableData = useSelector(state => selectAllUserData(state));
+    useEffect(() => {
+        dispatch(allUsersData(user_id, token));
+    }, [dispatch, token, user_id]);
+
+
+
+
     const [fileTableData, setFileTableData] = useState([
         {
             file_id: 23,
@@ -202,48 +168,43 @@ const Dashboard = () => {
         },
     ]);
 
+
+
+
     // for modal/alert 
     const { isOpen, onOpen, onClose } = useDisclosure();
     // for withdraw specific data show modal 
     const { isOpen: isWithdrawOpen, onOpen: onWithdrawOpen, onClose: onWithdrawClose } = useDisclosure();
     // for delete 
-    const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
-    const cancelRef = React.useRef();
+    // const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
+    // const cancelRef = React.useRef();
+
 
     // for specific user see
     const [selectedUser, setSelectedUser] = useState('');
-    const [selectedUserInfo, setSelectedUserInfo] = useState();
+    const selectedUserInfo = useSelector(state => selectSingleUser(state));
     const handleUserView = (user_id) => {
-        setSelectedUserInfo({
-            user_id: 53,
-            name: 'dummy ',
-            email: "dummy@dummy.com",
-            birthday: '25 June, 2002',
-            address: 'dummy, dummmy, dddddmmmuuuyy',
-            joining_date: '25 June, 2022',
-            balance: 7366,
-            remarks: 'asda, dhjsdjj',
-        });
-        console.log(user_id);
-
+        dispatch(userData(user_id, token));
+        // console.log(user_id);
         onOpen();
         setSelectedUser('');
     };
     // for specific user withdraw history 
     const handleView = (user_id) => {
-        console.log(user_id);
-
+        // console.log(user_id);
         if (user_id) {
-            window.location.href = `/dashboard/withdraw/history/${user_id}`;
+            // window.location.href = `/dashboard/withdraw/history/${user_id}`;
+            navigate(`/dashboard/withdraw/history/${user_id}`);
             setSelectedUser('');
         }
     };
     // delete user 
     const handleDelete = (user_id) => {
-        console.log(user_id);
-        // onOpen();
-        onDeleteOpen();
+        // console.log(user_id);
+        // onDeleteOpen();
+        dispatch(userDelete(user_id, token));
     };
+
 
     // file upload 
     const [file, setFile] = useState();
@@ -273,12 +234,12 @@ const Dashboard = () => {
 
         //     alert(`Selected file - ${this.fileInput.current.files[0].name}`);
     };
-    
     // delete file 
     const handleDeleteFile = (file_id) => {
         console.log(file_id);
-        onDeleteOpen();
+        // onDeleteOpen();
     };
+
 
     // for approve translate 
     const [start, setStart] = useState(false);
@@ -310,6 +271,7 @@ const Dashboard = () => {
         // new line call 
     };
 
+
     // for specific withdraw see
     const [selectedWithdraw, setSelectedWithdraw] = useState("");
     const [selectedWithdrawInfo, setSelectedWithdrawInfo] = useState();
@@ -338,7 +300,7 @@ const Dashboard = () => {
     };
     const handleWithdrawDelete = (withdraw_id) => {
         console.log(withdraw_id);
-        onDeleteOpen();
+        // onDeleteOpen();
     };
 
 
@@ -358,6 +320,7 @@ const Dashboard = () => {
                 p={3}
             >
                 Admin Dashboard</Text>
+
 
             {/* specific user show modal */}
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -379,66 +342,77 @@ const Dashboard = () => {
                         textAlign={'center'}
                         color={'white'}
                     >
-                        User Data for User No. : {selectedUserInfo?.user_id}</ModalHeader>
+                        User Data for User No. : {selectedUserInfo?.profile?.user_id}</ModalHeader>
 
                     {/* <ModalCloseButton /> */}
+                    {
+                        selectedUserInfo ?
+                            <ModalBody
+                                fontWeight='semibold'
+                                textAlign={'center'}
+                                my={3}
+                            >
+                                <VStack
+                                    justify={'space-evenly'}
+                                    textAlign={'center'}
+                                    whiteSpace="break-spaces"
+                                >
+                                    <Text>
+                                        <Image
+                                            boxSize='50px'
+                                            objectFit='cover'
+                                            borderRadius='full'
+                                            src={selectedUserInfo?.profile?.image_url}
+                                            alt={selectedUserInfo?.profile?.userName}
+                                        />
+                                    </Text>
+                                    <Text>Name: {selectedUserInfo?.profile?.userName}</Text>
+                                    <Text>Email : {selectedUserInfo?.profile?.user_email}</Text>
+                                    <Text>Birthday : {selectedUserInfo?.profile?.birthday}</Text>
+                                    <Text>Address : {selectedUserInfo?.profile?.address}</Text>
+                                    <Text>Joining Date : {selectedUserInfo?.profile?.join_date}</Text>
+                                    <Text>Balance : {selectedUserInfo?.profile?.balance}</Text>
 
-                    <ModalBody
-                        fontWeight='semibold'
-                        textAlign={'center'}
-                        my={3}
-                    >
-                        <VStack
-                            justify={'space-evenly'}
-                            textAlign={'center'}
-                            whiteSpace="break-spaces"
-                        >
-                            <Text>
-                                <Image
-                                    boxSize='50px'
-                                    objectFit='cover'
-                                    borderRadius='full'
-                                    src='https://bit.ly/dan-abramov'
-                                    alt='Dan Abramov'
-                                />
-                            </Text>
-                            <Text>Name: {selectedUserInfo?.name}</Text>
-                            <Text>Email : {selectedUserInfo?.email}</Text>
-                            <Text>Birthday : {selectedUserInfo?.birthday}</Text>
-                            <Text>Address : {selectedUserInfo?.address}</Text>
-                            <Text>Joining Date : {selectedUserInfo?.joining_date}</Text>
-                            <Text>Balance : {selectedUserInfo?.balance}</Text>
-                            <Text>Remarks : {selectedUserInfo?.remarks}</Text>
+                                    <HStack justify={'space-between'}>
+                                        <Text >
+                                            <Button
+                                                bgColor={'blue'}
+                                                p={1}
+                                                px={2}
+                                                mt={0}
+                                                borderRadius={'lg'}
+                                                color={'white'}
+                                                onClick={() => handleView(selectedUserInfo.profile.user_id)}
+                                            >
+                                                View Withdraw History</Button>
+                                        </Text>
 
-                            <HStack justify={'space-between'}>
-                                <Text >
-                                    <Button
-                                        bgColor={'blue'}
-                                        p={1}
-                                        px={2}
-                                        mt={0}
-                                        borderRadius={'lg'}
-                                        color={'white'}
-                                        onClick={() => handleView(selectedUserInfo.user_id)}
-                                    >
-                                        View Withdraw History</Button>
-                                </Text>
-
-                                <Text w={'60px'} gap={1}>
-                                    <Button
-                                        bgColor={'red'}
-                                        p={1}
-                                        px={2}
-                                        mt={0}
-                                        borderRadius={'lg'}
-                                        color={'white'}
-                                        onClick={() => handleDelete(selectedUserInfo.user_id)}
-                                    >
-                                        Delete</Button>
-                                </Text>
-                            </HStack>
-                        </VStack>
-                    </ModalBody>
+                                        <Text w={'60px'} gap={1}>
+                                            <Button
+                                                bgColor={'red'}
+                                                p={1}
+                                                px={2}
+                                                mt={0}
+                                                borderRadius={'lg'}
+                                                color={'white'}
+                                                onClick={() => handleDelete(selectedUserInfo.profile.user_id)}
+                                            >
+                                                Delete</Button>
+                                        </Text>
+                                    </HStack>
+                                </VStack>
+                            </ModalBody>
+                            :
+                            <Text
+                                fontSize="lg"
+                                fontWeight="bold"
+                                color='black'
+                                textAlign={'center'}
+                                my={2}
+                                p={3}
+                            >
+                                Invalid User Id, No data Found</Text>
+                    }
 
                     <ModalFooter>
                         <Button
@@ -560,7 +534,7 @@ const Dashboard = () => {
                 </ModalContent>
             </Modal>
 
-            {/* Delete Alert modal  */}
+            {/* Delete Alert modal 
             <AlertDialog
                 isOpen={isDeleteOpen}
                 leastDestructiveRef={cancelRef}
@@ -569,7 +543,6 @@ const Dashboard = () => {
                 <AlertDialogOverlay bg='blackAlpha.300'
                     backdropFilter='blur(10px) hue-rotate(90deg)'
                 >
-
                     <AlertDialogContent
                         bg={'gray'}
                         maxWidth={'400px'}
@@ -626,7 +599,8 @@ const Dashboard = () => {
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialogOverlay>
-            </AlertDialog>
+            </AlertDialog> */}
+
 
             <Tabs >
                 <TabList mb='1em'>
@@ -766,12 +740,12 @@ const Dashboard = () => {
                                     <Text w={'140px'} >Address</Text>
                                     <Text w={'120px'} >Joining Date</Text>
                                     <Text w={'70px'} >Balance</Text>
-                                    <Text w={'120px'} >Remarks</Text>
-                                    <Text w={'60px'} >History</Text>
+                                    <Text w={'75px'} >Withdraw History</Text>
                                     <Text w={'60px'} >Action</Text>
                                 </HStack>
 
                                 {
+                                    userTableData &&
                                     userTableData.map((td, i) =>
                                         <HStack key={i}
                                             justify={'space-evenly'}
@@ -780,24 +754,23 @@ const Dashboard = () => {
                                             whiteSpace="break-spaces"
                                         >
                                             <Text w={'70px'}>{i + 1}</Text>
-                                            <Text w={'60px'} >{td?.user_id}</Text>
+                                            <Text w={'60px'} >{td?.profile?.user_id}</Text>
                                             <Text w={'60px'} >
                                                 <Image
                                                     boxSize='50px'
                                                     objectFit='cover'
                                                     borderRadius='full'
-                                                    src='https://bit.ly/dan-abramov'
-                                                    alt='Dan Abramov'
+                                                    src={td?.profile?.image_url}
+                                                    alt={td?.profile?.userName}
                                                 />
                                             </Text>
-                                            <Text w={'120px'} >{td?.name}</Text>
-                                            <Text w={'130px'} >{td?.email}</Text>
-                                            <Text w={'120px'} >{td?.birthday}</Text>
-                                            <Text w={'140px'} >{td?.address}</Text>
-                                            <Text w={'120px'} >{td?.joining_date}</Text>
-                                            <Text w={'70px'} >{td?.balance}</Text>
-                                            <Text w={'120px'} >{td?.remarks}</Text>
-                                            <Text w={'60px'} gap={1}>
+                                            <Text w={'120px'} >{td?.profile?.userName}</Text>
+                                            <Text w={'130px'} >{td?.profile?.user_email}</Text>
+                                            <Text w={'120px'} >{td?.profile?.birthday}</Text>
+                                            <Text w={'140px'} >{td?.profile?.address}</Text>
+                                            <Text w={'120px'} >{td?.profile?.join_date}</Text>
+                                            <Text w={'70px'} >{td?.profile?.balance}</Text>
+                                            <Text w={'75px'} gap={1}>
                                                 {/* <Link href='/dashboard/withdraw/history/:id'> */}
                                                 <Button
                                                     bgColor={'blue'}
@@ -806,7 +779,7 @@ const Dashboard = () => {
                                                     mt={0}
                                                     borderRadius={'lg'}
                                                     color={'white'}
-                                                    onClick={() => handleView(td.user_id)}
+                                                    onClick={() => handleView(td?.profile?.user_id)}
                                                 >
                                                     View</Button>
                                                 {/* </Link> */}
@@ -820,7 +793,7 @@ const Dashboard = () => {
                                                     mt={0}
                                                     borderRadius={'lg'}
                                                     color={'white'}
-                                                    onClick={() => handleDelete(td.user_id)}
+                                                    onClick={() => handleDelete(td?.profile?.user_id)}
                                                 >
                                                     Delete</Button>
                                             </Text>

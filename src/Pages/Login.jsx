@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { forwardRef, useRef } from 'react';
 import { chakra, createIcon, IconButton, InputGroup, InputRightElement, useDisclosure, useMergeRefs, Button, ButtonGroup, VisuallyHidden, Box, Checkbox, Container, Divider, FormControl, FormLabel, Heading, HStack, Input, Link, Stack, Text, } from '@chakra-ui/react';
-import { Form } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -96,12 +96,17 @@ const OAuthButtonGroup = () => (
 
 const Login = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	// after sign in direct to home page 
 	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-	if (isLoggedIn) {
-		window.location.href = '/';
-	};
+	useEffect(() => {
+		if (isLoggedIn) {
+			// window.location.href = '/';
+			navigate("/");
+		};
+	}, [isLoggedIn, navigate]);
+
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');

@@ -4,16 +4,10 @@ import { Form } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDatasets, createNewDataset, datasetFileInput, datasetLineInput } from '../Redux/Thunk/Custom';
-import { selectIsLoggedIn, selectToken, selectID, selectCustomDatasets } from '../Redux/Reducer';
+import { selectToken, selectID, selectCustomDatasets } from '../Redux/Reducer';
 
 const CustomDataset = () => {
     const dispatch = useDispatch();
-
-    // for redirect to login page
-    const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-    if (!isLoggedIn) {
-        window.location.href = '/login';
-    };
 
     const token = useSelector(state => selectToken(state));
     const user_id = useSelector(state => selectID(state));
