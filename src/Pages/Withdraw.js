@@ -13,6 +13,7 @@ const Withdraw = () => {
 
 	// for redirect to login page
 	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+
 	if (!isLoggedIn) {
 		window.location.href = '/login';
 	};
@@ -38,10 +39,6 @@ const Withdraw = () => {
 		setAmount('');
 		setSystem('');
 		setInfo('');
-		// console.log(user_id);
-		// console.log(amount);
-		// console.log(system);
-		// console.log(info);
 	};
 
 	return (
@@ -58,7 +55,9 @@ const Withdraw = () => {
 				textAlign={'center'}
 				my={2}
 				p={3}
-			>Your Withdraws</Text>
+			>
+				Your Withdraws
+			</Text>
 
 			<Grid
 				gap={[null, 2, 4]}
