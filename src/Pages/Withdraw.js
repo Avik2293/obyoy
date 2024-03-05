@@ -199,7 +199,9 @@ const Withdraw = () => {
 				textAlign={'center'}
 				my={2}
 				p={3}
-			>Withdraw History</Text>
+			>
+				Withdraw History
+			</Text>
 
 			<TableContainer >
 				<VStack mx={'auto'} minWidth={"1200px"}>
