@@ -5,11 +5,10 @@ import { Provider } from 'react-redux';
 import { Text } from '@chakra-ui/react'
 
 import { routes } from './Routes/Routes';
-import { configureStore } from './Redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from "./Redux/index";
 
 function App() {
-	const { store, persistor } = configureStore();
 
 	return (
 		<Provider store={store}>
@@ -24,5 +23,3 @@ function App() {
 }
 
 export default App;
-
-{/*<PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>*/ }
