@@ -12,6 +12,7 @@ const Profile = () => {
 
 	// for redirect to login page
 	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+
 	if (!isLoggedIn) {
 		window.location.href = '/login';
 	};
@@ -30,6 +31,7 @@ const Profile = () => {
 	// image upload 
 	const [img, setImg] = useState(false);
 	const [file, setFile] = useState();
+
 	const handleFileChange = (e) => {
 		if (e.target.files) {
 			setFile(e.target.files[0]);
@@ -39,7 +41,6 @@ const Profile = () => {
 		if (!file) {
 			return;
 		}
-
 	};
 
 	const handleSubmit = event => {
