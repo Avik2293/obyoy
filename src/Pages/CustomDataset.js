@@ -11,6 +11,7 @@ const CustomDataset = () => {
 
     // for redirect to login page
     const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+
     if (!isLoggedIn) {
         window.location.href = '/login';
     };
@@ -61,7 +62,6 @@ const CustomDataset = () => {
         // event.preventDefault();
         dispatch(createNewDataset(user_id, newDatasetName, token));
         setNewDatasetName('');
-        // console.log(newDatasetName);
     };
 
     // for dataset selection
@@ -138,7 +138,6 @@ const CustomDataset = () => {
 
                         >
                             {
-                                // console.log(customDatasets)
                                 customDatasets &&
                                 customDatasets.map((value, key) =>
                                     <Button key={key}
