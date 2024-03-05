@@ -147,7 +147,3 @@ export default combineReducers({
 
 
 export const selectCustomDatasets = state => state.customDatasets.customDatasets || '';
-// export const selectIsLoggedIn = state => (state.login.token !== '' && state.login.user_id !== '') ? true : false;
-// export const selectIsAdmin = state => (state.login.user_type === 'admin') ? true : false;
-// console.log(selectIsAdmin);
-// export const selectProfile = state => state.login.profile;
