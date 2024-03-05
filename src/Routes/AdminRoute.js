@@ -10,7 +10,6 @@ import { selectIsAdmin } from '../Redux/Reducer';
 
 const AdminRoute = ({ children }) => {
     const isAdmin = useSelector(state => selectIsAdmin(state));
-    // console.log(isAdmin);
 
     // const {user, loading} = useContext(AuthContext);
     // const [isAdmin, isAdminLoading] = useAdmin(user?.email);
