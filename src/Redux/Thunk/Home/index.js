@@ -23,7 +23,6 @@ export const leaderboard = () => async (dispatch, getState) => {
     // axios.get(BASE_URL + "/api/v1/leaderboard")
     axios.get("/api/v1/leaderboard/topTen")
         .then((response) => {
-            // console.log(response.data);
             dispatch(leaderboardSuccess(response.data));
         }, error => {
             dispatch(leaderboardFailure(error))
@@ -59,7 +58,6 @@ export const translatedLine = (dataset_id, line_id, line, input, translator_id, 
         },
     })
         .then((response) => {
-            // console.log(response.data);
             dispatch(submitTranslatedlineSuccess(response.data));
         }, error => {
             dispatch(submitTranslatedlineFailure(error))
