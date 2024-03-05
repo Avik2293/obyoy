@@ -11,7 +11,6 @@ import {
     REQUEST_UPDATE_PROFILE,
     SUCCESS_UPDATE_PROFILE,
     FAILURE_UPDATE_PROFILE,
-    // UPDATE_SESSION_EXPIRY,
 } from "../Constant/login";
 
 
