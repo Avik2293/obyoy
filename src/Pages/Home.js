@@ -41,7 +41,6 @@ const Home = () => {
 		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
 		setInput('');
 		setStart(!start);
-		// console.log(line.dataset_id, line.line_id, line.line, input, profile.user_id);
 	};
 
 	const handleSubmitNext = event => {
@@ -49,7 +48,6 @@ const Home = () => {
 		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
 		setCount(count + 1);
 		setInput('');
-		// console.log(input);
 	};
 
 	return (
