@@ -16,7 +16,6 @@ export const fetchWithdraws = (user_id) => async (dispatch, getState) => {
     // axios.get(BASE_URL + "/api/v1/leaderboard")
     axios.get(`/api/v1/withdraws/${user_id}`)
         .then((response) => {
-            // console.log(response.data);
             dispatch(fetchWithdrawsSuccess(response.data));
         }, error => {
             dispatch(fetchWithdrawsFailure(error))
@@ -38,7 +37,6 @@ export const sendWithdrawRequest = (user_id, amount, system, info, token) => asy
         },
     })
         .then((response) => {
-            // console.log(response.data);
             dispatch(withdrawRequestSuccess(response.data));
         }, error => {
             dispatch(withdrawRequestFailure(error))
