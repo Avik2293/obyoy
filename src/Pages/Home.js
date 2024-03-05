@@ -13,8 +13,9 @@ const Home = () => {
 
 	// for redirect to login page
 	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+
 	if (!isLoggedIn) {
-		window.location.href = '/login';
+		window.location.href = '/login';	//should try to avoid manipulating dom
 	};
 	
 	const token = useSelector(state => selectToken(state));
@@ -111,7 +112,8 @@ const Home = () => {
 						textAlign={'center'}
 						my={5}
 					>
-						Next Top 5</Text>
+						Next Top 5
+					</Text>
 
 					{
 						<Box
@@ -333,7 +335,8 @@ const Home = () => {
 						textAlign={'center'}
 						my={1}
 					>
-						{profile?.userName} </Text>
+						{profile?.userName} 
+					</Text>
 
 					<Box
 						fontSize="sm"
