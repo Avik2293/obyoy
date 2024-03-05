@@ -55,12 +55,6 @@ export const routes = createBrowserRouter([
 				path: '/dashboard/withdraw/history/:id',
 				element: <WithdrawalHistory />
 			},
-			// {
-			//     path: '/dashboard/payment/:id',
-			//     element: <BuyerRoute><Payment></Payment></BuyerRoute>,
-			//     loader: ({ params }) => fetch(`https://re-books-server.vercel.app/bookings/${params.id}`)
-			// },
-
 		]
 	},
 	{
