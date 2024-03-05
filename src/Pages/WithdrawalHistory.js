@@ -67,7 +67,16 @@ const WithdrawalHistory = () => {
 
 	return (
 		<>
-			<Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={1} p={1}>Withdraw Data for User ID: {id}</Text>
+			<Text 
+				fontSize="lg" 
+				fontWeight="bold" 
+				color='black' 
+				textAlign={'center'} 
+				my={1} 
+				p={1}
+			>
+				Withdraw Data for User ID: {id}
+			</Text>
 
 			<TableContainer >
 				<VStack mx={'auto'} minWidth={"1200px"}>
