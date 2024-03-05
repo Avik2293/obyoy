@@ -62,7 +62,6 @@ export const datasetFileInput = (user_id, newDatasetName, token) => async (dispa
         },
     })
         .then((response) => {
-            // console.log(response.data);
             dispatch(fileInputSuccess(response.data));
         }, error => {
             dispatch(fileInputFailure(error))
@@ -85,7 +84,6 @@ export const datasetLineInput = (user_id, datasetId, datasetName, lineInput, tra
         },
     })
         .then((response) => {
-            // console.log(response.data);
             dispatch(lineInputSuccess(response.data));
         }, error => {
             dispatch(lineInputFailure(error))
