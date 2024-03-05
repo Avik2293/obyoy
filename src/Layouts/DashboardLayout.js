@@ -8,11 +8,9 @@ import Footer from '../Components/Footer';
 const DashboardLayout = () => {
 	return (
 		<div>
-			<Navbar></Navbar>
-
-			<Outlet></Outlet>
-
-			<Footer></Footer>
+			<Navbar/>
+			<Outlet/>
+			<Footer/>
 		</div>
 	);
 };
