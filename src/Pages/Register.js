@@ -17,7 +17,6 @@ const Logo = (props) => (
 	</chakra.svg>
 )
 
-
 const Register = () => {
 	const dispatch = useDispatch();
 
@@ -36,7 +35,6 @@ const Register = () => {
 		setLastName('');
 		setEmail('');
 		setPassword('');
-		// console.log(firstName, lastName, email, password);
 
 		//  after sign up direct to login page 
 		window.location.href = '/login';
