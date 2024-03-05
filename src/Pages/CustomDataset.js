@@ -229,7 +229,8 @@ const CustomDataset = () => {
                                 my={2}
                                 mt={8}
                             >
-                                Upload a file for create your custom dataset.</Text>
+                                Upload a file for create your custom dataset.
+                            </Text>
 
                             <Text
                                 fontSize="lg"
@@ -247,7 +248,8 @@ const CustomDataset = () => {
                                 textAlign={'end'}
                                 mt={7}
                             >
-                                * We are not going to pay you for this translation.</Text>
+                                * We are not going to pay you for this translation.
+                            </Text>
 
                             <Box>
                                 <Text
@@ -258,7 +260,8 @@ const CustomDataset = () => {
                                     my={2}
                                     mt={8}
                                 >
-                                    You can also create a new dataset & start input lines with translated lines.</Text>
+                                    You can also create a new dataset & start input lines with translated lines.
+                                </Text>
 
                                 <Form >
                                     <HStack>
@@ -311,7 +314,8 @@ const CustomDataset = () => {
                                 textAlign={'center'}
                                 my={4}
                             >
-                                New Line Input for {datasetName}</Text>
+                                New Line Input for {datasetName}
+                            </Text>
 
                             {/* <Form onSubmit={handleSubmit}> */}
                             <Form>
