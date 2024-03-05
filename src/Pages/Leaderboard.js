@@ -1,7 +1,5 @@
 import React from 'react';
 import { Container, HStack, Text, TableContainer, VStack, } from '@chakra-ui/react';
-// import { Link } from 'react-router-dom';
-// import { Link as ReactRouterLink } from 'react-router-dom';
 
 const Leaderboard = () => {
 
@@ -41,10 +39,12 @@ const Leaderboard = () => {
 	return (
 		<Container pb={{ base: '2', md: '4', }} px={{ base: '3', md: '8', }} maxWidth={"1200px"} mx={'auto'} >
 			<Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} my={2} p={3}
-			>Leaderboard Full List</Text>
+				>Leaderboard Full List
+			</Text>
 
-			<Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} mb={2} p={3}
-			>Your Leaderboard No. : 22</Text>
+			<Text fontSize="lg" fontWeight="bold" color='black' textAlign={'center'} mb={2} p={3}>
+				Your Leaderboard No. : 22
+			</Text>
 
 			< TableContainer >
 				<VStack mx={'auto'} minWidth={"800px"}>
@@ -55,7 +55,6 @@ const Leaderboard = () => {
 						<Text w={'140px'}>Work Days</Text>
 						<Text w={'140px'}>Total Balance</Text>
 					</HStack>
-
 					{
 						tableData.map((td, i) =>
 							<HStack key={i} justify={'space-evenly'} textAlign={'center'}>
@@ -67,7 +66,6 @@ const Leaderboard = () => {
 							</HStack>
 						)
 					}
-
 					{
 						tableData.map((td, i) =>
 							<HStack key={i} justify={'space-evenly'} textAlign={'center'}>
