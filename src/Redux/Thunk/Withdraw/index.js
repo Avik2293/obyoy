@@ -13,7 +13,6 @@ import {
 export const fetchWithdraws = (user_id) => async (dispatch, getState) => {
     dispatch(requestFetchWithdraws())
 
-    // axios.get(BASE_URL + "/api/v1/leaderboard")
     axios.get(`/api/v1/withdraws/${user_id}`)
         .then((response) => {
             dispatch(fetchWithdrawsSuccess(response.data));
@@ -25,7 +24,6 @@ export const fetchWithdraws = (user_id) => async (dispatch, getState) => {
 export const sendWithdrawRequest = (user_id, amount, system, info, token) => async (dispatch, getState) => {
     dispatch(requestWithdrawRequest())
 
-    // axios.post(BASE_URL + "/api/v1/translated_line", {
     axios.post("/api/v1/withdraw_request", {
         user_id: user_id,
         withdraw_amount: amount,
