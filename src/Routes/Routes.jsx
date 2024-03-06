@@ -12,17 +12,20 @@ import Withdraw from "../Pages/Withdraw";
 import WithdrawalHistory from "../Pages/WithdrawalHistory";
 import CustomDataset from "../Pages/CustomDataset";
 import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
 
 export const routes = createBrowserRouter([
 	{
 		path: '/',
-		element: <Main />,
+		// element: <Main />,
+		element: <UserRoute><Main /></UserRoute>,
 		// errorElement: <ErrorPage></ErrorPage>,
 		children: [
 			{
 				path: '/',
 				// loader: () => fetch('https://re-books-server.vercel.app/'),
-				element: <Home />
+				// element: <UserRoute><Home /></UserRoute>,
+				element: <Home />,
 			},
 			{
 				path: '/profile',

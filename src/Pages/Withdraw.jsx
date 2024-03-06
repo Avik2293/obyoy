@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Container, GridItem, Button, Text, Box, HStack, TableContainer, VStack, FormControl, FormLabel, Input, Select, Textarea } from '@chakra-ui/react';
 import { Form, } from 'react-router-dom';
-// import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWithdraws, sendWithdrawRequest, } from '../Redux/Thunk/Withdraw';
-import { selectIsLoggedIn, selectToken, selectID, selectProfile, selectWithdraws } from '../Redux/Reducer';
+import { selectToken, selectID, selectProfile, selectWithdraws } from '../Redux/Reducer';
 
 
 const Withdraw = () => {
 	const dispatch = useDispatch();
-
-	// for redirect to login page
-	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-
-	if (!isLoggedIn) {
-		window.location.href = '/login';
-	};
 
 	const token = useSelector(state => selectToken(state));
 	const user_id = useSelector(state => selectID(state));

@@ -4,6 +4,8 @@ import leaderboard, * as fromLeaderboard from "./leaderboard";
 import translation, * as fromTranslation from "./translation";
 import customDatasets, * as fromCustomDatasets from "./custom";
 import withdraws, * as fromWithdraws from "./withdraw";
+import userManagement, * as fromUserManagement from "./userManagement";
+
 
 export const rootReducer = combineReducers({
     "user": user,
@@ -11,19 +13,11 @@ export const rootReducer = combineReducers({
     "translation": translation,
     "withdraws": withdraws,
     "customDatasets": customDatasets,
+    "userManagement": userManagement,
 });
 
 const reducerFunction = (state, action) => rootReducer(state, action);
 export default reducerFunction;
-
-// export const selectLoginIsFetching = state => fromUser.selectLoginIsFetching(state.user);
-// export const selectUserName = state => fromUser.selectUserName(state.user);
-// export const selectAuth = state => (
-//     {
-//         login: selectToken(state) !== '',
-//         admin: fromUser.selectProfile(state.user).isadmin,
-//     }
-// );
 
 
 export const selectID = state => fromUser.selectUserID(state.user);
@@ -38,3 +32,21 @@ export const selectLine = state => fromTranslation.selectLine(state.translation)
 export const selectWithdraws = state => fromWithdraws.selectWithdraws(state.withdraws);
 
 export const selectCustomDatasets = state => fromCustomDatasets.selectCustomDatasets(state.customDatasets);
+
+export const selectAllUserData = state => fromUserManagement.selectAllUserData(state.userManagement.usersData);
+export const selectSingleUser = state => fromUserManagement.selectSingleUser(state.userManagement.usersData);
+export const selectUserWithdraws = state => fromUserManagement.selectUserWithdraws(state.userManagement.usersData);
+
+
+
+
+
+
+// export const selectLoginIsFetching = state => fromUser.selectLoginIsFetching(state.user);
+// export const selectUserName = state => fromUser.selectUserName(state.user);
+// export const selectAuth = state => (
+//     {
+//         login: selectToken(state) !== '',
+//         admin: fromUser.selectProfile(state.user).isadmin,
+//     }
+// );
