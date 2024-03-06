@@ -20,7 +20,6 @@ import {
 export const signup = (name, email, password) => async (dispatch, getState) => {
     dispatch(requestSignup())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
     axios.post("/api/v1/signup", {
         userName: name,
         user_email: email,
@@ -37,7 +36,6 @@ export const signup = (name, email, password) => async (dispatch, getState) => {
 export const login = (email, password) => async (dispatch, getState) => {
     dispatch(requestLogin())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
     axios.post("/api/v1/login", {
         user_email: email,
         user_password: password,
@@ -53,7 +51,6 @@ export const login = (email, password) => async (dispatch, getState) => {
 export const logout = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestLogout())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
     axios.delete("/api/v1/logout", {
         user_id: user_id,
     }, {
@@ -72,7 +69,6 @@ export const logout = (user_id, token) => async (dispatch, getState) => {
 export const profileUpdate = (userName, user_email, user_phone, address, birthday, token) => async (dispatch, getState) => {
     dispatch(requestUpdateProfile())
 
-    // axios.post(BASE_URL + "/api/v1/translated_line", {
     axios.post("/api/v1/profile_edit", {
         userName: userName,
         user_email: user_email,

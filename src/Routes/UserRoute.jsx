@@ -5,11 +5,12 @@ import { Navigate, useLocation } from 'react-router-dom';
 // import { AuthContext } from '../Context/AuthProvider';
 // import useAdmin from '../Hooks/useAdmin';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAdmin } from '../Redux/Reducer';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../Redux/Reducer';
 
-const AdminRoute = ({ children }) => {
-    const isAdmin = useSelector(state => selectIsAdmin(state));
+const UserRoute = ({ children }) => {
+    const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
+    // console.log(isAdmin);
 
     // const {user, loading} = useContext(AuthContext);
     // const [isAdmin, isAdminLoading] = useAdmin(user?.email);
@@ -19,11 +20,11 @@ const AdminRoute = ({ children }) => {
     //     return <Spinner></Spinner>;
     // }
 
-    if (isAdmin) {
+    if (isLoggedIn) {
         return children;
     }
     // return <Navigate to='/login' state={{ from: location }} replace></Navigate>;
     return <Navigate to='/login'></Navigate>;
 };
 
-export default AdminRoute;
+export default UserRoute;

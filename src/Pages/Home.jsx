@@ -5,18 +5,11 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
-import { selectIsLoggedIn, selectProfile, selectLeaderboardTop, selectLine, selectToken } from '../Redux/Reducer';
+import { selectProfile, selectLeaderboardTop, selectLine, selectToken } from '../Redux/Reducer';
 
 
 const Home = () => {
 	const dispatch = useDispatch();
-
-	// for redirect to login page
-	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-
-	if (!isLoggedIn) {
-		window.location.href = '/login';	//should try to avoid manipulating dom
-	};
 	
 	const token = useSelector(state => selectToken(state));
 	const topTen = useSelector(state => selectLeaderboardTop(state));

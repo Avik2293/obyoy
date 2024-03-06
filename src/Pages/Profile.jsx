@@ -4,18 +4,11 @@ import { Form, } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { profileUpdate } from '../Redux/Thunk/Login';
-import { selectIsLoggedIn, selectProfile, selectToken } from '../Redux/Reducer';
+import { selectProfile, selectToken } from '../Redux/Reducer';
 
 
 const Profile = () => {
 	const dispatch = useDispatch();
-
-	// for redirect to login page
-	const isLoggedIn = useSelector(state => selectIsLoggedIn(state));
-
-	if (!isLoggedIn) {
-		window.location.href = '/login';
-	};
 
 	const token = useSelector(state => selectToken(state));
 	const profile = useSelector(state => selectProfile(state));

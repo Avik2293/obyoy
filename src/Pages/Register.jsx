@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import { Flex, Box, FormControl, FormLabel, Input, InputGroup, HStack, InputRightElement, Stack, Button, Heading, useColorModeValue, chakra, Text, Link } from "@chakra-ui/react";
-import { Form, } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 import { useDispatch } from 'react-redux';
 import { signup } from '../Redux/Thunk/Login';
-// import { selectIsLoggedIn } from '../Redux/Reducer';
 
 const Logo = (props) => (
 	<chakra.svg color="white" height="12" width="auto" viewBox="0 0 89 89" xmlns="http://www.w3.org/2000/svg" {...props}
@@ -19,6 +18,15 @@ const Logo = (props) => (
 
 const Register = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	//  after sign up redirect to login page 
+	const [registerFlag, setRegisterFlag] = useState(false);
+	useEffect(() => {
+		if (registerFlag) {
+			navigate("/login");
+		}
+	}, [navigate, registerFlag]);
 
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -36,9 +44,9 @@ const Register = () => {
 		setEmail('');
 		setPassword('');
 
-		//  after sign up direct to login page 
-		window.location.href = '/login';
+		setRegisterFlag(true);
 	};
+
 
 	return (
 		<Flex
