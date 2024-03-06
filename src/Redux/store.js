@@ -20,7 +20,7 @@ export const configureStore = () => {
 		key: 'root',
 		storage: storage,
 		whitelist: ['user'],
-		blacklist: ['leaderboard', 'translation', 'withdraws', 'customDatasets'],
+		blacklist: ['leaderboard', 'translation', 'withdraws', 'customDatasets', 'userManagement', 'datasetManagement'],
 
 		transforms: [
 			// Create a transformer by passing the reducer key and configuration. Values

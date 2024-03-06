@@ -3,9 +3,9 @@ import {
     requestLeaderboard,
     leaderboardSuccess,
     leaderboardFailure,
-    // requestFetchProfile,
-    // fetchProfileSuccess,
-    // fetchProfileFailure,
+    requestFullLeaderboard,
+    fullLeaderboardSuccess,
+    fullLeaderboardFailure,
     requestFetchNewline,
     fetchNewlineSuccess,
     fetchNewlineFailure,
@@ -27,6 +27,19 @@ export const leaderboard = () => async (dispatch, getState) => {
             dispatch(leaderboardSuccess(response.data));
         }, error => {
             dispatch(leaderboardFailure(error))
+        })
+}
+
+export const fullLeaderboard = () => async (dispatch, getState) => {
+    dispatch(requestFullLeaderboard())
+
+    // axios.get(BASE_URL + "/api/v1/leaderboard")
+    axios.get("/api/v1/leaderboard/full")
+        .then((response) => {
+            // console.log(response.data);
+            dispatch(fullLeaderboardSuccess(response.data));
+        }, error => {
+            dispatch(fullLeaderboardFailure(error))
         })
 }
 
