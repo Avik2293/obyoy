@@ -10,11 +10,11 @@ import { selectProfile, selectLeaderboardTop, selectLine, selectToken } from '..
 
 const Home = () => {
 	const dispatch = useDispatch();
-	
+
 	const token = useSelector(state => selectToken(state));
 	const topTen = useSelector(state => selectLeaderboardTop(state));
 	const profile = useSelector(state => selectProfile(state));
-	
+
 	const [count, setCount] = useState(0);
 	const [start, setStart] = useState(false);
 	const line = useSelector(state => selectLine(state));
@@ -27,8 +27,8 @@ const Home = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(newLine());
-	}, [count, dispatch]);
+		dispatch(newLine(profile.user_id, token));
+	}, [count, dispatch, profile.user_id, token]);
 
 	const handleSubmit = event => {
 		// event.preventDefault();

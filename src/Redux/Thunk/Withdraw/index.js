@@ -10,11 +10,17 @@ import {
 
 // import { BASE_URL } from "../../Constant/withdraw";
 
-export const fetchWithdraws = (user_id) => async (dispatch, getState) => {
+export const fetchWithdraws = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestFetchWithdraws())
 
     // axios.get(BASE_URL + "/api/v1/leaderboard")
-    axios.get(`/api/v1/withdraws/${user_id}`)
+    axios.post("/api/v1/withdraws", {
+        user_id: user_id,
+    }, {
+        headers: {
+            'Authorization': token,
+        },
+    })
         .then((response) => {
             // console.log(response.data);
             dispatch(fetchWithdrawsSuccess(response.data));

@@ -6,6 +6,7 @@ import customDatasets, * as fromCustomDatasets from "./custom";
 import withdraws, * as fromWithdraws from "./withdraw";
 import userManagement, * as fromUserManagement from "./userManagement";
 import datasetManagement, * as fromDatasetManagement from "./datasetManagement";
+import reviewManagement, * as fromReviewManagement from "./reviewManagement";
 
 
 export const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
     "customDatasets": customDatasets,
     "userManagement": userManagement,
     "datasetManagement": datasetManagement,
+    "reviewManagement": reviewManagement,
 });
 
 const reducerFunction = (state, action) => rootReducer(state, action);
@@ -43,6 +45,7 @@ export const selectUserWithdraws = state => fromUserManagement.selectUserWithdra
 
 export const selectAllDatasetsData = state => fromDatasetManagement.selectAllDatasetsData(state.datasetManagement.datasetsData);
 
+export const selectReviewedLineData = state => fromReviewManagement.selectReviewedLineData(state.reviewManagement);
 
 
 

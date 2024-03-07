@@ -10,12 +10,6 @@ import {
     REQUEST_LOGOUT,
     SUCCESS_LOGOUT,
     FAILURE_LOGOUT,
-    // REQUEST_FETCH_ID,
-    // SUCCESS_FETCH_ID,
-    // FAILURE_FETCH_ID,
-    // REQUEST_FETCH_PROFILE,
-    // SUCCESS_FETCH_PROFILE,
-    // FAILURE_FETCH_PROFILE,
     REQUEST_UPDATE_PROFILE,
     SUCCESS_UPDATE_PROFILE,
     FAILURE_UPDATE_PROFILE,
@@ -75,17 +69,6 @@ const login = (state = initialState.login, action) => {
                 ...state,
                 error: action.payload,
             }
-
-        // case SUCCESS_FETCH_ID:
-        //     return {
-        //         ...state,
-        //         user_id: action.payload,
-        //     }
-        // case SUCCESS_FETCH_PROFILE:
-        //     return {
-        //         ...state,
-        //         profile: action.payload,
-        //     }
 
         case REQUEST_LOGOUT:
             return {

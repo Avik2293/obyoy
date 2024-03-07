@@ -54,7 +54,7 @@ export const logout = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestLogout())
 
     // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.delete("/api/v1/logout", {
+    axios.post("/api/v1/logout", {
         user_id: user_id,
     }, {
         headers: {
