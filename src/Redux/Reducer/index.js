@@ -5,6 +5,7 @@ import translation, * as fromTranslation from "./translation";
 import customDatasets, * as fromCustomDatasets from "./custom";
 import withdraws, * as fromWithdraws from "./withdraw";
 import userManagement, * as fromUserManagement from "./userManagement";
+import datasetManagement, * as fromDatasetManagement from "./datasetManagement";
 
 
 export const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
     "withdraws": withdraws,
     "customDatasets": customDatasets,
     "userManagement": userManagement,
+    "datasetManagement": datasetManagement,
 });
 
 const reducerFunction = (state, action) => rootReducer(state, action);
@@ -27,16 +29,19 @@ export const selectIsAdmin = state => fromUser.selectIsAdmin(state.user);
 export const selectProfile = state => fromUser.selectProfile(state.user);
 
 export const selectLeaderboardTop = state => fromLeaderboard.selectLeaderboard(state.leaderboard);
+export const selectFullLeaderboard = state => fromLeaderboard.selectFullLeaderboard(state.leaderboard);
 export const selectLine = state => fromTranslation.selectLine(state.translation);
 
 export const selectWithdraws = state => fromWithdraws.selectWithdraws(state.withdraws);
 
 export const selectCustomDatasets = state => fromCustomDatasets.selectCustomDatasets(state.customDatasets);
 
+// admin
 export const selectAllUserData = state => fromUserManagement.selectAllUserData(state.userManagement.usersData);
 export const selectSingleUser = state => fromUserManagement.selectSingleUser(state.userManagement.usersData);
 export const selectUserWithdraws = state => fromUserManagement.selectUserWithdraws(state.userManagement.usersData);
 
+export const selectAllDatasetsData = state => fromDatasetManagement.selectAllDatasetsData(state.datasetManagement.datasetsData);
 
 
 

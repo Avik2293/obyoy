@@ -5,29 +5,29 @@ export function makeServer({ environment = "test" } = {}) {
         environment,
 
         models: {
-            topTen: Model,
+            // topTen: Model,
             line: Model,
             // dataset: Model,
             login: Model,
         },
 
         seeds(server) {
-            server.create("topTen", {
-                firstFive: [
-                    { name: 'fdgdr gdf', balance: 5345 },
-                    { name: 'fddr gdf', balance: 545 },
-                    { name: 'fdgr gdf', balance: 355 },
-                    { name: 'fdhgdr gdf', balance: 345 },
-                    { name: 'fdegr gdf', balance: 35 },
-                ],
-                nextFive: [
-                    { name: 'fdgdr gdf', balance: 5345 },
-                    { name: 'fddr gdf', balance: 545 },
-                    { name: 'fdgr gdf', balance: 355 },
-                    { name: 'fdhgdr gdf', balance: 345 },
-                    { name: 'fdegr gdf', balance: 35 },
-                ]
-            })
+            // server.create("topTen", {
+            //     firstFive: [
+            //         { name: 'fdgdr gdf', balance: 5345 },
+            //         { name: 'fddr gdf', balance: 545 },
+            //         { name: 'fdgr gdf', balance: 355 },
+            //         { name: 'fdhgdr gdf', balance: 345 },
+            //         { name: 'fdegr gdf', balance: 35 },
+            //     ],
+            //     nextFive: [
+            //         { name: 'fdgdr gdf', balance: 5345 },
+            //         { name: 'fddr gdf', balance: 545 },
+            //         { name: 'fdgr gdf', balance: 355 },
+            //         { name: 'fdhgdr gdf', balance: 345 },
+            //         { name: 'fdegr gdf', balance: 35 },
+            //     ]
+            // })
             server.create("login", {
                 token: "1|233764s455teu8",
                 user_id: 2234,
@@ -142,6 +142,58 @@ export function makeServer({ environment = "test" } = {}) {
                 ],
             })
             server.db.loadData({
+                leaderboardData: {
+                    topTen: {
+                        firstFive: [
+                            { name: 'fdgdr gdf', balance: 5345 },
+                            { name: 'fddr gdf', balance: 545 },
+                            { name: 'fdgr gdf', balance: 355 },
+                            { name: 'fdhgdr gdf', balance: 345 },
+                            { name: 'fdegr gdf', balance: 35 },
+                        ],
+                        nextFive: [
+                            { name: 'fdgdr gdf', balance: 5345 },
+                            { name: 'fddr gdf', balance: 545 },
+                            { name: 'fdgr gdf', balance: 355 },
+                            { name: 'fdhgdr gdf', balance: 345 },
+                            { name: 'fdegr gdf', balance: 35 },
+                        ]
+                    },
+                    fullLeaderboard: [
+                        {
+                            name: 'dummy1',
+                            joining_date: '21 January, 2022',
+                            total_working_days: 342,
+                            total_balance: 3452,
+                        },
+                        {
+                            name: 'dummy2',
+                            joining_date: '22 January, 2022',
+                            total_working_days: 341,
+                            total_balance: 3451,
+                        },
+                        {
+                            name: 'dummy3',
+                            joining_date: '23 January, 2022',
+                            total_working_days: 343,
+                            total_balance: 3450,
+                        },
+                        {
+                            name: 'dummy4',
+                            joining_date: '24 January, 2022',
+                            total_working_days: 344,
+                            total_balance: 3445,
+                        },
+                        {
+                            name: 'dummy5',
+                            joining_date: '25 January, 2022',
+                            total_working_days: 354,
+                            total_balance: 3441,
+                        },
+                    ]
+                }
+            })
+            server.db.loadData({
                 datasets: [
                     {
                         dataset_id: 1,
@@ -149,6 +201,9 @@ export function makeServer({ environment = "test" } = {}) {
                         total_lines: 78,
                         total_translated: 45,
                         for_review: 24,
+                        upload_date: '25 June, 2002',
+                        details: 'dummy, dummmy, dddddmmmuuuyy',
+                        remarks: 'asda, dhjsdjj',
                         remaining_lines: [
                             { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
                             { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
@@ -171,6 +226,9 @@ export function makeServer({ environment = "test" } = {}) {
                         total_lines: 787,
                         total_translated: 145,
                         for_review: 224,
+                        upload_date: '5 June, 2002',
+                        details: 'dumy, dummy, dddddmmuuuyy',
+                        remarks: 'ada, dhsdjj',
                         remaining_lines: [
                             { line_id: 23, translator_id: 0, line: 'Who are you?', translated_line: '' },
                             { line_id: 24, translator_id: 0, line: 'What are you?', translated_line: '' },
@@ -283,6 +341,7 @@ export function makeServer({ environment = "test" } = {}) {
                     },
                 ]
             })
+
         },
 
         routes() {
@@ -357,7 +416,6 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.db.withdraws.where({ user_id: attrs.user_id })
             })
 
-            // can use delete, but what about admin proof
             this.post("/admin/user_delete", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
@@ -376,12 +434,44 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.db.usersData
             })
 
+            this.post("/admin/all_dataset", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.datasets
+            })
+
+            this.post("/admin/dataset_delete", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                schema.db.datasets.remove({ dataset_id: attrs.dataset_id });
+                // let id = request.params.id
+                // schema.db.usersData.find(attrs.user_id).destroy()
+                // schema.db.usersData.delete({user_id: attrs.user_id})
+
+                // let headers = {}
+                // let data = { success: ["User Delete Successfully"] }
+                // return new Response(201, headers, data)
+
+                return schema.db.datasets
+            })
+
 
             // Using the `timing` option to slow down the response
             this.get("/leaderboard/topTen", (schema, request) => {
-                return schema.topTens.all()
+                // return schema.topTens.all()
+                return schema.db.leaderboardData[0].topTen
             })
             // }, { timing: 4000 })
+
+            this.get("/leaderboard/full", (schema, request) => {
+                return schema.db.leaderboardData[0].fullLeaderboard
+            })
 
             this.get("/new_line", (schema, request) => {
                 return schema.db.datasets[0]
@@ -496,39 +586,39 @@ export function makeServer({ environment = "test" } = {}) {
 
 
             // demu
-            this.get("/profile/:id", (schema, request) => {
-                let id = request.params.id
+            // this.get("/profile/:id", (schema, request) => {
+            //     let id = request.params.id
 
-                return schema.movies.find(id)
-            })
+            //     return schema.movies.find(id)
+            // })
 
             // Responding to a POST request
-            this.post("/movies", (schema, request) => {
-                let attrs = JSON.parse(request.requestBody)
-                // attrs.id = Math.floor(Math.random() * 100)
+            // this.post("/movies", (schema, request) => {
+            //     let attrs = JSON.parse(request.requestBody)
+            //     // attrs.id = Math.floor(Math.random() * 100)
 
-                // return { movie: attrs }
-                return schema.movies.create(attrs)
-            })
+            //     // return { movie: attrs }
+            //     return schema.movies.create(attrs)
+            // })
 
-            this.patch("/movies/:id", (schema, request) => {
-                let newAttrs = JSON.parse(request.requestBody)
-                let id = request.params.id
-                let movie = schema.movies.find(id)
+            // this.patch("/movies/:id", (schema, request) => {
+            //     let newAttrs = JSON.parse(request.requestBody)
+            //     let id = request.params.id
+            //     let movie = schema.movies.find(id)
 
-                return movie.update(newAttrs)
-            })
+            //     return movie.update(newAttrs)
+            // })
 
             // Using the `Response` class to return a 500
-            this.delete("/movies/:id", (schema, request) => {
-                // let headers = {}
-                // let data = { errors: ["Server did not respond"] }
-                // return new Response(500, headers, data)
+            // this.delete("/movies/:id", (schema, request) => {
+            //     // let headers = {}
+            //     // let data = { errors: ["Server did not respond"] }
+            //     // return new Response(500, headers, data)
 
-                let id = request.params.id
+            //     let id = request.params.id
 
-                return schema.movies.find(id).destroy()
-            })
+            //     return schema.movies.find(id).destroy()
+            // })
         },
     })
 

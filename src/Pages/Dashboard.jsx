@@ -35,7 +35,8 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
-import { selectToken, selectID, selectAllUserData, selectSingleUser } from '../Redux/Reducer';
+import { allDatasetsData, uploadDataset, datasetDelete } from '../Redux/Thunk/DatasetManagement';
+import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData } from '../Redux/Reducer';
 
 
 const Dashboard = () => {
@@ -46,70 +47,14 @@ const Dashboard = () => {
     const user_id = useSelector(state => selectID(state));
 
     const userTableData = useSelector(state => selectAllUserData(state));
+    const fileTableData = useSelector(state => selectAllDatasetsData(state));
     useEffect(() => {
         dispatch(allUsersData(user_id, token));
+        dispatch(allDatasetsData(user_id, token));
     }, [dispatch, token, user_id]);
 
 
 
-
-    const [fileTableData, setFileTableData] = useState([
-        {
-            file_id: 23,
-            file_name: 'dummy ',
-            type: ".pdf",
-            upload_date: '25 June, 2002',
-            details: 'dummy, dummmy, dddddmmmuuuyy',
-            total_line: 2022,
-            finished_line: 366,
-            for_approve: 36,
-            remarks: 'asda, dhjsdjj',
-        },
-        {
-            file_id: 3,
-            file_name: 'dumy ',
-            type: ".xlce",
-            upload_date: '5 June, 2002',
-            details: 'dumy, dummy, dddddmmuuuyy',
-            total_line: 25,
-            finished_line: 36,
-            for_approve: 3,
-            remarks: 'ada, dhsdjj',
-        },
-        {
-            file_id: 2,
-            file_name: 'dmmy ',
-            type: ".word",
-            upload_date: '25 June, 2022',
-            details: 'dumm, dummm, dddddmmmuuuy',
-            total_line: 252022,
-            finished_line: 766,
-            for_approve: 316,
-            remarks: 'sda, dhsdjj',
-        },
-        {
-            file_id: 233,
-            file_name: 'dummy ',
-            type: ".pdf",
-            upload_date: '25 June, 2012',
-            details: 'dummy, dummmy, dddddmmmuuuyy',
-            total_line: 22022,
-            finished_line: 66,
-            for_approve: 6,
-            remarks: 'asda, dhjsdjj',
-        },
-        {
-            file_id: 213,
-            file_name: 'dummy ',
-            type: ".nai",
-            upload_date: '25 June, 2102',
-            details: 'dummy, dummmy, dddddmmmuuuyy',
-            total_line: 22,
-            finished_line: 3,
-            for_approve: 3,
-            remarks: 'asda, dhjjj',
-        },
-    ]);
     const [withdrawTableData, setWithdrawTableData] = useState([
         {
             withdraw_id: 533,
@@ -219,10 +164,11 @@ const Dashboard = () => {
         }
 
     };
-    // delete file 
-    const handleDeleteFile = (file_id) => {
-        console.log(file_id);
+    // delete dataset 
+    const handleDeleteDataset = (dataset_id) => {
+        // console.log(dataset_id);
         // onDeleteOpen();
+        dispatch(datasetDelete(dataset_id, token));
     };
 
 
@@ -519,8 +465,8 @@ const Dashboard = () => {
                 </ModalContent>
             </Modal>
 
-            {/* Delete Alert modal 
-            <AlertDialog
+            {/* Delete Alert modal */}
+            {/* <AlertDialog
                 isOpen={isDeleteOpen}
                 leastDestructiveRef={cancelRef}
                 onClose={onDeleteClose}
@@ -615,7 +561,7 @@ const Dashboard = () => {
                             borderRadius: 7
                         }}
                     >
-                        File Input</Tab>
+                        Dataset Input</Tab>
 
                     <Tab
                         px={[null, 3, 12,]}
@@ -789,7 +735,7 @@ const Dashboard = () => {
                         </TableContainer>
                     </TabPanel>
 
-                    {/* file input  */}
+                    {/* Dataset input  */}
                     <TabPanel>
                         <Text
                             fontSize="lg"
@@ -799,7 +745,7 @@ const Dashboard = () => {
                             my={1}
                             p={1}
                         >
-                            Upload a File Translate</Text>
+                            Upload a Dataset for Translate</Text>
 
                         {/* for Upload  */}
                         <Box
@@ -839,7 +785,7 @@ const Dashboard = () => {
                             my={1}
                             p={1}
                         >
-                            All files Info</Text>
+                            All Datasets Info</Text>
 
                         {/* file table  */}
                         <TableContainer >
@@ -852,14 +798,13 @@ const Dashboard = () => {
                                     whiteSpace="break-spaces"
                                 >
                                     <Text w={'30px'} >No.</Text>
-                                    <Text w={'70px'} >File ID</Text>
-                                    <Text w={'70px'} >Name</Text>
-                                    <Text w={'70px'} >Type</Text>
+                                    <Text w={'70px'} >Dataset ID</Text>
+                                    <Text w={'70px'} >Dataset Name</Text>
                                     <Text w={'130px'} >Uploading Date</Text>
                                     <Text w={'130px'} >Details</Text>
                                     <Text w={'70px'} >Total Line</Text>
-                                    <Text w={'70px'} >Finished Line</Text>
-                                    <Text w={'70px'} >Line For Approve</Text>
+                                    <Text w={'80px'} >Translated Line</Text>
+                                    <Text w={'70px'} >Line For Review</Text>
                                     <Text w={'120px'} >Remarks</Text>
                                     <Text w={'60px'} >Action</Text>
                                 </HStack>
@@ -873,14 +818,13 @@ const Dashboard = () => {
                                             whiteSpace="break-spaces"
                                         >
                                             <Text w={'30px'} >{i + 1}</Text>
-                                            <Text w={'70px'} >{td?.file_id}</Text>
-                                            <Text w={'70px'} >{td?.file_name}</Text>
-                                            <Text w={'70px'} >{td?.type}</Text>
+                                            <Text w={'70px'} >{td?.dataset_id}</Text>
+                                            <Text w={'70px'} >{td?.dataset_name}</Text>
                                             <Text w={'130px'} >{td?.upload_date}</Text>
                                             <Text w={'130px'} >{td?.details}</Text>
-                                            <Text w={'70px'} >{td?.total_line}</Text>
-                                            <Text w={'70px'} >{td?.finished_line}</Text>
-                                            <Text w={'70px'} >{td?.for_approve}</Text>
+                                            <Text w={'70px'} >{td?.total_lines}</Text>
+                                            <Text w={'80px'} >{td?.total_translated}</Text>
+                                            <Text w={'70px'} >{td?.for_review}</Text>
                                             <Text w={'120px'} >{td?.remarks}</Text>
                                             <Text w={'60px'} gap={1}>
                                                 <Button
@@ -890,7 +834,7 @@ const Dashboard = () => {
                                                     mt={0}
                                                     borderRadius={'lg'}
                                                     color={'white'}
-                                                    onClick={() => handleDeleteFile(td.file_id)}
+                                                    onClick={() => handleDeleteDataset(td.dataset_id)}
                                                 >
                                                     Delete</Button>
                                             </Text>
