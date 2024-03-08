@@ -76,12 +76,12 @@ const lines = (state = initialState.lines, action) => {
         case FAILURE_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
-                dataset_id: 0,
-                dataset_name: '',
-                line_id: 0,
-                line: "",
-                translated_line: '',
-                translator_id: 0,
+                // dataset_id: 0,
+                // dataset_name: '',
+                // line_id: 0,
+                // line: "",
+                // translated_line: '',
+                // translator_id: 0,
                 error: action.payload,
             }
 

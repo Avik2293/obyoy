@@ -36,7 +36,8 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
 import { allDatasetsData, uploadDataset, datasetDelete } from '../Redux/Thunk/DatasetManagement';
-import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData } from '../Redux/Reducer';
+import { reviewingLine, approveLine, rejectLine } from '../Redux/Thunk/ReviewManagement';
+import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData, selectReviewedLineData } from '../Redux/Reducer';
 
 
 const Dashboard = () => {
@@ -48,9 +49,11 @@ const Dashboard = () => {
 
     const userTableData = useSelector(state => selectAllUserData(state));
     const fileTableData = useSelector(state => selectAllDatasetsData(state));
+    const reviewedLine = useSelector(state => selectReviewedLineData(state));
     useEffect(() => {
         dispatch(allUsersData(user_id, token));
         dispatch(allDatasetsData(user_id, token));
+        dispatch(reviewingLine(user_id, token));
     }, [dispatch, token, user_id]);
 
 
@@ -174,35 +177,38 @@ const Dashboard = () => {
 
     // for approve translate 
     const [start, setStart] = useState(false);
-    const [lineNo, setLineNo] = useState('')
+    // const [lineNo, setLineNo] = useState('');
     const handleSubmit = (event) => {
         // event.preventDefault();
         if (event) {
-            // approving the line 
+            dispatch(approveLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // console.log(event);
         }
         else {
-            // rejecting the line 
+            dispatch(rejectLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // console.log('reject');
         }
-        setLineNo('');
-        console.log(lineNo);
-        console.log(event);
+        // setLineNo('');
+        // console.log(reviewedLine?.line_id);
         setStart(!start);
     };
     const handleSubmitNext = (event) => {
         // event.preventDefault();
         if (event) {
-            // approving the line 
+            dispatch(approveLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // console.log(event);
         }
         else {
-            // rejecting the line 
+            dispatch(rejectLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // console.log('reject & next');
         }
-        setLineNo('');
-        console.log(lineNo);
-        console.log(event);
-        // new line call 
+        // setLineNo('');
+        // console.log(reviewedLine?.line_id);
+
+        // dispatch(reviewingLine(user_id, token));
     };
 
-
+    // remaining work for later *****************
     // for specific withdraw see
     const [selectedWithdraw, setSelectedWithdraw] = useState("");
     const [selectedWithdrawInfo, setSelectedWithdrawInfo] = useState();
@@ -466,71 +472,73 @@ const Dashboard = () => {
             </Modal>
 
             {/* Delete Alert modal */}
-            {/* <AlertDialog
-                isOpen={isDeleteOpen}
-                leastDestructiveRef={cancelRef}
-                onClose={onDeleteClose}
-            >
-                <AlertDialogOverlay bg='blackAlpha.300'
-                    backdropFilter='blur(10px) hue-rotate(90deg)'
-                >
-                    <AlertDialogContent
-                        bg={'gray'}
-                        maxWidth={'400px'}
-                        mx={'auto'}
-                        my={'auto'}
-                        borderRadius={10}
-                        padding={5}
-                    >
-                        <AlertDialogHeader
-                            fontSize='lg'
-                            fontWeight='bold'
-                            textAlign={'center'}
-                            color={'white'}
-                        >
-                            Delete Customer
-                        </AlertDialogHeader>
+            {
+                // <AlertDialog
+                //     isOpen={isDeleteOpen}
+                //     leastDestructiveRef={cancelRef}
+                //     onClose={onDeleteClose}
+                // >
+                //     <AlertDialogOverlay bg='blackAlpha.300'
+                //         backdropFilter='blur(10px) hue-rotate(90deg)'
+                //     >
+                //         <AlertDialogContent
+                //             bg={'gray'}
+                //             maxWidth={'400px'}
+                //             mx={'auto'}
+                //             my={'auto'}
+                //             borderRadius={10}
+                //             padding={5}
+                //         >
+                //             <AlertDialogHeader
+                //                 fontSize='lg'
+                //                 fontWeight='bold'
+                //                 textAlign={'center'}
+                //                 color={'white'}
+                //             >
+                //                 Delete Customer
+                //             </AlertDialogHeader>
 
-                        <AlertDialogBody
-                            fontWeight='semibold'
-                            textAlign={'center'}
-                            my={3}
-                        >
-                            <Text>Are you sure?</Text>
-                            <Text>You want to delete this?</Text>
-                            <Text>You can't undo this action afterwards.</Text>
-                        </AlertDialogBody>
+                //             <AlertDialogBody
+                //                 fontWeight='semibold'
+                //                 textAlign={'center'}
+                //                 my={3}
+                //             >
+                //                 <Text>Are you sure?</Text>
+                //                 <Text>You want to delete this?</Text>
+                //                 <Text>You can't undo this action afterwards.</Text>
+                //             </AlertDialogBody>
 
-                        <AlertDialogFooter>
-                            <Button
-                                ref={cancelRef}
-                                bgColor={'black'}
-                                p={1}
-                                px={2}
-                                mt={0}
-                                borderRadius={'lg'}
-                                color={'white'}
-                                onClick={onDeleteClose}
-                            >
-                                Cancel
-                            </Button>
+                //             <AlertDialogFooter>
+                //                 <Button
+                //                     ref={cancelRef}
+                //                     bgColor={'black'}
+                //                     p={1}
+                //                     px={2}
+                //                     mt={0}
+                //                     borderRadius={'lg'}
+                //                     color={'white'}
+                //                     onClick={onDeleteClose}
+                //                 >
+                //                     Cancel
+                //                 </Button>
 
-                            <Button
-                                bgColor={'red'}
-                                p={1}
-                                px={2}
-                                mt={0}
-                                borderRadius={'lg'}
-                                color={'white'}
-                                onClick={onDeleteClose}
-                                ml={3}
-                            >
-                                Delete
-                            </Button>
-                        </AlertDialogFooter>
-                    </AlertDialogContent>
-                </AlertDialogOverlay>
-            </AlertDialog> */}
+                //                 <Button
+                //                     bgColor={'red'}
+                //                     p={1}
+                //                     px={2}
+                //                     mt={0}
+                //                     borderRadius={'lg'}
+                //                     color={'white'}
+                //                     onClick={onDeleteClose}
+                //                     ml={3}
+                //                 >
+                //                     Delete
+                //                 </Button>
+                //             </AlertDialogFooter>
+                //         </AlertDialogContent>
+                //     </AlertDialogOverlay>
+                // </AlertDialog>
+            }
 
 
             <Tabs >
@@ -906,7 +914,25 @@ const Dashboard = () => {
                                     textAlign={'center'}
                                     my={4}
                                 >
-                                    Line 1</Text>
+                                    Dataset Name: {reviewedLine?.dataset_name}</Text>
+
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    my={4}
+                                >
+                                    Dataset Id: {reviewedLine?.dataset_id}</Text>
+
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    my={4}
+                                >
+                                    Line ID: {reviewedLine?.line_id}</Text>
 
                                 <Text
                                     border='2px'
@@ -919,11 +945,9 @@ const Dashboard = () => {
                                     textAlign={'center'}
                                     my={2}
                                     p={3}
-                                    h={[null, '150px', '150px', '100px']}
+                                // h={[null, '150px', '150px', '100px']}
                                 >
-                                    .........................................
-                                    ..........................................................
-                                    ....................................................</Text>
+                                    {reviewedLine?.line}</Text>
 
                                 <Text
                                     fontSize="lg"
@@ -941,7 +965,7 @@ const Dashboard = () => {
                                     textAlign={'center'}
                                     my={4}
                                 >
-                                    Translated By: dummy (ID: 345)</Text>
+                                    Translated By:  Id no. {reviewedLine?.translator_id}</Text>
 
                                 <Text
                                     border='2px'
@@ -954,11 +978,9 @@ const Dashboard = () => {
                                     textAlign={'center'}
                                     my={2}
                                     p={3}
-                                    h={[null, '150px', '150px', '100px']}
+                                // h={[null, '150px', '150px', '100px']}
                                 >
-                                    .........................................
-                                    ..........................................................
-                                    ....................................................</Text>
+                                    {reviewedLine?.translated_line}</Text>
 
 
                                 <HStack justify={'space-evenly'}>

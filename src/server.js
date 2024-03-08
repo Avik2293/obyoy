@@ -6,8 +6,6 @@ export function makeServer({ environment = "test" } = {}) {
 
         models: {
             // topTen: Model,
-            line: Model,
-            // dataset: Model,
             login: Model,
         },
 
@@ -54,10 +52,7 @@ export function makeServer({ environment = "test" } = {}) {
                 },
                 session_expiry: 0,
             })
-            server.create("line", {
-                newLine: "What you want to know ?",
-                translatedLine: '',
-            })
+
 
             server.db.loadData({
                 usersData: [
@@ -370,13 +365,12 @@ export function makeServer({ environment = "test" } = {}) {
                 // return schema.db.usersData.findBy({ user_email: attrs.user_email })
             })
 
-            this.delete("/logout", (schema, request) => {
+            this.post("/logout", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
                 console.log(authToken);
 
-                // need to send id with route or post method
                 let headers = {}
                 let data = { success: ["Logout Successfully"] }
                 return new Response(201, headers, data)
@@ -461,7 +455,35 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.db.datasets
             })
 
+            this.post("/admin/reviewing_line", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
 
+                return schema.db.datasets[0]
+            })
+
+            this.post("/admin/approving_line", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.datasets[0]
+            })
+
+            this.post("/admin/rejecting_line", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.datasets[0]
+            })
+
+
+            // for user 
             // Using the `timing` option to slow down the response
             this.get("/leaderboard/topTen", (schema, request) => {
                 // return schema.topTens.all()
@@ -473,7 +495,12 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.db.leaderboardData[0].fullLeaderboard
             })
 
-            this.get("/new_line", (schema, request) => {
+            this.post("/new_line", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
                 return schema.db.datasets[0]
             })
 
@@ -506,19 +533,15 @@ export function makeServer({ environment = "test" } = {}) {
                 // db.users.update({name: 'Link'}, {name: 'Epona'});
             })
 
-            this.get("/withdraws/:user_id", (schema, request) => {
-                let user_id = request.params.user_id
-                // db.users.where({ name: 'Zelda' });
-                // return {
-                //     data: {
-                //         id: movie.id,
-                //         type: "movies",
-                //         attributes: {
-                //             title: movie.title,
-                //         },
-                //     },
-                // }
-                return schema.db.withdraws.where({ user_id: user_id })
+            this.post("/withdraws", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                // let user_id = request.params.user_id
+                
+                return schema.db.withdraws.where({ user_id: attrs.user_id })
             })
 
             this.post("/withdraw_request", (schema, request) => {
@@ -532,19 +555,14 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.db.withdraws.where({ user_id: attrs.user_id })
             })
 
-            this.get("/custom_datasets/:user_id", (schema, request) => {
-                let user_id = request.params.user_id
-                // db.users.where({ name: 'Zelda' });
-                // return {
-                //     data: {
-                //         id: movie.id,
-                //         type: "movies",
-                //         attributes: {
-                //             title: movie.title,
-                //         },
-                //     },
-                // }
-                return schema.db.customDatasets.where({ user_id: user_id })
+            this.post("/custom_datasets", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+                // let user_id = request.params.user_id
+                
+                return schema.db.customDatasets.where({ user_id: attrs.user_id })
 
             })
 

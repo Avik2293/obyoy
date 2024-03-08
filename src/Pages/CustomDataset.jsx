@@ -13,8 +13,8 @@ const CustomDataset = () => {
     const user_id = useSelector(state => selectID(state));
 
     useEffect(() => {
-        dispatch(fetchDatasets(user_id));
-    }, [dispatch, user_id]);
+        dispatch(fetchDatasets(user_id, token));
+    }, [dispatch, token, user_id]);
 
     const customDatasets = useSelector(state => selectCustomDatasets(state));
 

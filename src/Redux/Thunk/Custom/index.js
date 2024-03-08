@@ -16,10 +16,17 @@ import {
 
 // import { BASE_URL } from "../../Constant/custom";
 
-export const fetchDatasets = (user_id) => async (dispatch, getState) => {
+export const fetchDatasets = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestFetchDatasets())
 
-    axios.get(`/api/v1/custom_datasets/${user_id}`)
+    // axios.get(BASE_URL + "/api/v1/leaderboard")
+    axios.post("/api/v1/custom_datasets", {
+        user_id: user_id,
+    }, {
+        headers: {
+            'Authorization' : token,
+        },
+    })
         .then((response) => {
             // console.log(response.data);
             dispatch(fetchDatasetsSuccess(response.data));

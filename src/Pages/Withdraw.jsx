@@ -15,8 +15,8 @@ const Withdraw = () => {
 	const profile = useSelector(state => selectProfile(state));
 
 	useEffect(() => {
-		dispatch(fetchWithdraws(user_id));
-	}, [dispatch, user_id]);
+		dispatch(fetchWithdraws(user_id, token));
+	}, [dispatch, token, user_id]);
 
 	const withdraws = useSelector(state => selectWithdraws(state));
 
