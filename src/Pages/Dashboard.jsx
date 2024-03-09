@@ -36,8 +36,9 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
 import { allDatasetsData, uploadDataset, datasetDelete } from '../Redux/Thunk/DatasetManagement';
+import { allCustomDatasetsData, approveCustomDataset, downloadCustomDataset } from '../Redux/Thunk/CustomDatasetManagement';
 import { reviewingLine, approveLine, rejectLine } from '../Redux/Thunk/ReviewManagement';
-import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData, selectReviewedLineData } from '../Redux/Reducer';
+import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData, selectAllCustomDatasetsData, selectReviewedLineData } from '../Redux/Reducer';
 
 
 const Dashboard = () => {
@@ -49,13 +50,14 @@ const Dashboard = () => {
 
     const userTableData = useSelector(state => selectAllUserData(state));
     const fileTableData = useSelector(state => selectAllDatasetsData(state));
+    const customDatasetsTableData = useSelector(state => selectAllCustomDatasetsData(state));
     const reviewedLine = useSelector(state => selectReviewedLineData(state));
     useEffect(() => {
         dispatch(allUsersData(user_id, token));
         dispatch(allDatasetsData(user_id, token));
+        dispatch(allCustomDatasetsData(user_id, token));
         dispatch(reviewingLine(user_id, token));
     }, [dispatch, token, user_id]);
-
 
 
     const [withdrawTableData, setWithdrawTableData] = useState([
@@ -117,8 +119,6 @@ const Dashboard = () => {
     ]);
 
 
-
-
     // for modal/alert 
     const { isOpen, onOpen, onClose } = useDisclosure();
     // for withdraw specific data show modal 
@@ -175,6 +175,17 @@ const Dashboard = () => {
     };
 
 
+    // custom dataset management
+    const handleApproveCustomDataset = (dataset_id) => {
+        // console.log(dataset_id);
+        dispatch(approveCustomDataset(dataset_id, token));
+    };
+    const handleDownloadCustomDataset = (dataset_id) => {
+        // console.log(dataset_id);
+        dispatch(downloadCustomDataset(dataset_id, token));
+    };
+
+
     // for approve translate 
     const [start, setStart] = useState(false);
     // const [lineNo, setLineNo] = useState('');
@@ -207,6 +218,7 @@ const Dashboard = () => {
 
         // dispatch(reviewingLine(user_id, token));
     };
+
 
     // remaining work for later *****************
     // for specific withdraw see
@@ -583,6 +595,20 @@ const Dashboard = () => {
                             borderRadius: 7
                         }}
                     >
+                        Custom Dataset</Tab>
+
+                    <Tab
+                        px={[null, 3, 12,]}
+                        py={2}
+                        _selected={{
+                            px: 12,
+                            py: 2,
+                            borderX: '2px',
+                            borderTop: '2px',
+                            borderColor: 'gray',
+                            borderRadius: 7
+                        }}
+                    >
                         Approve Translate</Tab>
 
                     <Tab
@@ -845,6 +871,96 @@ const Dashboard = () => {
                                                     onClick={() => handleDeleteDataset(td.dataset_id)}
                                                 >
                                                     Delete</Button>
+                                            </Text>
+                                        </HStack>
+                                    )
+                                }
+                            </VStack>
+                        </TableContainer>
+                    </TabPanel>
+
+                    {/* Custom Dataset  */}
+                    <TabPanel>
+                        <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                            my={1}
+                            p={1}
+                        >
+                            All Custom Datasets Info</Text>
+
+                        {/* file table  */}
+                        <TableContainer >
+                            <VStack mx={'auto'} minWidth={"1200px"}>
+                                <HStack
+                                    justify={'space-evenly'}
+                                    textAlign={'center'}
+                                    fontWeight={'bold'}
+                                    gap={6}
+                                    whiteSpace="break-spaces"
+                                >
+                                    <Text w={'30px'} >No.</Text>
+                                    <Text w={'60px'} >Dataset ID</Text>
+                                    <Text w={'80px'} >Dataset Name</Text>
+                                    <Text w={'130px'} >Creating Date</Text>
+                                    <Text w={'80px'} >Approval Status</Text>
+                                    <Text w={'130px'} >Approval Date</Text>
+                                    <Text w={'60px'} >Creator Id</Text>
+                                    <Text w={'80px'} >Created By</Text>
+                                    <Text w={'60px'} >Total Lines</Text>
+                                    <Text w={'120px'} >Remarks</Text>
+                                    <Text w={'60px'} ></Text>
+                                    <Text w={'60px'} ></Text>
+                                </HStack>
+
+                                {
+                                    customDatasetsTableData.map((td, i) =>
+                                        <HStack key={i}
+                                            justify={'space-evenly'}
+                                            textAlign={'center'}
+                                            gap={6}
+                                            whiteSpace="break-spaces"
+                                        >
+                                            <Text w={'30px'} >{i + 1}</Text>
+                                            <Text w={'60px'} >{td?.dataset_id}</Text>
+                                            <Text w={'80px'} >{td?.dataset_name}</Text>
+                                            <Text w={'130px'} >{td?.create_date}</Text>
+                                            <Text w={'80px'} >{td?.approval_status}</Text>
+                                            <Text w={'130px'} >{td?.approval_date}</Text>
+                                            <Text w={'60px'} >{td?.user_id}</Text>
+                                            <Text w={'80px'} >{td?.userName}</Text>
+                                            <Text w={'60px'} >{td?.total_lines}</Text>
+                                            <Text w={'120px'} >{td?.remarks}</Text>
+                                            <Text w={'60px'} gap={1}>
+                                                {
+                                                    (td.approval_status == 'Pending') ?
+                                                        <Button
+                                                            bgColor={'green'}
+                                                            p={1}
+                                                            px={2}
+                                                            mt={0}
+                                                            borderRadius={'lg'}
+                                                            color={'white'}
+                                                            onClick={() => handleApproveCustomDataset(td.dataset_id)}
+                                                        >
+                                                            Approve</Button>
+                                                        :
+                                                        <Text w={'60px'} >...</Text>
+                                                }
+                                            </Text>
+                                            <Text w={'60px'} gap={1}>
+                                                <Button
+                                                    bgColor={'blue'}
+                                                    p={1}
+                                                    px={2}
+                                                    mt={0}
+                                                    borderRadius={'lg'}
+                                                    color={'white'}
+                                                    onClick={() => handleDownloadCustomDataset(td.dataset_id)}
+                                                >
+                                                    Download</Button>
                                             </Text>
                                         </HStack>
                                     )
