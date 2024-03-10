@@ -935,7 +935,7 @@ const Dashboard = () => {
                                             <Text w={'120px'} >{td?.remarks}</Text>
                                             <Text w={'60px'} gap={1}>
                                                 {
-                                                    (td.approval_status == 'Pending') ?
+                                                    (td.approval_status === 'Pending') ?
                                                         <Button
                                                             bgColor={'green'}
                                                             p={1}
