@@ -19,12 +19,6 @@ import {
     ModalBody,
     useDisclosure,
     Image,
-    // AlertDialog,
-    // AlertDialogBody,
-    // AlertDialogFooter,
-    // AlertDialogHeader,
-    // AlertDialogContent,
-    // AlertDialogOverlay,
     FormControl,
     FormLabel,
     Input,
@@ -32,6 +26,7 @@ import {
 } from '@chakra-ui/react';
 import { Form, useNavigate } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
+import DeleteDialog from '../Components/DeleteDialog';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
@@ -48,6 +43,7 @@ const Dashboard = () => {
     const token = useSelector(state => selectToken(state));
     const user_id = useSelector(state => selectID(state));
 
+    // for initial data load
     const userTableData = useSelector(state => selectAllUserData(state));
     const fileTableData = useSelector(state => selectAllDatasetsData(state));
     const customDatasetsTableData = useSelector(state => selectAllCustomDatasetsData(state));
@@ -120,12 +116,41 @@ const Dashboard = () => {
 
 
     // for modal/alert 
+    // for specific user show
     const { isOpen, onOpen, onClose } = useDisclosure();
     // for withdraw specific data show modal 
     const { isOpen: isWithdrawOpen, onOpen: onWithdrawOpen, onClose: onWithdrawClose } = useDisclosure();
-    // for delete 
-    // const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
-    // const cancelRef = React.useRef();
+    // for delete user/dataset 
+    const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
+
+    // for dynamic delete system
+    const [deleteId, setDeleteId] = useState(null);
+    const [deleteTitle, setDeleteTitle] = useState('');
+    const [deleteMessage, setDeleteMessage] = useState('');
+    const [deleteOption, setDeleteOption] = useState('');
+    const handleDelete = (id, title, message, option) => {
+        // Set the delete info
+        setDeleteId(id);
+        setDeleteTitle(title);
+        setDeleteMessage(message);
+        setDeleteOption(option);
+        // open the delete dialog
+        onDeleteOpen();
+    };
+    const deleteFunction = (id, option) => {
+        if (option === "user") {
+            dispatch(userDelete(id, token));
+        }
+        else if (option === "dataset") {
+            dispatch(datasetDelete(id, token));
+        }
+        setDeleteId(null);
+        setDeleteTitle('');
+        setDeleteMessage('');
+        setDeleteOption('');
+        // for specific user delete modal close
+        onClose();
+    };
 
 
     // for specific user see
@@ -147,14 +172,9 @@ const Dashboard = () => {
         }
     };
     // delete user 
-    const handleDelete = (user_id) => {
-        // console.log(user_id);
-        // onDeleteOpen();
-        dispatch(userDelete(user_id, token));
-    };
 
 
-    // file upload 
+    // Dataset management 
     const [file, setFile] = useState();
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -168,11 +188,6 @@ const Dashboard = () => {
 
     };
     // delete dataset 
-    const handleDeleteDataset = (dataset_id) => {
-        // console.log(dataset_id);
-        // onDeleteOpen();
-        dispatch(datasetDelete(dataset_id, token));
-    };
 
 
     // custom dataset management
@@ -220,7 +235,7 @@ const Dashboard = () => {
     };
 
 
-    // remaining work for later *****************
+    // remaining work for later ***
     // for specific withdraw see
     const [selectedWithdraw, setSelectedWithdraw] = useState("");
     const [selectedWithdrawInfo, setSelectedWithdrawInfo] = useState();
@@ -344,7 +359,7 @@ const Dashboard = () => {
                                                 mt={0}
                                                 borderRadius={'lg'}
                                                 color={'white'}
-                                                onClick={() => handleDelete(selectedUserInfo.profile.user_id)}
+                                                onClick={() => handleDelete(selectedUserInfo.profile.user_id, "Delete User", "Are you sure you want to delete this user?", "user")}
                                             >
                                                 Delete</Button>
                                         </Text>
@@ -483,74 +498,16 @@ const Dashboard = () => {
                 </ModalContent>
             </Modal>
 
-            {/* Delete Alert modal */}
-            {
-                // <AlertDialog
-                //     isOpen={isDeleteOpen}
-                //     leastDestructiveRef={cancelRef}
-                //     onClose={onDeleteClose}
-                // >
-                //     <AlertDialogOverlay bg='blackAlpha.300'
-                //         backdropFilter='blur(10px) hue-rotate(90deg)'
-                //     >
-                //         <AlertDialogContent
-                //             bg={'gray'}
-                //             maxWidth={'400px'}
-                //             mx={'auto'}
-                //             my={'auto'}
-                //             borderRadius={10}
-                //             padding={5}
-                //         >
-                //             <AlertDialogHeader
-                //                 fontSize='lg'
-                //                 fontWeight='bold'
-                //                 textAlign={'center'}
-                //                 color={'white'}
-                //             >
-                //                 Delete Customer
-                //             </AlertDialogHeader>
-
-                //             <AlertDialogBody
-                //                 fontWeight='semibold'
-                //                 textAlign={'center'}
-                //                 my={3}
-                //             >
-                //                 <Text>Are you sure?</Text>
-                //                 <Text>You want to delete this?</Text>
-                //                 <Text>You can't undo this action afterwards.</Text>
-                //             </AlertDialogBody>
-
-                //             <AlertDialogFooter>
-                //                 <Button
-                //                     ref={cancelRef}
-                //                     bgColor={'black'}
-                //                     p={1}
-                //                     px={2}
-                //                     mt={0}
-                //                     borderRadius={'lg'}
-                //                     color={'white'}
-                //                     onClick={onDeleteClose}
-                //                 >
-                //                     Cancel
-                //                 </Button>
-
-                //                 <Button
-                //                     bgColor={'red'}
-                //                     p={1}
-                //                     px={2}
-                //                     mt={0}
-                //                     borderRadius={'lg'}
-                //                     color={'white'}
-                //                     onClick={onDeleteClose}
-                //                     ml={3}
-                //                 >
-                //                     Delete
-                //                 </Button>
-                //             </AlertDialogFooter>
-                //         </AlertDialogContent>
-                //     </AlertDialogOverlay>
-                // </AlertDialog>
-            }
+            {/* delete modal */}
+            <DeleteDialog
+                isOpen={isDeleteOpen}
+                onClose={onDeleteClose}
+                title={deleteTitle}
+                message={deleteMessage}
+                deleteFunction={deleteFunction}
+                id={deleteId}
+                option={deleteOption}
+            />
 
 
             <Tabs >
@@ -758,7 +715,7 @@ const Dashboard = () => {
                                                     mt={0}
                                                     borderRadius={'lg'}
                                                     color={'white'}
-                                                    onClick={() => handleDelete(td?.profile?.user_id)}
+                                                    onClick={() => handleDelete(td?.profile?.user_id, "Delete User", "Are you sure you want to delete this user?", "user")}
                                                 >
                                                     Delete</Button>
                                             </Text>
@@ -868,7 +825,7 @@ const Dashboard = () => {
                                                     mt={0}
                                                     borderRadius={'lg'}
                                                     color={'white'}
-                                                    onClick={() => handleDeleteDataset(td.dataset_id)}
+                                                    onClick={() => handleDelete(td.dataset_id, "Delete Dataset", "Are you sure you want to delete this dataset?", "dataset")}
                                                 >
                                                     Delete</Button>
                                             </Text>
@@ -935,7 +892,7 @@ const Dashboard = () => {
                                             <Text w={'120px'} >{td?.remarks}</Text>
                                             <Text w={'60px'} gap={1}>
                                                 {
-                                                    (td.approval_status == 'Pending') ?
+                                                    (td.approval_status === 'Pending') ?
                                                         <Button
                                                             bgColor={'green'}
                                                             p={1}
@@ -947,7 +904,7 @@ const Dashboard = () => {
                                                         >
                                                             Approve</Button>
                                                         :
-                                                        <Text w={'60px'} >...</Text>
+                                                        null
                                                 }
                                             </Text>
                                             <Text w={'60px'} gap={1}>
