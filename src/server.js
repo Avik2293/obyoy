@@ -254,6 +254,7 @@ export function makeServer({ environment = "test" } = {}) {
                         approval_status: 'Pending',
                         approval_date: '',
                         all_lines: [],
+                        remarks: '',
                     },
                     {
                         dataset_id: 112,
@@ -264,6 +265,7 @@ export function makeServer({ environment = "test" } = {}) {
                         create_date: '02 February, 2024',
                         approval_status: 'Approved',
                         approval_date: '05 February, 2024',
+                        remarks: 'fgsf gdf',
                         all_lines: [
                             { line_id: 3, line: 'Are you?', translated_line: 'dsfsr fjrur hdyet' },
                             { line_id: 4, line: 'What you?', translated_line: 'dsfr fjur hyet' },
@@ -436,23 +438,50 @@ export function makeServer({ environment = "test" } = {}) {
 
                 return schema.db.datasets
             })
-
+            
             this.post("/admin/dataset_delete", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
                 console.log(authToken);
-
+                
                 schema.db.datasets.remove({ dataset_id: attrs.dataset_id });
                 // let id = request.params.id
                 // schema.db.usersData.find(attrs.user_id).destroy()
                 // schema.db.usersData.delete({user_id: attrs.user_id})
-
+                
                 // let headers = {}
                 // let data = { success: ["User Delete Successfully"] }
                 // return new Response(201, headers, data)
-
+                
                 return schema.db.datasets
+            })
+
+            this.post("/admin/all_custom_dataset", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.customDatasets
+            })
+
+            this.post("/admin/approve_custom_dataset", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.customDatasets
+            })
+
+            this.post("/admin/download_custom_dataset", (schema, request) => {
+                let attrs = JSON.parse(request.requestBody)
+                let authToken = request.requestHeaders.Authorization
+                console.log(attrs);
+                console.log(authToken);
+
+                return schema.db.customDatasets
             })
 
             this.post("/admin/reviewing_line", (schema, request) => {
@@ -540,7 +569,7 @@ export function makeServer({ environment = "test" } = {}) {
                 console.log(authToken);
 
                 // let user_id = request.params.user_id
-                
+
                 return schema.db.withdraws.where({ user_id: attrs.user_id })
             })
 
@@ -561,7 +590,7 @@ export function makeServer({ environment = "test" } = {}) {
                 console.log(attrs);
                 console.log(authToken);
                 // let user_id = request.params.user_id
-                
+
                 return schema.db.customDatasets.where({ user_id: attrs.user_id })
 
             })
