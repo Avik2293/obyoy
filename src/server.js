@@ -348,19 +348,16 @@ export function makeServer({ environment = "test" } = {}) {
                 let attrs = JSON.parse(request.requestBody)
                 // let authToken = request.re/questHeaders.Authorization
                 console.log(attrs);
-                // console.log(authToken);
 
                 let headers = {}
-                let data = { success: ["User SignUp Successfully."] }
+                let data = { success: ["User Signed Up Successfully."] }
                 return new Response(201, headers, data)
                 // db.users.insert({ name: 'Link', age: 173 });
             })
 
             this.post("/login", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
-                // let authToken = request.re/questHeaders.Authorization
                 console.log(attrs);
-                // console.log(authToken);
 
                 // return schema.logins.find({user_email:attrs.user_email, user_password: attrs.user_password})
                 return schema.logins.all()
@@ -371,17 +368,13 @@ export function makeServer({ environment = "test" } = {}) {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
-                console.log(authToken);
 
                 let headers = {}
                 let data = { success: ["Logout Successfully"] }
                 return new Response(201, headers, data)
 
-                // let id = request.params.id
-                // return schema.movies.find(id).destroy()
                 // db.users.remove({name: 'Zelda'});
             })
-
 
             // for admin dashboard
             // all authToken in admin route is admin's token for check
@@ -398,7 +391,6 @@ export function makeServer({ environment = "test" } = {}) {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
-                console.log(authToken);
 
                 return schema.db.usersData.findBy({ user_id: attrs.user_id })
             })
@@ -419,9 +411,6 @@ export function makeServer({ environment = "test" } = {}) {
                 console.log(authToken);
 
                 schema.db.usersData.remove({ user_id: attrs.user_id });
-                // let id = request.params.id
-                // schema.db.usersData.find(attrs.user_id).destroy()
-                // schema.db.usersData.delete({user_id: attrs.user_id})
 
                 // let headers = {}
                 // let data = { success: ["User Delete Successfully"] }
@@ -446,9 +435,6 @@ export function makeServer({ environment = "test" } = {}) {
                 console.log(authToken);
                 
                 schema.db.datasets.remove({ dataset_id: attrs.dataset_id });
-                // let id = request.params.id
-                // schema.db.usersData.find(attrs.user_id).destroy()
-                // schema.db.usersData.delete({user_id: attrs.user_id})
                 
                 // let headers = {}
                 // let data = { success: ["User Delete Successfully"] }
@@ -470,7 +456,6 @@ export function makeServer({ environment = "test" } = {}) {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
-                console.log(authToken);
 
                 return schema.db.customDatasets
             })
@@ -511,11 +496,9 @@ export function makeServer({ environment = "test" } = {}) {
                 return schema.db.datasets[0]
             })
 
-
             // for user 
             // Using the `timing` option to slow down the response
             this.get("/leaderboard/topTen", (schema, request) => {
-                // return schema.topTens.all()
                 return schema.db.leaderboardData[0].topTen
             })
             // }, { timing: 4000 })
@@ -577,10 +560,6 @@ export function makeServer({ environment = "test" } = {}) {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
-                console.log(authToken);
-                // let headers = {}
-                // let data = { success: ["New Dataset Created."] }
-                // return new Response(201, headers, data)
                 return schema.db.withdraws.where({ user_id: attrs.user_id })
             })
 
@@ -589,7 +568,6 @@ export function makeServer({ environment = "test" } = {}) {
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
                 console.log(authToken);
-                // let user_id = request.params.user_id
 
                 return schema.db.customDatasets.where({ user_id: attrs.user_id })
 
@@ -600,9 +578,6 @@ export function makeServer({ environment = "test" } = {}) {
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
                 console.log(authToken);
-                // let headers = {}
-                // let data = { success: ["New Dataset Created."] }
-                // return new Response(201, headers, data)
                 return schema.db.customDatasets.where({ user_id: attrs.user_id })
             })
 
@@ -611,9 +586,6 @@ export function makeServer({ environment = "test" } = {}) {
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
                 console.log(authToken);
-                // let headers = {}
-                // let data = { success: ["New file input in Dataset successfully."] }
-                // return new Response(201, headers, data)
                 return schema.db.customDatasets.where({ user_id: attrs.user_id })
             })
 
@@ -627,25 +599,11 @@ export function makeServer({ environment = "test" } = {}) {
                 return new Response(201, headers, data)
             })
 
-
-
-
-
-
             // demu
             // this.get("/profile/:id", (schema, request) => {
             //     let id = request.params.id
 
             //     return schema.movies.find(id)
-            // })
-
-            // Responding to a POST request
-            // this.post("/movies", (schema, request) => {
-            //     let attrs = JSON.parse(request.requestBody)
-            //     // attrs.id = Math.floor(Math.random() * 100)
-
-            //     // return { movie: attrs }
-            //     return schema.movies.create(attrs)
             // })
 
             // this.patch("/movies/:id", (schema, request) => {
@@ -656,16 +614,6 @@ export function makeServer({ environment = "test" } = {}) {
             //     return movie.update(newAttrs)
             // })
 
-            // Using the `Response` class to return a 500
-            // this.delete("/movies/:id", (schema, request) => {
-            //     // let headers = {}
-            //     // let data = { errors: ["Server did not respond"] }
-            //     // return new Response(500, headers, data)
-
-            //     let id = request.params.id
-
-            //     return schema.movies.find(id).destroy()
-            // })
         },
     })
 
