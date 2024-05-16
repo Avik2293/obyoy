@@ -15,38 +15,39 @@ import {
 
 
 export const requestSignup = () => ({
-    type : REQUEST_SIGNUP,
+    type: REQUEST_SIGNUP,
 })
 export const signupSuccess = (data) => ({
     type: SUCCESS_SIGNUP,
     payload: data,
 })
 export const signupFailure = (error) => ({
-    type : FAILURE_SIGNUP,
+    type: FAILURE_SIGNUP,
     payload: error,
 })
 
 export const requestLogin = () => ({
-    type : REQUEST_LOGIN,
+    type: REQUEST_LOGIN,
 })
 export const loginSuccess = (data) => ({
     type: SUCCESS_LOGIN,
-    payload: data.logins[0],
+    // payload: data.logins[0],
+    payload: data,
 })
 export const loginFailure = (error) => ({
-    type : FAILURE_LOGIN,
+    type: FAILURE_LOGIN,
     payload: error,
 })
 
 export const requestLogout = () => ({
-    type : REQUEST_LOGOUT,
+    type: REQUEST_LOGOUT,
 })
 export const logoutSuccess = (data) => ({
     type: SUCCESS_LOGOUT,
     payload: data,
 })
 export const logoutFailure = (error) => ({
-    type : FAILURE_LOGOUT,
+    type: FAILURE_LOGOUT,
     payload: error,
 })
 

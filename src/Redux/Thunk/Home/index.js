@@ -15,7 +15,7 @@ import {
     // updateSessionExpiry,
 } from "../../ActionCreator/home";
 
-// import { BASE_URL } from "../../Constant/home";
+import { BASE_URL } from "../../Constant/home";
 
 export const leaderboard = () => async (dispatch, getState) => {
     dispatch(requestLeaderboard())
