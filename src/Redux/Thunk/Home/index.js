@@ -44,8 +44,7 @@ export const fullLeaderboard = () => async (dispatch, getState) => {
 export const newLine = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestFetchNewline())
 
-    // axios.get(BASE_URL + "/api/v1/lines/newLine")
-    axios.post("/api/v1/new_line", {
+    axios.get(BASE_URL + "/api/v1/datastream/getnext", {
         user_id: user_id,
     }, {
         headers: {
