@@ -14,7 +14,7 @@ import {
     userDeleteFailure,
 } from "../../ActionCreator/userManagement";
 
-// import { BASE_URL } from "../../Constant/login";
+import { BASE_URL } from "../../Constant/login";
 
 export const allUsersData = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestAllUsersData())

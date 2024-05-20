@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { extendTheme, ChakraProvider } from '@chakra-ui/react';     
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // for mirage 
-import { makeServer } from "./server"
+// import { makeServer } from "./server"
 
-if (process.env.NODE_ENV === "development") {
-	makeServer({ environment: "development" })
-}
+// if (process.env.NODE_ENV === "development") {
+// 	makeServer({ environment: "development" })
+// }
 
 const colors = {
 	brand: {

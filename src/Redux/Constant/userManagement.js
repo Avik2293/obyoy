@@ -14,4 +14,4 @@ export const FAILURE_USER_WITHDRAW_DATA = "FAILURE_USER_WITHDRAW_DATA";
 export const FAILURE_USER_DELETE = "FAILURE_USER_DELETE";
 
 
-export const BASE_URL = "http://192.168.1.8:8080";
+export const BASE_URL = "http://localhost:8080";

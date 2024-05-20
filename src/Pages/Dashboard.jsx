@@ -23,6 +23,7 @@ import {
     FormLabel,
     Input,
     Box,
+    Textarea,
 } from '@chakra-ui/react';
 import { Form, useNavigate } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
@@ -30,7 +31,7 @@ import DeleteDialog from '../Components/DeleteDialog';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
-import { allDatasetsData, uploadDataset, datasetDelete } from '../Redux/Thunk/DatasetManagement';
+import { allDatasetsData, uploadInputDataset, uploadDataset, datasetDelete } from '../Redux/Thunk/DatasetManagement';
 import { allCustomDatasetsData, approveCustomDataset, downloadCustomDataset } from '../Redux/Thunk/CustomDatasetManagement';
 import { reviewingLine, approveLine, rejectLine } from '../Redux/Thunk/ReviewManagement';
 import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData, selectAllCustomDatasetsData, selectReviewedLineData } from '../Redux/Reducer';
@@ -175,6 +176,21 @@ const Dashboard = () => {
 
 
     // Dataset management 
+    const [startInput, setStartInput] = useState(false);
+    const [datasetName, setDatasetName] = useState('');
+    const [datasetLanguage, setDatasetLanguage] = useState('');
+    const [datasetInput, setDatasetInput] = useState('');
+    const handleDatasetSubmit = () => {
+        dispatch(uploadInputDataset(datasetName, datasetLanguage, datasetInput, token));
+        console.log(datasetName);
+        console.log(datasetLanguage);
+        console.log(datasetInput);
+
+        setStartInput(false);
+        setDatasetName('');
+        setDatasetLanguage('');
+        setDatasetInput('');
+    };
     const [file, setFile] = useState();
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -767,6 +783,147 @@ const Dashboard = () => {
                                     Upload</Button>
                             </Box>
                         </Box>
+
+                        <Text
+                            fontSize="lg"
+                            fontWeight="bold"
+                            color='black'
+                            textAlign={'center'}
+                            my={1}
+                            p={1}
+                        >
+                            Uplaod a Dataset by Text Input</Text>
+
+                        {
+                            !startInput &&
+                            <>
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    mb={2}
+                                >
+                                    ...</Text>
+
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    my={2}
+                                >
+                                    Click "Start" to start text input dataset.</Text>
+
+                                <Text textAlign={'center'} my={2}>
+                                    <Button
+                                        rightIcon={<IoArrowForwardCircleOutline />}
+                                        size="lg"
+                                        bg={"blue"}
+                                        color={"white"}
+                                        _hover={{ bg: "blue.500" }}
+                                        px={4}
+                                        py={1}
+                                        borderRadius={'lg'}
+                                        onClick={() => setStartInput(!startInput)}
+                                    >
+                                        Start
+                                    </Button>
+                                </Text>
+
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    mb={2}
+                                >
+                                    ...</Text>
+                            </>
+                        }
+
+                        {
+                            startInput &&
+                            <Box>
+                                <Form>
+                                    <FormControl isRequired>
+                                        <VStack>
+                                            <HStack>
+                                                <FormLabel htmlFor="datasetName" fontWeight={'bold'} >Dataset Name</FormLabel>
+                                                <Input
+                                                    id="datasetName"
+                                                    type="text"
+                                                    placeholder='Type Dataset Name'
+                                                    px={2}
+                                                    w={'300px'}
+                                                    onChange={(e) => setDatasetName(e.target.value)}
+                                                    value={datasetName}
+                                                    isRequired
+                                                />
+
+                                                <FormLabel htmlFor="datasetLanguage" fontWeight={'bold'} >Dataset Language</FormLabel>
+                                                <Input
+                                                    id="datasetLanguage"
+                                                    type="text"
+                                                    placeholder='Type Dataset Language'
+                                                    px={2}
+                                                    w={'300px'}
+                                                    onChange={(e) => setDatasetLanguage(e.target.value)}
+                                                    value={datasetLanguage}
+                                                    isRequired
+                                                />
+                                            </HStack>
+
+                                            <FormLabel htmlFor="datasetInput" fontWeight={'bold'} >Dataset Input</FormLabel>
+                                            <Textarea
+                                                name="datasetInput"
+                                                id="datasetInput"
+                                                type="text"
+                                                placeholder='Type Dataset Input'
+                                                px={2}
+                                                w='50%'
+                                                onChange={(e) => setDatasetInput(e.target.value)}
+                                                value={datasetInput}
+                                                isRequired
+                                                border='2px'
+                                                mx={'auto'}
+                                                variant='filled'
+                                                borderColor='gray'
+                                                borderRadius="md"
+                                                // fontSize="lg"
+                                                // fontWeight="semibold"
+                                                // bg={'gray'}
+                                                // color='white'
+                                                // h={[null, '150px', '150px', '100px']}
+                                                h="auto"
+                                                autogrow={5}
+                                            />
+
+                                            <Button
+                                                bgColor={(datasetName && datasetLanguage && datasetInput) ? 'blue' : 'gray'}
+                                                p={1}
+                                                px={2}
+                                                borderRadius={'lg'}
+                                                color={'white'}
+                                                isDisabled={(datasetName && datasetLanguage && datasetInput) ? false : true}
+                                                onClick={() => handleDatasetSubmit()}
+                                            >
+                                                Submit</Button>
+                                        </VStack>
+                                    </FormControl>
+                                </Form>
+
+                                <Text
+                                    fontSize="lg"
+                                    fontWeight="bold"
+                                    color='black'
+                                    textAlign={'center'}
+                                    mb={2}
+                                >
+                                    ...*** ...</Text>
+
+                            </Box>
+                        }
 
                         <Text
                             fontSize="lg"

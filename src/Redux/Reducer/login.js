@@ -21,7 +21,8 @@ const initialState = {
         token: "",
         user_id: 0,
         isLoggedIn: '',
-        user_type: '',
+        // user_type: '',
+        account_type: '',
         profile: {},
 
         session_expiry: 0,
@@ -57,10 +58,11 @@ const login = (state = initialState.login, action) => {
             return {
                 ...state,
                 token: action.payload.token,
-                user_id: action.payload.user_id,
-                isLoggedIn: action.payload.isLoggedIn,
-                user_type: action.payload.user_type,
-                profile: action.payload.profile,
+                user_id: action.payload.id,
+                // isLoggedIn: action.payload.isLoggedIn,
+                // user_type: action.payload.user_type,
+                account_type: action.payload.account_type,
+                // profile: action.payload.profile,
                 // session_expiry: action.payload.session_expiry,
                 error: '',
             }
@@ -81,7 +83,8 @@ const login = (state = initialState.login, action) => {
                 token: "",
                 user_id: '',
                 isLoggedIn: '',
-                user_type: 0,
+                // user_type: '',
+                account_type: '',
                 profile: {},
             }
         case FAILURE_LOGOUT:
@@ -163,6 +166,7 @@ export default combineReducers({
 export const selectUserID = state => state.login.user_id || '';
 export const selectToken = state => state.login.token || '';
 export const selectIsLoggedIn = state => (state.login.token !== '' && state.login.user_id !== '') ? true : false;
-export const selectIsAdmin = state => (state.login.user_type === 'admin') ? true : false;
+// export const selectIsAdmin = state => (state.login.user_type === 'admin') ? true : false;
+export const selectIsAdmin = state => (state.login.account_type === 'admin') ? true : false;
 console.log(selectIsAdmin);
 export const selectProfile = state => state.login.profile;

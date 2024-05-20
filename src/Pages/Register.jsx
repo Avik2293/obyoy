@@ -34,17 +34,18 @@ const Register = () => {
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 
-	const name = firstName + ' ' + lastName;
+	// const name = firstName + ' ' + lastName;
 
 	const handleSubmit = (event) => {
 		// event.preventDefault();
-		dispatch(signup(name, email, password));
+		dispatch(signup(firstName, lastName, email, password));
 		setFirstName('');
 		setLastName('');
 		setEmail('');
 		setPassword('');
 
 		setRegisterFlag(true);
+		console.log(firstName);
 	};
 
 
