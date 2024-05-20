@@ -51,13 +51,6 @@ const lines = (state = initialState.lines, action) => {
         case FAILURE_FETCH_NEWLINE:
             return {
                 ...state,
-                dataset_id: 0,
-                dataset_name: '',
-                line_id: 0,
-                line: "",
-                line_number: 0,
-                translated_line: '',
-                translator_id: 0,
                 error: action.payload,
             }
 

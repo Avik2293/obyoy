@@ -28,7 +28,7 @@ const Home = () => {
 
 	useEffect(() => {
 		dispatch(newLine(profile.user_id, token));
-		console.log(token);
+		// console.log(token);
 	}, [count, dispatch, profile.user_id, token]);
 
 	const handleSubmit = event => {

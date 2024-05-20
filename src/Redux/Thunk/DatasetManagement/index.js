@@ -56,13 +56,13 @@ export const uploadDataset = (user_id, token) => async (dispatch, getState) => {
         })
 }
 
-export const uploadInputDataset = (datasetName, datasetLanguage, datasetInput, token) => async (dispatch, getState) => {
+export const uploadInputDataset = (datasetName, datasetLanguage, linesArray, token) => async (dispatch, getState) => {
     dispatch(requestUploadInputDataset())
 
     axios.post(BASE_URL + "/api/v1/dataset/create", {
         name: datasetName,
         source_language: datasetLanguage,
-        set: datasetInput,
+        set: linesArray,
     }, {
         headers: {
             'Authorization': token,
