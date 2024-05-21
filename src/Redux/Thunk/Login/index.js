@@ -53,21 +53,22 @@ export const login = (email, password) => async (dispatch, getState) => {
 }
 
 export const logout = (user_id, token) => async (dispatch, getState) => {
-    dispatch(requestLogout())
+    dispatch(logoutSuccess());
+    // dispatch(requestLogout())
 
-    axios.post(BASE_URL + "/api/v1/users/logout", {
-        user_id: user_id,
-    }, {
-        headers: {
-            'Authorization': token,
-        },
-    })
-        .then((response) => {
-            dispatch(logoutSuccess(response.data));
-            // dispatch(updateSessionExpiry(nextDate));
-        }, error => {
-            dispatch(logoutFailure(error))
-        })
+    // axios.post(BASE_URL + "/api/v1/users/logout", {
+    // user_id: user_id,
+    // }, {
+    // headers: {
+    // 'Authorization': token,
+    // },
+    // })
+    // .then((response) => {
+    // dispatch(logoutSuccess(response.data));
+    // dispatch(updateSessionExpiry(nextDate));
+    // }, error => {
+    // dispatch(logoutFailure(error))
+    // })
 }
 
 export const profileUpdate = (userName, user_email, user_phone, address, birthday, token) => async (dispatch, getState) => {

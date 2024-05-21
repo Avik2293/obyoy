@@ -5,6 +5,7 @@ import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Toaster } from 'react-hot-toast';
 
 // for mirage 
 // import { makeServer } from "./server"
@@ -28,6 +29,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<ChakraProvider theme={theme}>
+			<Toaster position="top-center" reverseOrder={false} />
+
 			<App />
 		</ChakraProvider>
 	</React.StrictMode>

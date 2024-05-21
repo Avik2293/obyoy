@@ -54,7 +54,7 @@ export const newLine = (user_id, token) => async (dispatch, getState) => {
         .then((response) => {
             dispatch(fetchNewlineSuccess(response.data));
         }, error => {
-            dispatch(fetchNewlineFailure(error))
+            dispatch(fetchNewlineFailure(error));
         })
 }
 

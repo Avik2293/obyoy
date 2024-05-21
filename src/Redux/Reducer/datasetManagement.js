@@ -17,6 +17,7 @@ import {
 
 const initialState = {
     allDataset: [],
+    success: '',
     error: '',
     isFetching: false,
 }
@@ -65,18 +66,21 @@ const datasetsData = (state = initialState, action) => {
             return {
                 ...state,
                 // allDataset: [],
+                success: '',
                 error: '',
             }
         case SUCCESS_UPLOAD_INPUT_DATASET:
             return {
                 ...state,
-                allDataset: action.payload,
+                // allDataset: action.payload,
+                success: action.payload.message,
                 error: '',
             }
         case FAILURE_UPLOAD_INPUT_DATASET:
             return {
                 ...state,
                 // allDataset: [],
+                success: '',
                 error: action.payload,
             }
 
@@ -133,4 +137,5 @@ export default combineReducers({
 });
 
 
-export const selectAllDatasetsData = state => state.allDataset;
+// export const selectAllDatasetsData = state => state.allDataset;
+export const selectAllDatasetsData = state => state;

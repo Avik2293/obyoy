@@ -35,6 +35,7 @@ import { allDatasetsData, uploadInputDataset, uploadDataset, datasetDelete } fro
 import { allCustomDatasetsData, approveCustomDataset, downloadCustomDataset } from '../Redux/Thunk/CustomDatasetManagement';
 import { reviewingLine, approveLine, rejectLine } from '../Redux/Thunk/ReviewManagement';
 import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData, selectAllCustomDatasetsData, selectReviewedLineData } from '../Redux/Reducer';
+import toast from 'react-hot-toast';
 
 
 const Dashboard = () => {
@@ -46,7 +47,7 @@ const Dashboard = () => {
 
     // for initial data load
     const userTableData = useSelector(state => selectAllUserData(state));
-    const fileTableData = useSelector(state => selectAllDatasetsData(state));
+    const allDatasetManagementData = useSelector(state => selectAllDatasetsData(state));
     const customDatasetsTableData = useSelector(state => selectAllCustomDatasetsData(state));
     const reviewedLine = useSelector(state => selectReviewedLineData(state));
     useEffect(() => {
@@ -55,7 +56,6 @@ const Dashboard = () => {
         dispatch(allCustomDatasetsData(user_id, token));
         dispatch(reviewingLine(user_id, token));
     }, [dispatch, token, user_id]);
-
 
     const [withdrawTableData, setWithdrawTableData] = useState([
         {
@@ -180,17 +180,24 @@ const Dashboard = () => {
     const [datasetName, setDatasetName] = useState('');
     const [datasetLanguage, setDatasetLanguage] = useState('');
     const [datasetInput, setDatasetInput] = useState('');
+    const linesArray = datasetInput.split(/[\r\n.]+ ?/).filter(Boolean);
     const handleDatasetSubmit = () => {
-        dispatch(uploadInputDataset(datasetName, datasetLanguage, datasetInput, token));
-        console.log(datasetName);
-        console.log(datasetLanguage);
-        console.log(datasetInput);
-
-        setStartInput(false);
-        setDatasetName('');
-        setDatasetLanguage('');
-        setDatasetInput('');
+        dispatch(uploadInputDataset(datasetName, datasetLanguage, linesArray, token));
+        // console.log(datasetsSuccess);
     };
+    useEffect(() => {
+        if (allDatasetManagementData.success === 'dataset created') {
+            toast.success(allDatasetManagementData.success);
+            setStartInput(false);
+            setDatasetName('');
+            setDatasetLanguage('');
+            setDatasetInput('');
+        }
+        if (allDatasetManagementData.error.message) {
+            toast.error(allDatasetManagementData.error.message);
+        }
+    }, [allDatasetManagementData.error.message, allDatasetManagementData.success]);
+
     const [file, setFile] = useState();
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -958,7 +965,8 @@ const Dashboard = () => {
                                 </HStack>
 
                                 {
-                                    fileTableData.map((td, i) =>
+                                    allDatasetManagementData.allDataset.length !== 0 &&
+                                    allDatasetManagementData.allDataset.map((td, i) =>
                                         <HStack key={i}
                                             justify={'space-evenly'}
                                             textAlign={'center'}
