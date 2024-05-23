@@ -7,14 +7,13 @@ import {
     withdrawRequestSuccess,
     withdrawRequestFailure,
 } from "../../ActionCreator/withdraw";
+import { fetchWithdraws_url, sendWithdrawRequest_url } from "../../../allApiPath";
 
-import { BASE_URL } from "../../Constant/withdraw";
 
 export const fetchWithdraws = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestFetchWithdraws())
 
-    // axios.get(BASE_URL + "/api/v1/leaderboard")
-    axios.post("/api/v1/withdraws", {
+    axios.post(fetchWithdraws_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -31,7 +30,7 @@ export const fetchWithdraws = (user_id, token) => async (dispatch, getState) => 
 export const sendWithdrawRequest = (user_id, amount, system, info, token) => async (dispatch, getState) => {
     dispatch(requestWithdrawRequest())
 
-    axios.post("/api/v1/withdraw_request", {
+    axios.post(sendWithdrawRequest_url, {
         user_id: user_id,
         withdraw_amount: amount,
         withdraw_system: system,

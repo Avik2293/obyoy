@@ -13,14 +13,12 @@ import {
     datasetDeleteSuccess,
     datasetDeleteFailure,
 } from "../../ActionCreator/datasetManagement";
-
-import { BASE_URL } from "../../Constant/login";
+import { allDatasetsData_url, datasetDelete_url, uploadDataset_url, uploadInputDataset_url } from "../../../allApiPath";
 
 export const allDatasetsData = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestAllDatasetsData())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/all_dataset", {
+    axios.post(allDatasetsData_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -39,8 +37,7 @@ export const allDatasetsData = (user_id, token) => async (dispatch, getState) =>
 export const uploadDataset = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestUploadDataset())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/single_user", {
+    axios.post(uploadDataset_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -59,7 +56,7 @@ export const uploadDataset = (user_id, token) => async (dispatch, getState) => {
 export const uploadInputDataset = (datasetName, datasetLanguage, linesArray, token) => async (dispatch, getState) => {
     dispatch(requestUploadInputDataset())
 
-    axios.post(BASE_URL + "/api/v1/dataset/create", {
+    axios.post(uploadInputDataset_url, {
         name: datasetName,
         source_language: datasetLanguage,
         set: linesArray,
@@ -80,8 +77,7 @@ export const uploadInputDataset = (datasetName, datasetLanguage, linesArray, tok
 export const datasetDelete = (dataset_id, token) => async (dispatch, getState) => {
     dispatch(requestDatasetDelete())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/dataset_delete", {
+    axios.post(datasetDelete_url, {
         dataset_id: dataset_id,
     }, {
         headers: {

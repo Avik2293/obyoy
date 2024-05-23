@@ -166,7 +166,7 @@ export default combineReducers({
 export const selectUserID = state => state.login.user_id || '';
 export const selectToken = state => state.login.token || '';
 export const selectIsLoggedIn = state => (state.login.token !== '' && state.login.user_id !== '') ? true : false;
-// export const selectIsAdmin = state => (state.login.user_type === 'admin') ? true : false;
+
 export const selectIsAdmin = state => (state.login.account_type === 'admin') ? true : false;
-console.log(selectIsAdmin);
+// console.log(selectIsAdmin);
 export const selectProfile = state => state.login.profile;

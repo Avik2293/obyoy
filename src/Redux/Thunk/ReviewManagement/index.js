@@ -10,14 +10,13 @@ import {
     rejectLineSuccess,
     rejectLineFailure,
 } from "../../ActionCreator/reviewManagement";
+import { approveLine_url, rejectLine_url, reviewingLine_url } from "../../../allApiPath";
 
-import { BASE_URL } from "../../Constant/login";
 
 export const reviewingLine = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestReviewingLine())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/reviewing_line", {
+    axios.post(reviewingLine_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -35,8 +34,7 @@ export const reviewingLine = (user_id, token) => async (dispatch, getState) => {
 export const approveLine = (user_id, dataset_id, line_id, line, translated_line, translator_id, token) => async (dispatch, getState) => {
     dispatch(requestApproveLine())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/approving_line", {
+    axios.post(approveLine_url, {
         user_id: user_id,
         dataset_id: dataset_id,
         line_id: line_id,
@@ -60,8 +58,7 @@ export const approveLine = (user_id, dataset_id, line_id, line, translated_line,
 export const rejectLine = (user_id, dataset_id, line_id, line, translated_line, translator_id, token) => async (dispatch, getState) => {
     dispatch(requestRejectLine())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/rejecting_line", {
+    axios.post(rejectLine_url, {
         user_id: user_id,
         dataset_id: dataset_id,
         line_id: line_id,

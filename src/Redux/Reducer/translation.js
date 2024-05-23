@@ -17,6 +17,7 @@ const initialState = {
         line_number: 0,
         translated_line: '',
         translator_id: 0,
+        success: '',
         error: "",
     },
     isFetching: false,
@@ -34,23 +35,26 @@ const lines = (state = initialState.lines, action) => {
                 line_number: 0,
                 translated_line: '',
                 translator_id: 0,
+                success: '',
                 error: "",
             }
         case SUCCESS_FETCH_NEWLINE:
             return {
                 ...state,
                 dataset_id: action.payload.dataset_id,
-                dataset_name: action.payload.dataset_name,
-                line_id: action.payload.remaining_lines[0].line_id,
+                // dataset_name: action.payload.dataset_name,
+                // line_id: action.payload.remaining_lines[0].line_id,
                 line: action.payload.source_sentence,
                 line_number: action.payload.line_number,
-                translated_line: '',
-                translator_id: 0,
+                // translated_line: '',
+                // translator_id: 0,
+                // success: '',
                 error: "",
             }
         case FAILURE_FETCH_NEWLINE:
             return {
                 ...state,
+                success: '',
                 error: action.payload,
             }
 
@@ -63,11 +67,13 @@ const lines = (state = initialState.lines, action) => {
                 // line: action.payload.line,
                 // translated_line: action.payload.input,
                 // translator_id: action.payload.translator_id,
+                success: '',
                 error: '',
             }
         case SUCCESS_SUBMIT_TRANSLATEDLINE:
             return {
                 ...state,
+                success: action.payload.message,
                 error: '',
             }
         case FAILURE_SUBMIT_TRANSLATEDLINE:
@@ -79,6 +85,7 @@ const lines = (state = initialState.lines, action) => {
                 // line: "",
                 // translated_line: '',
                 // translator_id: 0,
+                success: '',
                 error: action.payload,
             }
 

@@ -5,7 +5,8 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
-import { selectProfile, selectLeaderboardTop, selectLine, selectToken } from '../Redux/Reducer';
+import { selectProfile, selectLeaderboardTop, selectLine, selectToken, selectID } from '../Redux/Reducer';
+import toast from 'react-hot-toast';
 
 
 const Home = () => {
@@ -14,9 +15,11 @@ const Home = () => {
 	const token = useSelector(state => selectToken(state));
 	const topTen = useSelector(state => selectLeaderboardTop(state));
 	const profile = useSelector(state => selectProfile(state));
+	const userId = useSelector(state => selectID(state));
 
 	const [count, setCount] = useState(0);
 	const [start, setStart] = useState(false);
+	const [formClose, setFormClose] = useState(false);
 	const line = useSelector(state => selectLine(state));
 
 	const [input, setInput] = useState('')
@@ -27,23 +30,41 @@ const Home = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(newLine(profile.user_id, token));
-		// console.log(token);
-	}, [count, dispatch, profile.user_id, token]);
+		dispatch(newLine(token));
+	}, [count, dispatch, token]);
 
 	const handleSubmit = event => {
-		// event.preventDefault();
-		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
-		setInput('');
-		setStart(!start);
+		event.preventDefault();
+		// dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
+		dispatch(translatedLine(line.line, input, userId, token));
+		setFormClose(true);
+	};
+	const handleSubmitNext = event => {
+		event.preventDefault();
+		// dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
+		dispatch(translatedLine(line.line, input, profile.user_id, token));
+		setFormClose(false);
 	};
 
-	const handleSubmitNext = event => {
-		// event.preventDefault();
-		dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
-		setCount(count + 1);
-		setInput('');
-	};
+	useEffect(() => {
+		if (line.success === 'parallelsentence created') {
+			toast.success(line.success);
+			setInput('');
+		}
+		if (line.error.message) {
+			toast.error(line.error.message);
+		}
+	}, [dispatch, line.error.message, line.success]);
+
+	useEffect(() => {
+		if (line.success === 'parallelsentence created' && formClose) {
+			setStart(false);
+		}
+		else if (line.success === 'parallelsentence created' && !formClose) {
+			setCount(count + 1);
+		}
+	}, [count, formClose, line.success]);
+
 
 	return (
 		<Container
@@ -178,7 +199,8 @@ const Home = () => {
 									py={1}
 									borderRadius={'lg'}
 									onClick={() => {
-										setStart(!start);
+										setStart(true);
+										setFormClose(false);
 										setCount(count + 1);
 									}}
 								>

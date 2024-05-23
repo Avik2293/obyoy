@@ -14,13 +14,13 @@ import {
     updateProfileFailure,
     // updateSessionExpiry,
 } from "../../ActionCreator/login";
+import { login_url, logout_url, profileUpdate_url, signup_url } from "../../../allApiPath";
 
-import { BASE_URL } from "../../Constant/login";
 
 export const signup = (firstName, lastName, email, password) => async (dispatch, getState) => {
     dispatch(requestSignup())
 
-    axios.post(BASE_URL + "/api/v1/users/registration", {
+    axios.post(signup_url, {
         first_name: firstName,
         last_name: lastName,
         email: email,
@@ -39,7 +39,7 @@ export const signup = (firstName, lastName, email, password) => async (dispatch,
 export const login = (email, password) => async (dispatch, getState) => {
     dispatch(requestLogin())
 
-    axios.post(BASE_URL + "/api/v1/users/login", {
+    axios.post(login_url, {
         email: email,
         password: password,
         account_type: 'admin',
@@ -56,7 +56,7 @@ export const logout = (user_id, token) => async (dispatch, getState) => {
     dispatch(logoutSuccess());
     // dispatch(requestLogout())
 
-    // axios.post(BASE_URL + "/api/v1/users/logout", {
+    // axios.post(logout_url, {
     // user_id: user_id,
     // }, {
     // headers: {
@@ -74,7 +74,7 @@ export const logout = (user_id, token) => async (dispatch, getState) => {
 export const profileUpdate = (userName, user_email, user_phone, address, birthday, token) => async (dispatch, getState) => {
     dispatch(requestUpdateProfile())
 
-    axios.post("/api/v1/profile_edit", {
+    axios.post(profileUpdate_url, {
         userName: userName,
         user_email: user_email,
         user_phone: user_phone,
