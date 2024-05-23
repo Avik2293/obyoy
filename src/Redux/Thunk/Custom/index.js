@@ -13,14 +13,13 @@ import {
     lineInputSuccess,
     lineInputFailure,
 } from "../../ActionCreator/custom";
+import { createNewDataset_url, datasetFileInput_url, datasetLineInput_url, fetchDatasets_url } from "../../../allApiPath";
 
-import { BASE_URL } from "../../Constant/custom";
 
 export const fetchDatasets = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestFetchDatasets())
 
-    // axios.get(BASE_URL + "/api/v1/leaderboard")
-    axios.post("/api/v1/custom_datasets", {
+    axios.post(fetchDatasets_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -38,7 +37,7 @@ export const fetchDatasets = (user_id, token) => async (dispatch, getState) => {
 export const createNewDataset = (user_id, newDatasetName, token) => async (dispatch, getState) => {
     dispatch(requestCreateDataset())
 
-    axios.post("/api/v1/create_dataset", {
+    axios.post(createNewDataset_url, {
         user_id: user_id,
         dataset_name: newDatasetName,
     }, {
@@ -56,7 +55,7 @@ export const createNewDataset = (user_id, newDatasetName, token) => async (dispa
 export const datasetFileInput = (user_id, newDatasetName, token) => async (dispatch, getState) => {
     dispatch(requestFileInput())
 
-    axios.post("/api/v1/dataset_file_input", {
+    axios.post(datasetFileInput_url, {
         user_id: user_id,
         dataset_name: newDatasetName,
     }, {
@@ -74,7 +73,7 @@ export const datasetFileInput = (user_id, newDatasetName, token) => async (dispa
 export const datasetLineInput = (user_id, datasetId, datasetName, lineInput, translatedLineInput, token) => async (dispatch, getState) => {
     dispatch(requestLineInput())
 
-    axios.post("/api/v1/dataset_line_input", {
+    axios.post(datasetLineInput_url, {
         user_id: user_id,
         dataset_id: datasetId,
         dataset_name: datasetName,

@@ -11,7 +11,7 @@ import {
     REQUEST_SUBMIT_TRANSLATEDLINE,
     SUCCESS_SUBMIT_TRANSLATEDLINE,
     FAILURE_SUBMIT_TRANSLATEDLINE,
-    
+
     // UPDATE_SESSION_EXPIRY,
 } from "../Constant/home";
 
@@ -52,7 +52,6 @@ export const fetchNewlineFailure = (error) => ({
     payload: error,
 })
 
-// export const requestSubmitTranslatedline = (dataset_id, line_id, line, input, translator_id) => ({
 export const requestSubmitTranslatedline = () => ({
     type: REQUEST_SUBMIT_TRANSLATEDLINE,
 })

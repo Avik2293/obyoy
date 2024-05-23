@@ -20,5 +20,3 @@ export const FAILURE_LOGOUT = "FAILURE_LOGOUT";
 export const FAILURE_UPDATE_PROFILE = "FAILURE_UPDATE_PROFILE";
 
 // export const UPDATE_SESSION_EXPIRY = "UPDATE_SESSION_EXPIRY";
-
-export const BASE_URL = "http://localhost:8080";

@@ -10,14 +10,13 @@ import {
     downloadCustomDatasetSuccess,
     downloadCustomDatasetFailure,
 } from "../../ActionCreator/customDatasetManagement";
+import { allCustomDatasetsData_url, approveCustomDataset_url, downloadCustomDataset_url } from "../../../allApiPath";
 
-import { BASE_URL } from "../../Constant/login";
 
 export const allCustomDatasetsData = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestAllCustomDatasetsData())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/all_custom_dataset", {
+    axios.post(allCustomDatasetsData_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -35,8 +34,7 @@ export const allCustomDatasetsData = (user_id, token) => async (dispatch, getSta
 export const approveCustomDataset = (dataset_id, token) => async (dispatch, getState) => {
     dispatch(requestApproveCustomDataset())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/approve_custom_dataset", {
+    axios.post(approveCustomDataset_url, {
         dataset_id: dataset_id,
     }, {
         headers: {
@@ -54,8 +52,7 @@ export const approveCustomDataset = (dataset_id, token) => async (dispatch, getS
 export const downloadCustomDataset = (dataset_id, token) => async (dispatch, getState) => {
     dispatch(requestDownloadCustomDataset())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/download_custom_dataset", {
+    axios.post(downloadCustomDataset_url, {
         dataset_id: dataset_id,
     }, {
         headers: {

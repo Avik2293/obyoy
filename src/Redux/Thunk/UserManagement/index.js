@@ -13,14 +13,13 @@ import {
     userDeleteSuccess,
     userDeleteFailure,
 } from "../../ActionCreator/userManagement";
+import { allUsersData_url, userData_url, userDelete_url, userWithdraws_url } from "../../../allApiPath";
 
-import { BASE_URL } from "../../Constant/login";
 
 export const allUsersData = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestAllUsersData())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/all_user", {
+    axios.post(allUsersData_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -39,8 +38,7 @@ export const allUsersData = (user_id, token) => async (dispatch, getState) => {
 export const userData = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestUserData())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/single_user", {
+    axios.post(userData_url, {
         user_id: user_id,
     }, {
         headers: {
@@ -59,8 +57,7 @@ export const userData = (user_id, token) => async (dispatch, getState) => {
 export const userWithdraws = (id, token) => async (dispatch, getState) => {
     dispatch(requestUserWithdrawData())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/user_withdraws", {
+    axios.post(userWithdraws_url, {
         user_id: id,
     }, {
         headers: {
@@ -79,8 +76,7 @@ export const userWithdraws = (id, token) => async (dispatch, getState) => {
 export const userDelete = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestUserDelete())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/admin/user_delete", {
+    axios.post(userDelete_url, {
         user_id: user_id,
     }, {
         headers: {

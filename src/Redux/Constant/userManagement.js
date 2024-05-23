@@ -13,5 +13,3 @@ export const FAILURE_USER_DATA = "FAILURE_USER_DATA";
 export const FAILURE_USER_WITHDRAW_DATA = "FAILURE_USER_WITHDRAW_DATA";
 export const FAILURE_USER_DELETE = "FAILURE_USER_DELETE";
 
-
-export const BASE_URL = "http://localhost:8080";

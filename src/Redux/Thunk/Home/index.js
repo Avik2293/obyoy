@@ -14,13 +14,13 @@ import {
     submitTranslatedlineFailure,
     // updateSessionExpiry,
 } from "../../ActionCreator/home";
+import { fullLeaderboard_url, leaderboard_url, newLine_url, translatedLine_url } from "../../../allApiPath";
 
-import { BASE_URL } from "../../Constant/home";
 
 export const leaderboard = () => async (dispatch, getState) => {
     dispatch(requestLeaderboard())
 
-    axios.get("/api/v1/leaderboard/topTen")
+    axios.get(leaderboard_url)
         .then((response) => {
             dispatch(leaderboardSuccess(response.data));
         }, error => {
@@ -31,8 +31,7 @@ export const leaderboard = () => async (dispatch, getState) => {
 export const fullLeaderboard = () => async (dispatch, getState) => {
     dispatch(requestFullLeaderboard())
 
-    // axios.get(BASE_URL + "/api/v1/leaderboard")
-    axios.get("/api/v1/leaderboard/full")
+    axios.get(fullLeaderboard_url)
         .then((response) => {
             // console.log(response.data);
             dispatch(fullLeaderboardSuccess(response.data));
@@ -41,12 +40,10 @@ export const fullLeaderboard = () => async (dispatch, getState) => {
         })
 }
 
-export const newLine = (user_id, token) => async (dispatch, getState) => {
+export const newLine = (token) => async (dispatch, getState) => {
     dispatch(requestFetchNewline())
 
-    axios.get(BASE_URL + "/api/v1/datastream/getnext", {
-        user_id: user_id,
-    }, {
+    axios.get(newLine_url, {
         headers: {
             'Authorization': token,
         },
@@ -58,15 +55,18 @@ export const newLine = (user_id, token) => async (dispatch, getState) => {
         })
 }
 
-export const translatedLine = (dataset_id, line_id, line, input, translator_id, token) => async (dispatch, getState) => {
+// export const translatedLine = (dataset_id, line_id, line, input, translator_id, token) => async (dispatch, getState) => {
+export const translatedLine = (line, input, translator_id, token) => async (dispatch, getState) => {
     dispatch(requestSubmitTranslatedline())
 
-    axios.post("/api/v1/translated_line", {
-        dataset_id: dataset_id,
-        line_id: line_id,
-        line: line,
-        translated_line: input,
+    axios.post(translatedLine_url, {
+        // dataset_id: dataset_id,
+        // line_id: line_id,
         translator_id: translator_id,
+        source_sentence: line,
+        source_language: 'English',
+        destination_sentence: input,
+        destination_language: 'Bengali',
     }, {
         headers: {
             'Authorization': token,
