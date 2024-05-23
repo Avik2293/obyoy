@@ -3,6 +3,9 @@ import {
     requestAllDatasetsData,
     allDatasetsDataSuccess,
     allDatasetsDataFailure,
+    requestUploadInputDataset,
+    uploadInputDatasetSuccess,
+    uploadInputDatasetFailure,
     requestUploadDataset,
     uploadDatasetSuccess,
     uploadDatasetFailure,
@@ -11,7 +14,7 @@ import {
     datasetDeleteFailure,
 } from "../../ActionCreator/datasetManagement";
 
-// import { BASE_URL } from "../../Constant/login";
+import { BASE_URL } from "../../Constant/login";
 
 export const allDatasetsData = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestAllDatasetsData())
@@ -50,6 +53,27 @@ export const uploadDataset = (user_id, token) => async (dispatch, getState) => {
             // dispatch(updateSessionExpiry(nextDate));
         }, error => {
             dispatch(uploadDatasetFailure(error))
+        })
+}
+
+export const uploadInputDataset = (datasetName, datasetLanguage, linesArray, token) => async (dispatch, getState) => {
+    dispatch(requestUploadInputDataset())
+
+    axios.post(BASE_URL + "/api/v1/dataset/create", {
+        name: datasetName,
+        source_language: datasetLanguage,
+        set: linesArray,
+    }, {
+        headers: {
+            'Authorization': token,
+        },
+    })
+        .then((response) => {
+            // console.log(response.data);
+            dispatch(uploadInputDatasetSuccess(response.data));
+            // dispatch(updateSessionExpiry(nextDate));
+        }, error => {
+            dispatch(uploadInputDatasetFailure(error))
         })
 }
 

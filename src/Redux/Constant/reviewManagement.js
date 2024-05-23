@@ -11,4 +11,4 @@ export const FAILURE_APPROVE_LINE = "FAILURE_APPROVE_LINE";
 export const FAILURE_REJECT_LINE = "FAILURE_REJECT_LINE";
 
 
-export const BASE_URL = "http://192.168.1.8:8080";
+export const BASE_URL = "http://localhost:8080";

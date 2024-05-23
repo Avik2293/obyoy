@@ -14,6 +14,7 @@ const initialState = {
         dataset_name: '',
         line_id: 0,
         line: "",
+        line_number: 0,
         translated_line: '',
         translator_id: 0,
         error: "",
@@ -30,6 +31,7 @@ const lines = (state = initialState.lines, action) => {
                 dataset_name: '',
                 line_id: 0,
                 line: "",
+                line_number: 0,
                 translated_line: '',
                 translator_id: 0,
                 error: "",
@@ -40,7 +42,8 @@ const lines = (state = initialState.lines, action) => {
                 dataset_id: action.payload.dataset_id,
                 dataset_name: action.payload.dataset_name,
                 line_id: action.payload.remaining_lines[0].line_id,
-                line: action.payload.remaining_lines[0].line,
+                line: action.payload.source_sentence,
+                line_number: action.payload.line_number,
                 translated_line: '',
                 translator_id: 0,
                 error: "",
@@ -48,12 +51,6 @@ const lines = (state = initialState.lines, action) => {
         case FAILURE_FETCH_NEWLINE:
             return {
                 ...state,
-                dataset_id: 0,
-                dataset_name: '',
-                line_id: 0,
-                line: "",
-                translated_line: '',
-                translator_id: 0,
                 error: action.payload,
             }
 

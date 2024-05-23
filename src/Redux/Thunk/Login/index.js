@@ -15,30 +15,34 @@ import {
     // updateSessionExpiry,
 } from "../../ActionCreator/login";
 
-// import { BASE_URL } from "../../Constant/login";
+import { BASE_URL } from "../../Constant/login";
 
-export const signup = (name, email, password) => async (dispatch, getState) => {
+export const signup = (firstName, lastName, email, password) => async (dispatch, getState) => {
     dispatch(requestSignup())
 
-    axios.post("/api/v1/signup", {
-        userName: name,
-        user_email: email,
-        user_password: password,
+    axios.post(BASE_URL + "/api/v1/users/registration", {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        account_type: 'admin',
     })
         .then((response) => {
             dispatch(signupSuccess(response.data));
             // dispatch(updateSessionExpiry(nextDate));
         }, error => {
-            dispatch(signupFailure(error))
+            dispatch(signupFailure(error));
+            // console.log(error);
         })
 }
 
 export const login = (email, password) => async (dispatch, getState) => {
     dispatch(requestLogin())
 
-    axios.post("/api/v1/login", {
-        user_email: email,
-        user_password: password,
+    axios.post(BASE_URL + "/api/v1/users/login", {
+        email: email,
+        password: password,
+        account_type: 'admin',
     })
         .then((response) => {
             dispatch(loginSuccess(response.data));
@@ -49,22 +53,22 @@ export const login = (email, password) => async (dispatch, getState) => {
 }
 
 export const logout = (user_id, token) => async (dispatch, getState) => {
-    dispatch(requestLogout())
+    dispatch(logoutSuccess());
+    // dispatch(requestLogout())
 
-    // axios.post(BASE_URL + "/api/v1/users/login", {
-    axios.post("/api/v1/logout", {
-        user_id: user_id,
-    }, {
-        headers: {
-            'Authorization': token,
-        },
-    })
-        .then((response) => {
-            dispatch(logoutSuccess(response.data));
-            // dispatch(updateSessionExpiry(nextDate));
-        }, error => {
-            dispatch(logoutFailure(error))
-        })
+    // axios.post(BASE_URL + "/api/v1/users/logout", {
+    // user_id: user_id,
+    // }, {
+    // headers: {
+    // 'Authorization': token,
+    // },
+    // })
+    // .then((response) => {
+    // dispatch(logoutSuccess(response.data));
+    // dispatch(updateSessionExpiry(nextDate));
+    // }, error => {
+    // dispatch(logoutFailure(error))
+    // })
 }
 
 export const profileUpdate = (userName, user_email, user_phone, address, birthday, token) => async (dispatch, getState) => {

@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { extendTheme, ChakraProvider } from '@chakra-ui/react';     
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Toaster } from 'react-hot-toast';
 
 // for mirage 
-import { makeServer } from "./server"
+// import { makeServer } from "./server"
 
-if (process.env.NODE_ENV === "development") {
-	makeServer({ environment: "development" })
-}
+// if (process.env.NODE_ENV === "development") {
+// 	makeServer({ environment: "development" })
+// }
 
 const colors = {
 	brand: {
@@ -28,6 +29,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<ChakraProvider theme={theme}>
+			<Toaster position="top-center" reverseOrder={false} />
+
 			<App />
 		</ChakraProvider>
 	</React.StrictMode>

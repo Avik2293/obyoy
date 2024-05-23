@@ -8,7 +8,7 @@ import {
     withdrawRequestFailure,
 } from "../../ActionCreator/withdraw";
 
-// import { BASE_URL } from "../../Constant/withdraw";
+import { BASE_URL } from "../../Constant/withdraw";
 
 export const fetchWithdraws = (user_id, token) => async (dispatch, getState) => {
     dispatch(requestFetchWithdraws())

@@ -4,6 +4,9 @@ import {
     REQUEST_ALL_DATASET,
     SUCCESS_ALL_DATASET,
     FAILURE_ALL_DATASET,
+    REQUEST_UPLOAD_INPUT_DATASET,
+    SUCCESS_UPLOAD_INPUT_DATASET,
+    FAILURE_UPLOAD_INPUT_DATASET,
     REQUEST_UPLOAD_DATASET,
     SUCCESS_UPLOAD_DATASET,
     FAILURE_UPLOAD_DATASET,
@@ -14,6 +17,7 @@ import {
 
 const initialState = {
     allDataset: [],
+    success: '',
     error: '',
     isFetching: false,
 }
@@ -58,6 +62,28 @@ const datasetsData = (state = initialState, action) => {
                 error: action.payload,
             }
 
+        case REQUEST_UPLOAD_INPUT_DATASET:
+            return {
+                ...state,
+                // allDataset: [],
+                success: '',
+                error: '',
+            }
+        case SUCCESS_UPLOAD_INPUT_DATASET:
+            return {
+                ...state,
+                // allDataset: action.payload,
+                success: action.payload.message,
+                error: '',
+            }
+        case FAILURE_UPLOAD_INPUT_DATASET:
+            return {
+                ...state,
+                // allDataset: [],
+                success: '',
+                error: action.payload,
+            }
+
         case REQUEST_DATASET_DELETE:
             return {
                 ...state,
@@ -85,14 +111,17 @@ const datasetsData = (state = initialState, action) => {
 const isFetching = (state = initialState.isFetching, action) => {
     switch (action.type) {
         case REQUEST_ALL_DATASET:
+        case REQUEST_UPLOAD_INPUT_DATASET:
         case REQUEST_UPLOAD_DATASET:
         case REQUEST_DATASET_DELETE:
             return true;
 
         case SUCCESS_ALL_DATASET:
+        case SUCCESS_UPLOAD_INPUT_DATASET:
         case SUCCESS_UPLOAD_DATASET:
         case SUCCESS_DATASET_DELETE:
         case FAILURE_ALL_DATASET:
+        case FAILURE_UPLOAD_INPUT_DATASET:
         case FAILURE_UPLOAD_DATASET:
         case FAILURE_DATASET_DELETE:
             return false;
@@ -108,4 +137,5 @@ export default combineReducers({
 });
 
 
-export const selectAllDatasetsData = state => state.allDataset;
+// export const selectAllDatasetsData = state => state.allDataset;
+export const selectAllDatasetsData = state => state;

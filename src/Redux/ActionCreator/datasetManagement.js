@@ -2,6 +2,9 @@ import {
     REQUEST_ALL_DATASET,
     SUCCESS_ALL_DATASET,
     FAILURE_ALL_DATASET,
+    REQUEST_UPLOAD_INPUT_DATASET,
+    SUCCESS_UPLOAD_INPUT_DATASET,
+    FAILURE_UPLOAD_INPUT_DATASET,
     REQUEST_UPLOAD_DATASET,
     SUCCESS_UPLOAD_DATASET,
     FAILURE_UPLOAD_DATASET,
@@ -20,6 +23,18 @@ export const allDatasetsDataSuccess = (data) => ({
 })
 export const allDatasetsDataFailure = (error) => ({
     type: FAILURE_ALL_DATASET,
+    payload: error,
+})
+
+export const requestUploadInputDataset = () => ({
+    type: REQUEST_UPLOAD_INPUT_DATASET,
+})
+export const uploadInputDatasetSuccess = (data) => ({
+    type: SUCCESS_UPLOAD_INPUT_DATASET,
+    payload: data,
+})
+export const uploadInputDatasetFailure = (error) => ({
+    type: FAILURE_UPLOAD_INPUT_DATASET,
     payload: error,
 })
 

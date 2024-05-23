@@ -51,15 +51,3 @@ export const selectAllDatasetsData = state => fromDatasetManagement.selectAllDat
 export const selectAllCustomDatasetsData = state => fromCustomDatasetManagement.selectAllCustomDatasetsData(state.customDatasetManagement.customDatasetsData);
 
 export const selectReviewedLineData = state => fromReviewManagement.selectReviewedLineData(state.reviewManagement);
-
-
-
-
-// export const selectLoginIsFetching = state => fromUser.selectLoginIsFetching(state.user);
-// export const selectUserName = state => fromUser.selectUserName(state.user);
-// export const selectAuth = state => (
-//     {
-//         login: selectToken(state) !== '',
-//         admin: fromUser.selectProfile(state.user).isadmin,
-//     }
-// );

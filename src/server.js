@@ -346,17 +346,45 @@ export function makeServer({ environment = "test" } = {}) {
         },
 
         routes() {
-            this.namespace = "api/v1"
+            this.namespace = "dsad/api/v1"
 
             this.post("/signup", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
-                // let authToken = request.re/questHeaders.Authorization
                 console.log(attrs);
+<<<<<<< HEAD
+=======
+
+                // schema.db.usersData.insert({
+                //     token: "1|234re764s45teu8", // random and unique generate
+                //     user_id: 136, // random and unique generate
+                //     isLoggedIn: false, // initially false, after login true
+                //     user_type: 'translator',
+                //     profile: {
+                //         user_id: 136, // as like up one
+                //         userName: attrs.userName,
+                //         user_email: attrs.user_email,
+                //         user_password: attrs.user_password,
+                //         user_phone: "", // later on profile update
+                //         join_date: "23 May, 2021", // auto take the date from system
+                //         birthday: "", // later on profile update
+                //         address: "", // later on profile update
+                //         total_working_days: 0, // auto take from the join date
+                //         leaderboard_place: 0, // initially put in the last leaderboard place
+                //         balance: 0,
+                //         total_balance: 0,
+                //         total_withdraw: 0,
+                //         for_approve: 0,
+                //         today_contribution: 0,
+                //         image_url: '', // initially default image, later update on profile update
+                //     },
+                //     session_expiry: 0, // automatic update as website rule
+                // });
+>>>>>>> b72d0f8ba1997b6b633fccab49ce0e60aca92990
 
                 let headers = {}
                 let data = { success: ["User Signed Up Successfully."] }
                 return new Response(201, headers, data)
-                // db.users.insert({ name: 'Link', age: 173 });
+                // return  schema.db.usersData
             })
 
             this.post("/login", (schema, request) => {
@@ -431,19 +459,26 @@ export function makeServer({ environment = "test" } = {}) {
 
                 return schema.db.datasets
             })
-            
+
             this.post("/admin/dataset_delete", (schema, request) => {
                 let attrs = JSON.parse(request.requestBody)
                 let authToken = request.requestHeaders.Authorization
                 console.log(attrs);
                 console.log(authToken);
-                
+
                 schema.db.datasets.remove({ dataset_id: attrs.dataset_id });
+<<<<<<< HEAD
                 
+=======
+                // let id = request.params.id
+                // schema.db.usersData.find(attrs.user_id).destroy()
+                // schema.db.usersData.delete({user_id: attrs.user_id})
+
+>>>>>>> b72d0f8ba1997b6b633fccab49ce0e60aca92990
                 // let headers = {}
                 // let data = { success: ["User Delete Successfully"] }
                 // return new Response(201, headers, data)
-                
+
                 return schema.db.datasets
             })
 
