@@ -1,4 +1,4 @@
-import { createServer, Model } from "miragejs"
+import { createServer, Model, JSONAPISerializer } from "miragejs"
 
 export function makeServer({ environment = "test" } = {}) {
     let server = createServer({
@@ -6,7 +6,11 @@ export function makeServer({ environment = "test" } = {}) {
 
         models: {
             // topTen: Model,
-            login: Model,
+            login: Model.extend(),
+        },
+
+        serializers: {
+            application: JSONAPISerializer,
         },
 
         seeds(server) {
