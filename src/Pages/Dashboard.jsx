@@ -193,6 +193,10 @@ const Dashboard = () => {
             setDatasetLanguage('');
             setDatasetInput('');
         }
+        if (allDatasetManagementData.success === 'dataset file created') {   ///need to update the message
+            toast.success(allDatasetManagementData.success);
+            setFile('');
+        }
         if (allDatasetManagementData.error.message) {
             toast.error(allDatasetManagementData.error.message);
         }
@@ -200,15 +204,28 @@ const Dashboard = () => {
 
     const [file, setFile] = useState();
     const handleFileChange = (e) => {
+        // const file = event.target.files[0];
         if (e.target.files) {
-            setFile(e.target.files[0]);
+            const selectedFile = e.target.files[0];
+            if (!selectedFile.type.match('text.*')) {
+                alert('Please select text file.');
+                return;
+            }
+            if (selectedFile.size > 1024 * 1024) {
+                alert('File size should not exceed 1MB.');
+                return;
+            }
+            setFile(selectedFile);
         }
     };
     const handleUploadClick = () => {
-        if (!file) {
-            return;
+        if (file) {
+            dispatch(uploadDataset(user_id, file, token));
+            console.log('File ready to be uploaded:', file);
         }
-
+        else {
+            alert('No file selected.');
+        }
     };
     // delete dataset 
 
