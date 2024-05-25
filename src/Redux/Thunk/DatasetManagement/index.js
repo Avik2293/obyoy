@@ -34,11 +34,12 @@ export const allDatasetsData = (user_id, token) => async (dispatch, getState) =>
         })
 }
 
-export const uploadDataset = (user_id, token) => async (dispatch, getState) => {
+export const uploadDataset = (user_id, file, token) => async (dispatch, getState) => {
     dispatch(requestUploadDataset())
 
     axios.post(uploadDataset_url, {
         user_id: user_id,
+        file: file,
     }, {
         headers: {
             'Authorization': token,

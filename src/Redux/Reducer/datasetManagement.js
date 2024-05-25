@@ -47,18 +47,21 @@ const datasetsData = (state = initialState, action) => {
             return {
                 ...state,
                 // allDataset: [],
+                success: '',
                 error: '',
             }
         case SUCCESS_UPLOAD_DATASET:
             return {
                 ...state,
-                allDataset: action.payload,
+                // allDataset: action.payload,
+                success: action.payload.message,
                 error: '',
             }
         case FAILURE_UPLOAD_DATASET:
             return {
                 ...state,
                 // allDataset: [],
+                success: '',
                 error: action.payload,
             }
 
