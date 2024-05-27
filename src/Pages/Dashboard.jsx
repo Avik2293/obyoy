@@ -52,7 +52,7 @@ const Dashboard = () => {
     const reviewedLine = useSelector(state => selectReviewedLineData(state));
     useEffect(() => {
         dispatch(allUsersData(user_id, token));
-        dispatch(allDatasetsData(user_id, token));
+        dispatch(allDatasetsData(0, 5, token));
         dispatch(allCustomDatasetsData(user_id, token));
         dispatch(reviewingLine(user_id, token));
     }, [dispatch, token, user_id]);
@@ -117,6 +117,7 @@ const Dashboard = () => {
 
 
     // for modal/alert 
+
     // for specific user show
     const { isOpen, onOpen, onClose } = useDisclosure();
     // for withdraw specific data show modal 
@@ -187,6 +188,7 @@ const Dashboard = () => {
     };
     useEffect(() => {
         if (allDatasetManagementData.success === 'dataset created') {
+            dispatch(allDatasetsData(0, 5, token));
             toast.success(allDatasetManagementData.success);
             setStartInput(false);
             setDatasetName('');
@@ -194,13 +196,14 @@ const Dashboard = () => {
             setDatasetInput('');
         }
         if (allDatasetManagementData.success === 'dataset file created') {   ///need to update the message
+            dispatch(allDatasetsData(0, 5, token));
             toast.success(allDatasetManagementData.success);
             setFile('');
         }
         if (allDatasetManagementData.error.message) {
             toast.error(allDatasetManagementData.error.message);
         }
-    }, [allDatasetManagementData.error.message, allDatasetManagementData.success]);
+    }, [allDatasetManagementData.error.message, allDatasetManagementData.success, dispatch, token]);
 
     const [file, setFile] = useState();
     const handleFileChange = (e) => {
@@ -227,7 +230,6 @@ const Dashboard = () => {
             alert('No file selected.');
         }
     };
-    // delete dataset 
 
 
     // custom dataset management
@@ -970,13 +972,14 @@ const Dashboard = () => {
                                     whiteSpace="break-spaces"
                                 >
                                     <Text w={'30px'} >No.</Text>
-                                    <Text w={'70px'} >Dataset ID</Text>
+                                    <Text w={'120px'} >Dataset ID</Text>
+                                    <Text w={'120px'} >Uploader ID</Text>
                                     <Text w={'70px'} >Dataset Name</Text>
                                     <Text w={'130px'} >Uploading Date</Text>
-                                    <Text w={'130px'} >Details</Text>
+                                    <Text w={'80px'} >Source Language</Text>
                                     <Text w={'70px'} >Total Line</Text>
                                     <Text w={'80px'} >Translated Line</Text>
-                                    <Text w={'70px'} >Line For Review</Text>
+                                    <Text w={'80px'} >Reviewed Lines</Text>
                                     <Text w={'120px'} >Remarks</Text>
                                     <Text w={'60px'} >Action</Text>
                                 </HStack>
@@ -991,13 +994,14 @@ const Dashboard = () => {
                                             whiteSpace="break-spaces"
                                         >
                                             <Text w={'30px'} >{i + 1}</Text>
-                                            <Text w={'70px'} >{td?.dataset_id}</Text>
-                                            <Text w={'70px'} >{td?.dataset_name}</Text>
-                                            <Text w={'130px'} >{td?.upload_date}</Text>
-                                            <Text w={'130px'} >{td?.details}</Text>
+                                            <Text w={'120px'} >{td?.dataset_id}</Text>
+                                            <Text w={'120px'} >{td?.uploader_id}</Text>
+                                            <Text w={'70px'} >{td?.name}</Text>
+                                            <Text w={'130px'} >{td?.created_at}</Text>
+                                            <Text w={'80px'} >{td?.source_language}</Text>
                                             <Text w={'70px'} >{td?.total_lines}</Text>
-                                            <Text w={'80px'} >{td?.total_translated}</Text>
-                                            <Text w={'70px'} >{td?.for_review}</Text>
+                                            <Text w={'80px'} >{td?.translated_lines}</Text>
+                                            <Text w={'80px'} >{td?.reviewed_lines}</Text>
                                             <Text w={'120px'} >{td?.remarks}</Text>
                                             <Text w={'60px'} gap={1}>
                                                 <Button

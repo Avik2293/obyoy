@@ -32,7 +32,7 @@ export const userWithdraws_url = `${BASE_URL}/api/v1/admin/user_withdraws`;
 export const userDelete_url = `${BASE_URL}/api/v1/admin/user_delete`;
 
 // datasetManagement
-export const allDatasetsData_url = `${BASE_URL}/api/v1/admin/all_dataset`;
+export const allDatasetsData_url = (skip, limit) => `${BASE_URL}/api/v1/dataset/list/${skip}/${limit}`;      //  ok
 export const uploadDataset_url = `${BASE_URL}/api/v1/admin/single_user`;
 export const uploadInputDataset_url = `${BASE_URL}/api/v1/dataset/create`;                  //ok
 export const datasetDelete_url = `${BASE_URL}/api/v1/admin/dataset_delete`;

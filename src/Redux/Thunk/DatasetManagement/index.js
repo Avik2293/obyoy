@@ -15,12 +15,10 @@ import {
 } from "../../ActionCreator/datasetManagement";
 import { allDatasetsData_url, datasetDelete_url, uploadDataset_url, uploadInputDataset_url } from "../../../allApiPath";
 
-export const allDatasetsData = (user_id, token) => async (dispatch, getState) => {
+export const allDatasetsData = (skip, limit, token) => async (dispatch, getState) => {
     dispatch(requestAllDatasetsData())
 
-    axios.post(allDatasetsData_url, {
-        user_id: user_id,
-    }, {
+    axios.get(allDatasetsData_url(skip, limit), {
         headers: {
             'Authorization': token,
         },
@@ -46,7 +44,6 @@ export const uploadDataset = (user_id, file, token) => async (dispatch, getState
         },
     })
         .then((response) => {
-            // console.log(response.data);
             dispatch(uploadDatasetSuccess(response.data));
             // dispatch(updateSessionExpiry(nextDate));
         }, error => {
