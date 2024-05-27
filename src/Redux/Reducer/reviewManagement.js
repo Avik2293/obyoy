@@ -14,12 +14,13 @@ import {
 
 const initialState = {
     reviewedLine: {
-        dataset_id: 0,
-        dataset_name: '',
-        line_id: 0,
-        line: "",
-        translated_line: '',
-        translator_id: 0,
+        // dataset_id: 0,
+        // dataset_name: '',
+        // line_id: 0,
+        // line: "",
+        // translated_line: '',
+        // translator_id: 0,
+        success: '',
         error: "",
     },
     error: '',
@@ -31,34 +32,31 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
         case REQUEST_REVIEWING_LINE:
             return {
                 ...state,
-                dataset_id: 0,
-                dataset_name: '',
-                line_id: 0,
-                line: "",
-                translated_line: '',
-                translator_id: 0,
+                // dataset_id: 0,
+                // dataset_name: '',
+                // line_id: 0,
+                // line: "",
+                // translated_line: '',
+                // translator_id: 0,
+                success: '',
                 error: '',
             }
         case SUCCESS_REVIEWING_LINE:
             return {
                 ...state,
-                dataset_id: action.payload.dataset_id,
-                dataset_name: action.payload.dataset_name,
-                line_id: action.payload.reviewing_lines[0].line_id,
-                line: action.payload.reviewing_lines[0].line,
-                translated_line: action.payload.reviewing_lines[0].translated_line,
-                translator_id: action.payload.reviewing_lines[0].translator_id,
+                // dataset_id: action.payload.dataset_id,
+                // dataset_name: action.payload.dataset_name,
+                // line_id: action.payload.reviewing_lines[0].line_id,
+                // line: action.payload.reviewing_lines[0].line,
+                // translated_line: action.payload.reviewing_lines[0].translated_line,
+                // translator_id: action.payload.reviewing_lines[0].translator_id,
+                success: '',
                 error: "",
             }
         case FAILURE_REVIEWING_LINE:
             return {
                 ...state,
-                dataset_id: 0,
-                dataset_name: '',
-                line_id: 0,
-                line: "",
-                translated_line: '',
-                translator_id: 0,
+                success: '',
                 error: action.payload,
             }
 
@@ -66,6 +64,7 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
             return {
                 ...state,
                 // reviewedLine: [],
+                success: '',
                 error: '',
             }
         case SUCCESS_APPROVE_LINE:
@@ -77,31 +76,33 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
                 // line: "",
                 // translated_line: '',
                 // translator_id: 0,
+                success: '',
                 error: '',
             }
         case FAILURE_APPROVE_LINE:
             return {
                 ...state,
-                // reviewedLine: [],
+                success: '',
                 error: action.payload,
             }
 
         case REQUEST_REJECT_LINE:
             return {
                 ...state,
-                // reviewedLine: [],
+                success: '',
                 error: '',
             }
         case SUCCESS_REJECT_LINE:
             return {
                 ...state,
                 // reviewedLine: action.payload,
+                success: '',
                 error: '',
             }
         case FAILURE_REJECT_LINE:
             return {
                 ...state,
-                // reviewedLine: [],
+                success: '',
                 error: action.payload,
             }
 

@@ -35,14 +35,12 @@ const Home = () => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		// dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
-		dispatch(translatedLine(line.line, input, userId, token));
+		dispatch(translatedLine(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
 		setFormClose(true);
 	};
 	const handleSubmitNext = event => {
 		event.preventDefault();
-		// dispatch(translatedLine(line.dataset_id, line.line_id, line.line, input, profile.user_id, token));
-		dispatch(translatedLine(line.line, input, profile.user_id, token));
+		dispatch(translatedLine(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
 		setFormClose(false);
 	};
 
@@ -167,18 +165,82 @@ const Home = () => {
 					p='6'
 					rounded='md'
 				>
+					<Text
+						fontSize="2xl"
+						fontWeight="bold"
+						color='black'
+						textAlign={'center'}
+						mb={2}
+					>
+						Welcome </Text>
+
+					{/* upper box information */}
+					<Grid
+						gap={[null, 2, 4]}
+						templateRows='repeat(2, 1fr)'
+						templateColumns='repeat(4, 1fr)'
+						mb={5}
+					>
+						<GridItem
+							rowSpan={[null, 1, 2]}
+							colSpan={[null, 2, 1]}
+							boxShadow='2xl'
+							p='5'
+							border='2px'
+							borderColor='green'
+							borderRadius={15}
+							textAlign={'center'}
+						>
+							<Text>Total Dataset</Text>
+							<Text>{profile?.total_balance}</Text>
+						</GridItem>
+
+						<GridItem
+							rowSpan={[null, 1, 2]}
+							colSpan={[null, 2, 1]}
+							boxShadow='2xl'
+							p='5'
+							border='2px'
+							borderColor='green'
+							borderRadius={15}
+							textAlign={'center'}
+						>
+							<Text>Total Translation</Text>
+							<Text>{profile?.balance}</Text>
+						</GridItem>
+
+						<GridItem
+							rowSpan={[null, 1, 2]}
+							colSpan={[null, 2, 1]}
+							boxShadow='2xl'
+							p='5'
+							border='2px'
+							borderColor='green'
+							borderRadius={15}
+							textAlign={'center'}
+						>
+							<Text>Total Reviewed</Text>
+							<Text>{profile?.total_withdraw}</Text>
+						</GridItem>
+
+						<GridItem
+							rowSpan={[null, 1, 2]}
+							colSpan={[null, 2, 1]}
+							boxShadow='2xl'
+							p='5'
+							border='2px'
+							borderColor='green'
+							borderRadius={15}
+							textAlign={'center'}
+						>
+							<Text>Custom Dataset</Text>
+							<Text>{profile?.for_approve}</Text>
+						</GridItem>
+					</Grid>
 
 					{
 						!start &&
 						<>
-							<Text
-								fontSize="lg"
-								fontWeight="bold"
-								color='black'
-								textAlign={'center'}
-								mb={2}
-							>
-								Welcome,</Text>
 							<Text
 								fontSize="lg"
 								fontWeight="bold"
@@ -238,7 +300,7 @@ const Home = () => {
 								textAlign={'center'}
 								my={4}
 							>
-								Line ID.: {line?.line_id}</Text>
+								Datastream Id.: {line?.datastream_id}</Text>
 
 							<Text
 								border='2px'
