@@ -195,7 +195,7 @@ const Dashboard = () => {
             setDatasetLanguage('');
             setDatasetInput('');
         }
-        if (allDatasetManagementData.success === 'dataset file created') {   ///need to update the message
+        if (allDatasetManagementData.success === 'dataset file created') {   ///need to update the message for file
             dispatch(allDatasetsData(0, 5, token));
             toast.success(allDatasetManagementData.success);
             setFile('');
@@ -245,36 +245,56 @@ const Dashboard = () => {
 
     // for approve translate 
     const [start, setStart] = useState(false);
-    // const [lineNo, setLineNo] = useState('');
+    const [nextFlag, setNextFlag] = useState(false);
     const handleSubmit = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         if (event) {
             dispatch(approveLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
-            // console.log(event);
         }
         else {
             dispatch(rejectLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
-            // console.log('reject');
         }
-        // setLineNo('');
-        // console.log(reviewedLine?.line_id);
-        setStart(!start);
+        setNextFlag(false);
     };
     const handleSubmitNext = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         if (event) {
             dispatch(approveLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
-            // console.log(event);
         }
         else {
             dispatch(rejectLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
-            // console.log('reject & next');
         }
-        // setLineNo('');
-        // console.log(reviewedLine?.line_id);
-
+        setNextFlag(true);
         // dispatch(reviewingLine(user_id, token));
     };
+    const [finalTranslateStart, setFinalTranslateStart] = useState(false);
+    const [finalTranslateInput, setFinalTranslateInput] = useState('');
+    const handleFinalTranslateInputChange = (e) => setFinalTranslateInput(e.target.value);
+    const handleFinalTranslateInputSubmit = event => {
+        event.preventDefault();
+        // dispatch(translatedLine(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
+    };
+    useEffect(() => {
+        if ((reviewedLine.success === 'approve' || reviewedLine.success === 'reject') && !nextFlag) {      // message update
+            toast.success(reviewedLine.success);
+            setStart(!start);
+        }
+        if ((reviewedLine.success === 'approve' || reviewedLine.success === 'reject') && nextFlag) {   ///need to update the message 
+            dispatch(reviewingLine(token));
+            toast.success(reviewedLine.success);
+            setNextFlag(false);
+        }
+        if (reviewedLine.success === 'final line') {   ///update the message for final line input
+            // dispatch(allDatasetsData(0, 5, token));
+            toast.success(reviewedLine.success);
+            setStart(false);
+            setFinalTranslateStart(false);
+            setFinalTranslateInput('');
+        }
+        if (reviewedLine.error.message) {
+            toast.error(reviewedLine.error.message);
+        }
+    }, [dispatch, nextFlag, reviewedLine.error.message, reviewedLine.success, start, token]);
 
 
     // remaining work for later ***
@@ -976,6 +996,7 @@ const Dashboard = () => {
                                     <Text w={'120px'} >Uploader ID</Text>
                                     <Text w={'70px'} >Dataset Name</Text>
                                     <Text w={'130px'} >Uploading Date</Text>
+                                    <Text w={'130px'} >Description</Text>
                                     <Text w={'80px'} >Source Language</Text>
                                     <Text w={'70px'} >Total Line</Text>
                                     <Text w={'80px'} >Translated Line</Text>
@@ -985,7 +1006,7 @@ const Dashboard = () => {
                                 </HStack>
 
                                 {
-                                    allDatasetManagementData.allDataset.length !== 0 &&
+                                    allDatasetManagementData?.allDataset &&
                                     allDatasetManagementData.allDataset.map((td, i) =>
                                         <HStack key={i}
                                             justify={'space-evenly'}
@@ -998,6 +1019,7 @@ const Dashboard = () => {
                                             <Text w={'120px'} >{td?.uploader_id}</Text>
                                             <Text w={'70px'} >{td?.name}</Text>
                                             <Text w={'130px'} >{td?.created_at}</Text>
+                                            <Text w={'130px'} >{td?.description}</Text>
                                             <Text w={'80px'} >{td?.source_language}</Text>
                                             <Text w={'70px'} >{td?.total_lines}</Text>
                                             <Text w={'80px'} >{td?.translated_lines}</Text>
@@ -1241,68 +1263,142 @@ const Dashboard = () => {
                                 >
                                     {reviewedLine?.translated_line}</Text>
 
+                                {
+                                    !finalTranslateStart &&
+                                    <>
+                                        <HStack justify={'space-evenly'}>
+                                            <Text textAlign={'center'} my={2}>
+                                                <Button
+                                                    size="lg"
+                                                    bg={"green"}
+                                                    color={"white"}
+                                                    _hover={{ bg: "blue.500" }}
+                                                    px={4}
+                                                    py={1}
+                                                    borderRadius={'lg'}
+                                                    onClick={() => handleSubmit(1)}
+                                                >
+                                                    Approve
+                                                </Button>
+                                            </Text>
 
-                                <HStack justify={'space-evenly'}>
-                                    <Text textAlign={'center'} my={2}>
-                                        <Button
-                                            size="lg"
-                                            bg={"green"}
-                                            color={"white"}
-                                            _hover={{ bg: "blue.500" }}
-                                            px={4}
-                                            py={1}
-                                            borderRadius={'lg'}
-                                            onClick={() => handleSubmit(1)}
-                                        >
-                                            Approve
-                                        </Button>
-                                    </Text>
+                                            <Text textAlign={'end'} my={2}>
+                                                <Button
+                                                    size="lg"
+                                                    bg={"green"}
+                                                    color={"white"}
+                                                    _hover={{ bg: "blue.500" }}
+                                                    px={4}
+                                                    py={1}
+                                                    borderRadius={'lg'}
+                                                    onClick={() => handleSubmitNext(1)}
+                                                >
+                                                    Approve & Next
+                                                </Button>
+                                            </Text>
 
-                                    <Text textAlign={'end'} my={2}>
-                                        <Button
-                                            size="lg"
-                                            bg={"green"}
-                                            color={"white"}
-                                            _hover={{ bg: "blue.500" }}
-                                            px={4}
-                                            py={1}
-                                            borderRadius={'lg'}
-                                            onClick={() => handleSubmitNext(1)}
-                                        >
-                                            Approve & Next
-                                        </Button>
-                                    </Text>
+                                            <Text textAlign={'center'} my={2}>
+                                                <Button
+                                                    size="lg"
+                                                    bg={"red"}
+                                                    color={"white"}
+                                                    _hover={{ bg: "blue.500" }}
+                                                    px={4}
+                                                    py={1}
+                                                    borderRadius={'lg'}
+                                                    onClick={() => handleSubmit(0)}
+                                                >
+                                                    Reject
+                                                </Button>
+                                            </Text>
 
-                                    <Text textAlign={'center'} my={2}>
-                                        <Button
-                                            size="lg"
-                                            bg={"red"}
-                                            color={"white"}
-                                            _hover={{ bg: "blue.500" }}
-                                            px={4}
-                                            py={1}
-                                            borderRadius={'lg'}
-                                            onClick={() => handleSubmit(0)}
-                                        >
-                                            Reject
-                                        </Button>
-                                    </Text>
+                                            <Text textAlign={'end'} my={2}>
+                                                <Button
+                                                    size="lg"
+                                                    bg={"red"}
+                                                    color={"white"}
+                                                    _hover={{ bg: "blue.500" }}
+                                                    px={4}
+                                                    py={1}
+                                                    borderRadius={'lg'}
+                                                    onClick={() => handleSubmitNext(0)}
+                                                >
+                                                    Reject & Next
+                                                </Button>
+                                            </Text>
+                                        </HStack>
 
-                                    <Text textAlign={'end'} my={2}>
-                                        <Button
-                                            size="lg"
-                                            bg={"red"}
-                                            color={"white"}
-                                            _hover={{ bg: "blue.500" }}
-                                            px={4}
-                                            py={1}
-                                            borderRadius={'lg'}
-                                            onClick={() => handleSubmitNext(0)}
+                                        <Text
+                                            fontSize="lg"
+                                            fontWeight="bold"
+                                            color='black'
+                                            textAlign={'center'}
+                                            my={2}
+                                            mt={5}
                                         >
-                                            Reject & Next
-                                        </Button>
-                                    </Text>
-                                </HStack>
+                                            Click "Final" to start Final Translate Input.</Text>
+
+                                        <Text textAlign={'center'} my={2} mb={5}>
+                                            <Button
+                                                rightIcon={<IoArrowForwardCircleOutline />}
+                                                size="lg"
+                                                bg={"blue"}
+                                                color={"white"}
+                                                _hover={{ bg: "blue.500" }}
+                                                px={4}
+                                                py={1}
+                                                borderRadius={'lg'}
+                                                onClick={() => setFinalTranslateStart(!finalTranslateStart)}
+                                            >
+                                                Final
+                                            </Button>
+                                        </Text>
+
+                                    </>
+                                }
+
+                                {
+                                    finalTranslateStart &&
+                                    <Box>
+                                        {/* <Form onSubmit={handleSubmit}> */}
+                                        <Form>
+                                            <Textarea
+                                                name="finalTranslateInput"
+                                                id="finalTranslateInput"
+                                                variant='filled'
+                                                width='100%'
+                                                p={3}
+                                                my={3}
+                                                placeholder='Type your input here..'
+                                                onChange={handleFinalTranslateInputChange}
+                                                required
+                                                value={finalTranslateInput}
+                                            // h={[null, '150px', '150px', '100px']}
+                                            />
+
+                                            <Text textAlign={'center'} my={2}>
+                                                <Button
+                                                    size="lg"
+                                                    bg={"blue"}
+                                                    color={"white"}
+                                                    _hover={{ bg: "blue.500" }}
+                                                    px={4}
+                                                    py={1}
+                                                    borderRadius={'lg'}
+                                                    type='submit'
+                                                    onClick={(event) => {
+                                                        if (finalTranslateInput) {
+                                                            handleFinalTranslateInputSubmit(event);
+                                                        }
+                                                    }}
+                                                >
+                                                    Final Submit
+                                                </Button>
+                                            </Text>
+                                        </Form>
+                                    </Box>
+                                }
+
                             </Box>
                         }
                     </TabPanel>
