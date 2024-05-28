@@ -282,7 +282,7 @@ const Home = () => {
 								textAlign={'center'}
 								my={4}
 							>
-								Dataset Name: {line?.dataset_name}</Text>
+								Dataset Name: {line?.name}</Text>
 
 							<Text
 								fontSize="lg"

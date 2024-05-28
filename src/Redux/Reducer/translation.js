@@ -39,7 +39,7 @@ const lines = (state = initialState.lines, action) => {
         case SUCCESS_FETCH_NEWLINE:
             return {
                 ...state,
-                // dataset_name: action.payload.dataset_name,
+                name: action.payload.name,
                 dataset_id: action.payload.dataset_id,
                 datastream_id: action.payload.datastream_id,
                 line_number: action.payload.line_number,
