@@ -181,9 +181,11 @@ const Dashboard = () => {
     const [datasetName, setDatasetName] = useState('');
     const [datasetLanguage, setDatasetLanguage] = useState('');
     const [datasetInput, setDatasetInput] = useState('');
+    const [datasetDescription, setDatasetDescription] = useState('');
+    const [datasetRemarks, setDatasetRemarks] = useState('');
     const linesArray = datasetInput.split(/[\r\n.]+ ?/).filter(Boolean);
     const handleDatasetSubmit = () => {
-        dispatch(uploadInputDataset(datasetName, datasetLanguage, linesArray, token));
+        dispatch(uploadInputDataset(datasetName, datasetLanguage, linesArray, datasetDescription, datasetRemarks, token));
         // console.log(datasetsSuccess);
     };
     useEffect(() => {
@@ -195,7 +197,7 @@ const Dashboard = () => {
             setDatasetLanguage('');
             setDatasetInput('');
         }
-        if (allDatasetManagementData.success === 'dataset file created') {   ///need to update the message for file
+        if (allDatasetManagementData.success === 'dataset file created') {   // need to update the message for file
             dispatch(allDatasetsData(0, 5, token));
             toast.success(allDatasetManagementData.success);
             setFile('');
@@ -945,13 +947,61 @@ const Dashboard = () => {
                                                 autogrow={5}
                                             />
 
+                                            <Textarea
+                                                name="datasetDescription"
+                                                id="datasetDescription"
+                                                type="text"
+                                                placeholder='Type Dataset Description'
+                                                px={2}
+                                                w='50%'
+                                                onChange={(e) => setDatasetDescription(e.target.value)}
+                                                value={datasetDescription}
+                                                isRequired
+                                                border='2px'
+                                                mx={'auto'}
+                                                variant='filled'
+                                                borderColor='gray'
+                                                borderRadius="md"
+                                                // fontSize="lg"
+                                                // fontWeight="semibold"
+                                                // bg={'gray'}
+                                                // color='white'
+                                                // h={[null, '150px', '150px', '100px']}
+                                                h="auto"
+                                                autogrow={5}
+                                            />
+
+                                            <Textarea
+                                                name="datasetRemarks"
+                                                id="datasetRemarks"
+                                                type="text"
+                                                placeholder='Type Dataset Remarks'
+                                                px={2}
+                                                w='50%'
+                                                onChange={(e) => setDatasetRemarks(e.target.value)}
+                                                value={datasetRemarks}
+                                                isRequired
+                                                border='2px'
+                                                mx={'auto'}
+                                                variant='filled'
+                                                borderColor='gray'
+                                                borderRadius="md"
+                                                // fontSize="lg"
+                                                // fontWeight="semibold"
+                                                // bg={'gray'}
+                                                // color='white'
+                                                // h={[null, '150px', '150px', '100px']}
+                                                h="auto"
+                                                autogrow={5}
+                                            />
+
                                             <Button
-                                                bgColor={(datasetName && datasetLanguage && datasetInput) ? 'blue' : 'gray'}
+                                                bgColor={(datasetName && datasetLanguage && datasetInput && datasetDescription && datasetRemarks) ? 'blue' : 'gray'}
                                                 p={1}
                                                 px={2}
                                                 borderRadius={'lg'}
                                                 color={'white'}
-                                                isDisabled={(datasetName && datasetLanguage && datasetInput) ? false : true}
+                                                isDisabled={(datasetName && datasetLanguage && datasetInput && datasetDescription && datasetRemarks) ? false : true}
                                                 onClick={() => handleDatasetSubmit()}
                                             >
                                                 Submit</Button>
@@ -1018,7 +1068,7 @@ const Dashboard = () => {
                                             <Text w={'120px'} >{td?.dataset_id}</Text>
                                             <Text w={'120px'} >{td?.uploader_id}</Text>
                                             <Text w={'70px'} >{td?.name}</Text>
-                                            <Text w={'130px'} >{td?.created_at}</Text>
+                                            <Text w={'130px'} >{td?.update_date}</Text>
                                             <Text w={'130px'} >{td?.description}</Text>
                                             <Text w={'80px'} >{td?.source_language}</Text>
                                             <Text w={'70px'} >{td?.total_lines}</Text>
