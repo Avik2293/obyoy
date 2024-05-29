@@ -9,6 +9,10 @@ export const profileUpdate_url = `${BASE_URL}/api/v1/profile_edit`;
 // home
 export const leaderboard_url = `${BASE_URL}/api/v1/leaderboard/topTen`;
 export const fullLeaderboard_url = `${BASE_URL}/api/v1/leaderboard/full`;
+export const datasetCount_url = `${BASE_URL}/api/v1/dataset/count`;                    // ok
+export const translationCount_url = `${BASE_URL}/api/v1/translation/count`;             // ok
+export const reviewedCount_url = `${BASE_URL}/api/v1/parallelsentence/count`;             // ok
+export const customDatasetCount_url = `${BASE_URL}/api/v1/datastream/count`;             // ok
 export const newLine_url = `${BASE_URL}/api/v1/datastream/getnext`;                   //ok
 export const translatedLine_url = `${BASE_URL}/api/v1/parallelsentence/create`;       //ok
 
@@ -43,7 +47,6 @@ export const approveCustomDataset_url = `${BASE_URL}/api/v1/admin/approve_custom
 export const downloadCustomDataset_url = `${BASE_URL}/api/v1/admin/download_custom_dataset`;
 
 // reviewManagement
-export const reviewingLine_url = `${BASE_URL}/api/v1/admin/reviewing_line`;
-export const approveLine_url = `${BASE_URL}/api/v1/admin/approving_line`;
-export const rejectLine_url = `${BASE_URL}/api/v1/admin/rejecting_line`;
+export const reviewingLine_url = `${BASE_URL}/api/v1/parallelsentence/getnext`;              // ok
+export const lineReviewAction_url = `${BASE_URL}/api/v1/parallelsentence/update`;                   // ok
 

@@ -4,12 +4,9 @@ import {
     REQUEST_REVIEWING_LINE,
     SUCCESS_REVIEWING_LINE,
     FAILURE_REVIEWING_LINE,
-    REQUEST_APPROVE_LINE,
-    SUCCESS_APPROVE_LINE,
-    FAILURE_APPROVE_LINE,
-    REQUEST_REJECT_LINE,
-    SUCCESS_REJECT_LINE,
-    FAILURE_REJECT_LINE,
+    REQUEST_LINE_REVIEW_ACTION,
+    SUCCESS_LINE_REVIEW_ACTION,
+    FAILURE_LINE_REVIEW_ACTION,
 } from "../Constant/reviewManagement";
 
 const initialState = {
@@ -32,24 +29,28 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
         case REQUEST_REVIEWING_LINE:
             return {
                 ...state,
-                // dataset_id: 0,
-                // dataset_name: '',
-                // line_id: 0,
-                // line: "",
-                // translated_line: '',
-                // translator_id: 0,
+                dataset_id: 0,
+                dataset_name: '',
+                // line_id: action.payload.line_number,
+                line_number: 0,
+                line: '',
+                translated_line: '',
+                translator_id: 0,
+                reviewed_lines: '',
                 success: '',
                 error: '',
             }
         case SUCCESS_REVIEWING_LINE:
             return {
                 ...state,
-                // dataset_id: action.payload.dataset_id,
-                // dataset_name: action.payload.dataset_name,
-                // line_id: action.payload.reviewing_lines[0].line_id,
-                // line: action.payload.reviewing_lines[0].line,
-                // translated_line: action.payload.reviewing_lines[0].translated_line,
-                // translator_id: action.payload.reviewing_lines[0].translator_id,
+                dataset_id: action.payload.dataset_id,
+                dataset_name: action.payload.name,
+                // line_id: action.payload.line_number,
+                line_number: action.payload.line_number,
+                line: action.payload.source_sentence,
+                translated_line: action.payload.destination_sentence,
+                translator_id: action.payload.translator_id,
+                reviewed_lines: action.payload.reviewed_lines,
                 success: '',
                 error: "",
             }
@@ -60,51 +61,25 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
                 error: action.payload,
             }
 
-        case REQUEST_APPROVE_LINE:
+        case REQUEST_LINE_REVIEW_ACTION:
             return {
                 ...state,
-                // reviewedLine: [],
                 success: '',
                 error: '',
             }
-        case SUCCESS_APPROVE_LINE:
+        case SUCCESS_LINE_REVIEW_ACTION:
             return {
                 ...state,
-                // dataset_id: 0,
-                // dataset_name: '',
-                // line_id: 0,
-                // line: "",
-                // translated_line: '',
-                // translator_id: 0,
-                success: '',
+                success: action.payload.message,
                 error: '',
             }
-        case FAILURE_APPROVE_LINE:
+        case FAILURE_LINE_REVIEW_ACTION:
             return {
                 ...state,
                 success: '',
                 error: action.payload,
             }
 
-        case REQUEST_REJECT_LINE:
-            return {
-                ...state,
-                success: '',
-                error: '',
-            }
-        case SUCCESS_REJECT_LINE:
-            return {
-                ...state,
-                // reviewedLine: action.payload,
-                success: '',
-                error: '',
-            }
-        case FAILURE_REJECT_LINE:
-            return {
-                ...state,
-                success: '',
-                error: action.payload,
-            }
 
         default:
             return state;
@@ -114,16 +89,13 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
 const isFetching = (state = initialState.isFetching, action) => {
     switch (action.type) {
         case REQUEST_REVIEWING_LINE:
-        case REQUEST_APPROVE_LINE:
-        case REQUEST_REJECT_LINE:
+        case REQUEST_LINE_REVIEW_ACTION:
             return true;
 
         case SUCCESS_REVIEWING_LINE:
-        case SUCCESS_APPROVE_LINE:
-        case SUCCESS_REJECT_LINE:
+        case SUCCESS_LINE_REVIEW_ACTION:
         case FAILURE_REVIEWING_LINE:
-        case FAILURE_APPROVE_LINE:
-        case FAILURE_REJECT_LINE:
+        case FAILURE_LINE_REVIEW_ACTION:
             return false;
 
         default:

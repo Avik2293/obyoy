@@ -33,7 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
 import { allDatasetsData, uploadInputDataset, uploadDataset, datasetDelete } from '../Redux/Thunk/DatasetManagement';
 import { allCustomDatasetsData, approveCustomDataset, downloadCustomDataset } from '../Redux/Thunk/CustomDatasetManagement';
-import { reviewingLine, approveLine, rejectLine } from '../Redux/Thunk/ReviewManagement';
+import { lineReviewAction, reviewingLine, } from '../Redux/Thunk/ReviewManagement';
 import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData, selectAllCustomDatasetsData, selectReviewedLineData } from '../Redux/Reducer';
 import toast from 'react-hot-toast';
 
@@ -54,7 +54,7 @@ const Dashboard = () => {
         dispatch(allUsersData(user_id, token));
         dispatch(allDatasetsData(0, 5, token));
         dispatch(allCustomDatasetsData(user_id, token));
-        dispatch(reviewingLine(user_id, token));
+        dispatch(reviewingLine(token));
     }, [dispatch, token, user_id]);
 
     const [withdrawTableData, setWithdrawTableData] = useState([
@@ -251,30 +251,30 @@ const Dashboard = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (event) {
-            dispatch(approveLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
         }
         else {
-            dispatch(rejectLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
         }
         setNextFlag(false);
     };
     const handleSubmitNext = (event) => {
         event.preventDefault();
         if (event) {
-            dispatch(approveLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
         }
         else {
-            dispatch(rejectLine(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
         }
         setNextFlag(true);
-        // dispatch(reviewingLine(user_id, token));
+        // dispatch(reviewingLine(token));
     };
     const [finalTranslateStart, setFinalTranslateStart] = useState(false);
     const [finalTranslateInput, setFinalTranslateInput] = useState('');
     const handleFinalTranslateInputChange = (e) => setFinalTranslateInput(e.target.value);
     const handleFinalTranslateInputSubmit = event => {
         event.preventDefault();
-        // dispatch(translatedLine(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
+        // dispatch(lineReviewAction(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
     };
     useEffect(() => {
         if ((reviewedLine.success === 'approve' || reviewedLine.success === 'reject') && !nextFlag) {      // message update
@@ -1263,7 +1263,7 @@ const Dashboard = () => {
                                     textAlign={'center'}
                                     my={4}
                                 >
-                                    Line ID: {reviewedLine?.line_id}</Text>
+                                    Line No.: {reviewedLine?.line_number}</Text>
 
                                 <Text
                                     border='2px'

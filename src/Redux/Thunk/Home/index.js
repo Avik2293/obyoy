@@ -55,12 +55,13 @@ export const newLine = (token) => async (dispatch, getState) => {
         })
 }
 
-export const translatedLine = (dataset_id, datastream_id, line_number, line, source_language, input, token) => async (dispatch, getState) => {
+export const translatedLine = (dataset_id, datastream_id, name, line_number, line, source_language, input, token) => async (dispatch, getState) => {
     dispatch(requestSubmitTranslatedline())
 
     axios.post(translatedLine_url, {
         dataset_id: dataset_id,
         datastream_id: datastream_id,
+        name: name,
         line_number: line_number,
         source_sentence: line,
         source_language: source_language,

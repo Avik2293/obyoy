@@ -35,12 +35,12 @@ const Home = () => {
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		dispatch(translatedLine(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
+		dispatch(translatedLine(line.dataset_id, line.datastream_id, line.name, line.line_number, line.line, line.source_language, input, token));
 		setFormClose(true);
 	};
 	const handleSubmitNext = event => {
 		event.preventDefault();
-		dispatch(translatedLine(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
+		dispatch(translatedLine(line.dataset_id, line.datastream_id, line.name, line.line_number, line.line, line.source_language, input, token));
 		setFormClose(false);
 	};
 
