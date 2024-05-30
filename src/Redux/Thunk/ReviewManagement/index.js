@@ -26,17 +26,22 @@ export const reviewingLine = (token) => async (dispatch, getState) => {
         })
 }
 
-export const lineReviewAction = (user_id, dataset_id, line_id, line, translated_line, translator_id, token) => async (dispatch, getState) => {
+export const lineReviewAction = (parallelsentence_id, reviewers, status, times_reviewed, finalTranslateInput, token) => async (dispatch, getState) => {
     dispatch(requestLineReviewAction())
 
-    axios.post(lineReviewAction_url, {
-        user_id: user_id,
-        dataset_id: dataset_id,
-        line_id: line_id,
-        line: line,
-        translated_line: translated_line,
-        translator_id: translator_id,
-    }, {
+    // Dynamically build the payload object
+    const payload = {
+        parallelsentence_id: parallelsentence_id,
+        status: status,
+        times_reviewed: times_reviewed,
+    };
+    if (finalTranslateInput) {
+        payload.reviewers = reviewers;
+        payload.reviewed_lines = finalTranslateInput;
+    }
+    console.log(payload);
+
+    axios.post(lineReviewAction_url, payload, {
         headers: {
             'Authorization': token,
         },

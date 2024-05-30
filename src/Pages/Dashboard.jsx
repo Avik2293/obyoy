@@ -249,45 +249,46 @@ const Dashboard = () => {
     const [start, setStart] = useState(false);
     const [nextFlag, setNextFlag] = useState(false);
     const handleSubmit = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
+        // reviewedLine.success = '';
+        // setNextFlag(false);
         if (event) {
-            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'accepted', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
         else {
-            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'rejected', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
-        setNextFlag(false);
     };
     const handleSubmitNext = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
+        setNextFlag(true);
         if (event) {
-            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'accepted', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
         else {
-            // dispatch(lineReviewAction(user_id, reviewedLine.dataset_id, reviewedLine.line_id, reviewedLine.line, reviewedLine.translated_line, reviewedLine.translator_id, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'rejected', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
-        setNextFlag(true);
-        // dispatch(reviewingLine(token));
     };
     const [finalTranslateStart, setFinalTranslateStart] = useState(false);
     const [finalTranslateInput, setFinalTranslateInput] = useState('');
     const handleFinalTranslateInputChange = (e) => setFinalTranslateInput(e.target.value);
     const handleFinalTranslateInputSubmit = event => {
         event.preventDefault();
-        // dispatch(lineReviewAction(line.dataset_id, line.datastream_id, line.line_number, line.line, line.source_language, input, token));
+        dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'reviewed', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
     };
     useEffect(() => {
-        if ((reviewedLine.success === 'approve' || reviewedLine.success === 'reject') && !nextFlag) {      // message update
+        if (reviewedLine.success === 'parallelsentence updated' && !nextFlag && !finalTranslateInput) {
             toast.success(reviewedLine.success);
-            setStart(!start);
+            setStart(false);
+            // setNextFlag(false);
         }
-        if ((reviewedLine.success === 'approve' || reviewedLine.success === 'reject') && nextFlag) {   ///need to update the message 
+        if (reviewedLine.success === 'parallelsentence updated' && nextFlag && !finalTranslateInput) {
             dispatch(reviewingLine(token));
             toast.success(reviewedLine.success);
             setNextFlag(false);
         }
-        if (reviewedLine.success === 'final line') {   ///update the message for final line input
-            // dispatch(allDatasetsData(0, 5, token));
+        if (reviewedLine.success === 'parallelsentence updated' && finalTranslateInput) {
+            dispatch(reviewingLine(token));
             toast.success(reviewedLine.success);
             setStart(false);
             setFinalTranslateStart(false);
@@ -296,7 +297,7 @@ const Dashboard = () => {
         if (reviewedLine.error.message) {
             toast.error(reviewedLine.error.message);
         }
-    }, [dispatch, nextFlag, reviewedLine.error.message, reviewedLine.success, start, token]);
+    }, [dispatch, finalTranslateInput, nextFlag, reviewedLine.error.message, reviewedLine.success, token]);
 
 
     // remaining work for later ***
@@ -1227,7 +1228,7 @@ const Dashboard = () => {
                                         px={4}
                                         py={1}
                                         borderRadius={'lg'}
-                                        onClick={() => setStart(!start)}
+                                        onClick={() => setStart(true)}
                                     >
                                         Start
                                     </Button>
@@ -1296,7 +1297,7 @@ const Dashboard = () => {
                                     textAlign={'center'}
                                     my={4}
                                 >
-                                    Translated By:  Id no. {reviewedLine?.translator_id}</Text>
+                                    Translated By:  Id:- {reviewedLine?.translator_id}</Text>
 
                                 <Text
                                     border='2px'
