@@ -10,12 +10,12 @@ import {
 
 const initialState = {
     lines: {
-        // dataset_name: '',
+        name: '',
         dataset_id: 0,
         datastream_id: 0,
-        source_language: '',
-        line: "",
         line_number: 0,
+        source_language: '',
+        line: '',
         success: '',
         error: "",
     },
@@ -27,12 +27,6 @@ const lines = (state = initialState.lines, action) => {
         case REQUEST_FETCH_NEWLINE:
             return {
                 ...state,
-                // dataset_name: '',
-                dataset_id: 0,
-                datastream_id: 0,
-                source_language: '',
-                line: "",
-                line_number: 0,
                 success: '',
                 error: "",
             }

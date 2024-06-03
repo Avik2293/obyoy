@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import user, * as fromUser from "./login";
 import leaderboard, * as fromLeaderboard from "./leaderboard";
+import basicCountInfo, * as fromBasicCountInfo from "./basicCountInfo";
 import translation, * as fromTranslation from "./translation";
 import customDatasets, * as fromCustomDatasets from "./custom";
 import withdraws, * as fromWithdraws from "./withdraw";
@@ -13,6 +14,7 @@ import reviewManagement, * as fromReviewManagement from "./reviewManagement";
 export const rootReducer = combineReducers({
     "user": user,
     "leaderboard": leaderboard,
+    "basicCountInfo": basicCountInfo,
     "translation": translation,
     "withdraws": withdraws,
     "customDatasets": customDatasets,
@@ -34,6 +36,7 @@ export const selectProfile = state => fromUser.selectProfile(state.user);
 
 export const selectLeaderboardTop = state => fromLeaderboard.selectLeaderboard(state.leaderboard);
 export const selectFullLeaderboard = state => fromLeaderboard.selectFullLeaderboard(state.leaderboard);
+export const selectBasicCountInfo = state => fromBasicCountInfo.selectBasicCountInfo(state.basicCountInfo);
 export const selectLine = state => fromTranslation.selectLine(state.translation);
 
 export const selectWithdraws = state => fromWithdraws.selectWithdraws(state.withdraws);
