@@ -33,7 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { allUsersData, userData, userDelete } from '../Redux/Thunk/UserManagement';
 import { allDatasetsData, uploadInputDataset, uploadDataset, datasetDelete } from '../Redux/Thunk/DatasetManagement';
 import { allCustomDatasetsData, approveCustomDataset, downloadCustomDataset } from '../Redux/Thunk/CustomDatasetManagement';
-import { lineReviewAction, reviewingLine, } from '../Redux/Thunk/ReviewManagement';
+import { lineReviewAction, reviewingLine, finalTranslation } from '../Redux/Thunk/ReviewManagement';
 import { selectToken, selectID, selectAllUserData, selectSingleUser, selectAllDatasetsData, selectAllCustomDatasetsData, selectReviewedLineData } from '../Redux/Reducer';
 import toast from 'react-hot-toast';
 
@@ -248,25 +248,26 @@ const Dashboard = () => {
     // for approve translate 
     const [start, setStart] = useState(false);
     const [nextFlag, setNextFlag] = useState(false);
+    const [status, setStatus] = useState('');
     const handleSubmit = (event) => {
         // event.preventDefault();
         // reviewedLine.success = '';
         // setNextFlag(false);
         if (event) {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'accepted', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
         else {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'rejected', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
     };
     const handleSubmitNext = (event) => {
         // event.preventDefault();
         setNextFlag(true);
         if (event) {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'accepted', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
         else {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'rejected', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
         }
     };
     const [finalTranslateStart, setFinalTranslateStart] = useState(false);
@@ -274,8 +275,10 @@ const Dashboard = () => {
     const handleFinalTranslateInputChange = (e) => setFinalTranslateInput(e.target.value);
     const handleFinalTranslateInputSubmit = event => {
         event.preventDefault();
-        dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, 'reviewed', reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+        dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
     };
+
+
     useEffect(() => {
         if (reviewedLine.success === 'parallelsentence updated' && !nextFlag && !finalTranslateInput) {
             toast.success(reviewedLine.success);
@@ -294,10 +297,18 @@ const Dashboard = () => {
             setFinalTranslateStart(false);
             setFinalTranslateInput('');
         }
+
         if (reviewedLine.error.message) {
             toast.error(reviewedLine.error.message);
         }
     }, [dispatch, finalTranslateInput, nextFlag, reviewedLine.error.message, reviewedLine.success, token]);
+
+    useEffect(() => {
+        if (reviewedLine.success === 'parallelsentence updated' && status === ('accepted' || 'reviewed')) {
+            dispatch(finalTranslation(reviewedLine.line, reviewedLine.source_language, status === 'accepted' ? reviewedLine.translated_line : finalTranslateInput, reviewedLine.destination_language, reviewedLine.dataset_id, reviewedLine.dataset_name, reviewedLine.datastream_id, reviewedLine.line_number, reviewedLine.translator_id, user_id, token));
+            console.log('done');
+        }
+    }, [dispatch, finalTranslateInput, reviewedLine.dataset_id, reviewedLine.dataset_name, reviewedLine.datastream_id, reviewedLine.destination_language, reviewedLine.line, reviewedLine.line_number, reviewedLine.source_language, reviewedLine.success, reviewedLine.translated_line, reviewedLine.translator_id, status, token, user_id]);
 
 
     // remaining work for later ***
@@ -1327,7 +1338,10 @@ const Dashboard = () => {
                                                     px={4}
                                                     py={1}
                                                     borderRadius={'lg'}
-                                                    onClick={() => handleSubmit(1)}
+                                                    onClick={() => {
+                                                        setStatus('accepted');
+                                                        handleSubmit(1);
+                                                    }}
                                                 >
                                                     Approve
                                                 </Button>
@@ -1342,7 +1356,10 @@ const Dashboard = () => {
                                                     px={4}
                                                     py={1}
                                                     borderRadius={'lg'}
-                                                    onClick={() => handleSubmitNext(1)}
+                                                    onClick={() => {
+                                                        setStatus('accepted');
+                                                        handleSubmitNext(1);
+                                                    }}
                                                 >
                                                     Approve & Next
                                                 </Button>
@@ -1357,7 +1374,10 @@ const Dashboard = () => {
                                                     px={4}
                                                     py={1}
                                                     borderRadius={'lg'}
-                                                    onClick={() => handleSubmit(0)}
+                                                    onClick={() => {
+                                                        setStatus('rejected');
+                                                        handleSubmit(0);
+                                                    }}
                                                 >
                                                     Reject
                                                 </Button>
@@ -1372,7 +1392,10 @@ const Dashboard = () => {
                                                     px={4}
                                                     py={1}
                                                     borderRadius={'lg'}
-                                                    onClick={() => handleSubmitNext(0)}
+                                                    onClick={() => {
+                                                        setStatus('rejected');
+                                                        handleSubmitNext(0);
+                                                    }}
                                                 >
                                                     Reject & Next
                                                 </Button>
@@ -1439,6 +1462,7 @@ const Dashboard = () => {
                                                     type='submit'
                                                     onClick={(event) => {
                                                         if (finalTranslateInput) {
+                                                            setStatus('reviewed');
                                                             handleFinalTranslateInputSubmit(event);
                                                         }
                                                     }}

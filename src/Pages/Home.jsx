@@ -4,8 +4,8 @@ import { Form, Link as ReactRouterLink } from 'react-router-dom';
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { leaderboard, newLine, translatedLine } from '../Redux/Thunk/Home';
-import { selectProfile, selectLeaderboardTop, selectLine, selectToken, selectID } from '../Redux/Reducer';
+import { leaderboard, datasetCount, translationCount, reviewedCount, customDatasetCount, newLine, translatedLine } from '../Redux/Thunk/Home';
+import { selectProfile, selectLeaderboardTop, selectLine, selectToken, selectID, selectBasicCountInfo } from '../Redux/Reducer';
 import toast from 'react-hot-toast';
 
 
@@ -16,6 +16,7 @@ const Home = () => {
 	const topTen = useSelector(state => selectLeaderboardTop(state));
 	const profile = useSelector(state => selectProfile(state));
 	const userId = useSelector(state => selectID(state));
+	const basicCountInfo = useSelector(state => selectBasicCountInfo(state));
 
 	const [count, setCount] = useState(0);
 	const [start, setStart] = useState(false);
@@ -27,7 +28,11 @@ const Home = () => {
 
 	useEffect(() => {
 		dispatch(leaderboard());
-	}, [dispatch]);
+		dispatch(datasetCount(token));
+		dispatch(translationCount(token));
+		dispatch(reviewedCount(token));
+		dispatch(customDatasetCount(token));
+	}, [dispatch, token]);
 
 	useEffect(() => {
 		dispatch(newLine(token));
@@ -192,7 +197,7 @@ const Home = () => {
 							textAlign={'center'}
 						>
 							<Text>Total Dataset</Text>
-							<Text>{profile?.total_balance}</Text>
+							<Text>{basicCountInfo?.datasetCount}</Text>
 						</GridItem>
 
 						<GridItem
@@ -206,7 +211,7 @@ const Home = () => {
 							textAlign={'center'}
 						>
 							<Text>Total Translation</Text>
-							<Text>{profile?.balance}</Text>
+							<Text>{basicCountInfo?.translationCount}</Text>
 						</GridItem>
 
 						<GridItem
@@ -220,7 +225,7 @@ const Home = () => {
 							textAlign={'center'}
 						>
 							<Text>Total Reviewed</Text>
-							<Text>{profile?.total_withdraw}</Text>
+							<Text>{basicCountInfo?.reviewedCount}</Text>
 						</GridItem>
 
 						<GridItem
@@ -234,7 +239,7 @@ const Home = () => {
 							textAlign={'center'}
 						>
 							<Text>Custom Dataset</Text>
-							<Text>{profile?.for_approve}</Text>
+							<Text>{basicCountInfo?.customDatasetCount}</Text>
 						</GridItem>
 					</Grid>
 

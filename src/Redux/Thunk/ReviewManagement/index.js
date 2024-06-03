@@ -6,8 +6,11 @@ import {
     requestLineReviewAction,
     lineReviewActionSuccess,
     lineReviewActionFailure,
+    requestFinalTranslation,
+    finalTranslationSuccess,
+    finalTranslationFailure,
 } from "../../ActionCreator/reviewManagement";
-import { lineReviewAction_url, reviewingLine_url } from "../../../allApiPath";
+import { finalTranslation_url, lineReviewAction_url, reviewingLine_url } from "../../../allApiPath";
 
 
 export const reviewingLine = (token) => async (dispatch, getState) => {
@@ -36,8 +39,8 @@ export const lineReviewAction = (parallelsentence_id, reviewers, status, times_r
         times_reviewed: times_reviewed,
     };
     if (finalTranslateInput) {
-        payload.reviewers = reviewers;
-        payload.reviewed_lines = finalTranslateInput;
+        payload.reviewers = [reviewers];
+        payload.reviewed_lines = [finalTranslateInput];
     }
     console.log(payload);
 
@@ -52,5 +55,34 @@ export const lineReviewAction = (parallelsentence_id, reviewers, status, times_r
             // dispatch(updateSessionExpiry(nextDate));
         }, error => {
             dispatch(lineReviewActionFailure(error))
+        })
+}
+
+export const finalTranslation = (source_sentence, source_language, destination_sentence, destination_language, dataset_id, name, datastream_id, line_number, translator_id, reviewer_id, token) => async (dispatch, getState) => {
+    dispatch(requestFinalTranslation())
+    console.log(destination_sentence);
+
+    axios.post(finalTranslation_url, {
+        source_sentence: source_sentence,
+        source_language: source_language,
+        destination_sentence: destination_sentence,
+        destination_language: destination_language,
+        dataset_id: dataset_id,
+        name: name,
+        datastream_id: datastream_id,
+        line_number: line_number,
+        translator_id: translator_id,
+        reviewer_id: reviewer_id,
+    }, {
+        headers: {
+            'Authorization': token,
+        },
+    })
+        .then((response) => {
+            // console.log(response.data);
+            dispatch(finalTranslationSuccess(response.data));
+            // dispatch(updateSessionExpiry(nextDate));
+        }, error => {
+            dispatch(finalTranslationFailure(error))
         })
 }

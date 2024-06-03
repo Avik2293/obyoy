@@ -7,6 +7,9 @@ import {
     REQUEST_LINE_REVIEW_ACTION,
     SUCCESS_LINE_REVIEW_ACTION,
     FAILURE_LINE_REVIEW_ACTION,
+    REQUEST_FINAL_TRANSLATION,
+    SUCCESS_FINAL_TRANSLATION,
+    FAILURE_FINAL_TRANSLATION,
 } from "../Constant/reviewManagement";
 
 const initialState = {
@@ -55,7 +58,7 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
                 ...state,
                 dataset_id: action.payload.dataset_id,
                 datastream_id: action.payload.datastream_id,
-                parallelsentence_id: action.payload.ID,
+                parallelsentence_id: action.payload.id,
                 dataset_name: action.payload.name,
                 times_reviewed: action.payload.times_reviewed,
                 line_number: action.payload.line_number,
@@ -94,6 +97,23 @@ const reviewedLineData = (state = initialState.reviewedLine, action) => {
                 error: action.payload,
             }
 
+        case REQUEST_FINAL_TRANSLATION:
+            return {
+                ...state,
+                success: '',
+                error: '',
+            }
+        case SUCCESS_FINAL_TRANSLATION:
+            return {
+                ...state,
+                success: action.payload.message,
+            }
+        case FAILURE_FINAL_TRANSLATION:
+            return {
+                ...state,
+                error: action.payload,
+            }
+
 
         default:
             return state;
@@ -104,12 +124,15 @@ const isFetching = (state = initialState.isFetching, action) => {
     switch (action.type) {
         case REQUEST_REVIEWING_LINE:
         case REQUEST_LINE_REVIEW_ACTION:
+        case REQUEST_FINAL_TRANSLATION:
             return true;
 
         case SUCCESS_REVIEWING_LINE:
         case SUCCESS_LINE_REVIEW_ACTION:
+        case SUCCESS_FINAL_TRANSLATION:
         case FAILURE_REVIEWING_LINE:
         case FAILURE_LINE_REVIEW_ACTION:
+        case FAILURE_FINAL_TRANSLATION:
             return false;
 
         default:
