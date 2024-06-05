@@ -183,7 +183,12 @@ const Dashboard = () => {
     const [datasetInput, setDatasetInput] = useState('');
     const [datasetDescription, setDatasetDescription] = useState('');
     const [datasetRemarks, setDatasetRemarks] = useState('');
-    const linesArray = datasetInput.split(/[\r\n.]+ ?/).filter(Boolean);
+    // const linesArray = datasetInput.split(/\r?\n|\r|\. ?/).filter(Boolean);
+    const linesArray = datasetInput
+        .split(/\r?\n|\r|\. ?/g) // Split by various line breaks or dot followed by a space
+        .map(line => line.trim()) // Remove leading and trailing whitespace from each line
+        .filter(line => line.length > 0); // Remove empty lines
+
     const handleDatasetSubmit = () => {
         dispatch(uploadInputDataset(datasetName, datasetLanguage, linesArray, datasetDescription, datasetRemarks, token));
         // console.log(datasetsSuccess);
@@ -196,6 +201,8 @@ const Dashboard = () => {
             setDatasetName('');
             setDatasetLanguage('');
             setDatasetInput('');
+            setDatasetDescription('');
+            setDatasetRemarks('');
         }
         if (allDatasetManagementData.success === 'dataset file created') {   // need to update the message for file
             dispatch(allDatasetsData(0, 5, token));
@@ -249,41 +256,61 @@ const Dashboard = () => {
     const [start, setStart] = useState(false);
     const [nextFlag, setNextFlag] = useState(false);
     const [status, setStatus] = useState('');
-    const handleSubmit = (event) => {
-        // event.preventDefault();
-        // reviewedLine.success = '';
-        // setNextFlag(false);
-        if (event) {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
-        }
-        else {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
-        }
-    };
-    const handleSubmitNext = (event) => {
-        // event.preventDefault();
-        setNextFlag(true);
-        if (event) {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
-        }
-        else {
-            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
-        }
-    };
+    // const handleSubmit = (event) => {
+    //     // event.preventDefault();
+    //     // reviewedLine.success = '';
+    //     // setNextFlag(false);
+    //     if (event) {
+    //         dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+    //     }
+    //     else {
+    //         dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+    //     }
+    // };
+    // const handleSubmitNext = (event) => {
+    //     // event.preventDefault();
+    //     setNextFlag(true);
+    //     if (event) {
+    //         dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+    //     }
+    //     else {
+    //         dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+    //     }
+    // };
     const [finalTranslateStart, setFinalTranslateStart] = useState(false);
     const [finalTranslateInput, setFinalTranslateInput] = useState('');
     const handleFinalTranslateInputChange = (e) => setFinalTranslateInput(e.target.value);
-    const handleFinalTranslateInputSubmit = event => {
-        event.preventDefault();
-        dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
-    };
+    // const handleFinalTranslateInputSubmit = event => {
+    //     event.preventDefault();
+    //     dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token));
+    // };
 
+    // const handleSubmit = (token, isUpdating, deliveryInfo, isFetching, isUpdated, user_id, order_id, delivery_id) => async (dispatch, getState) => {
+    const handleSubmit = () => async (dispatch, getState) => {
+
+        console.log('on');
+
+        await Promise.all([
+
+            console.log('start'),
+
+            dispatch(lineReviewAction(reviewedLine.parallelsentence_id, user_id, status, reviewedLine.times_reviewed ? reviewedLine.times_reviewed + 1 : 1, finalTranslateInput, token)),
+
+            console.log('middle'),
+
+            // if (reviewedLine.success === 'parallelsentence updated' && status === ('accepted' || 'reviewed')) {
+            reviewedLine.success === 'parallelsentence updated' && status === ('accepted' || 'reviewed') &&
+            dispatch(finalTranslation(reviewedLine.line, reviewedLine.source_language, status === 'accepted' ? reviewedLine.translated_line : finalTranslateInput, reviewedLine.destination_language, reviewedLine.dataset_id, reviewedLine.dataset_name, reviewedLine.datastream_id, reviewedLine.line_number, reviewedLine.translator_id, user_id, token)),
+            console.log('done'),
+            // },
+        ])
+    }
 
     useEffect(() => {
         if (reviewedLine.success === 'parallelsentence updated' && !nextFlag && !finalTranslateInput) {
+            dispatch(reviewingLine(token));
             toast.success(reviewedLine.success);
             setStart(false);
-            // setNextFlag(false);
         }
         if (reviewedLine.success === 'parallelsentence updated' && nextFlag && !finalTranslateInput) {
             dispatch(reviewingLine(token));
@@ -303,12 +330,12 @@ const Dashboard = () => {
         }
     }, [dispatch, finalTranslateInput, nextFlag, reviewedLine.error.message, reviewedLine.success, token]);
 
-    useEffect(() => {
-        if (reviewedLine.success === 'parallelsentence updated' && status === ('accepted' || 'reviewed')) {
-            dispatch(finalTranslation(reviewedLine.line, reviewedLine.source_language, status === 'accepted' ? reviewedLine.translated_line : finalTranslateInput, reviewedLine.destination_language, reviewedLine.dataset_id, reviewedLine.dataset_name, reviewedLine.datastream_id, reviewedLine.line_number, reviewedLine.translator_id, user_id, token));
-            console.log('done');
-        }
-    }, [dispatch, finalTranslateInput, reviewedLine.dataset_id, reviewedLine.dataset_name, reviewedLine.datastream_id, reviewedLine.destination_language, reviewedLine.line, reviewedLine.line_number, reviewedLine.source_language, reviewedLine.success, reviewedLine.translated_line, reviewedLine.translator_id, status, token, user_id]);
+    // useEffect(() => {
+    //     if (reviewedLine.success === 'parallelsentence updated' && status === ('accepted' || 'reviewed')) {
+    //         dispatch(finalTranslation(reviewedLine.line, reviewedLine.source_language, status === 'accepted' ? reviewedLine.translated_line : finalTranslateInput, reviewedLine.destination_language, reviewedLine.dataset_id, reviewedLine.dataset_name, reviewedLine.datastream_id, reviewedLine.line_number, reviewedLine.translator_id, user_id, token));
+    //         console.log('done');
+    //     }
+    // }, [dispatch, finalTranslateInput, reviewedLine.dataset_id, reviewedLine.dataset_name, reviewedLine.datastream_id, reviewedLine.destination_language, reviewedLine.line, reviewedLine.line_number, reviewedLine.source_language, reviewedLine.success, reviewedLine.translated_line, reviewedLine.translator_id, status, token, user_id]);
 
 
     // remaining work for later ***
@@ -1340,7 +1367,8 @@ const Dashboard = () => {
                                                     borderRadius={'lg'}
                                                     onClick={() => {
                                                         setStatus('accepted');
-                                                        handleSubmit(1);
+                                                        // handleSubmit(1);
+                                                        handleSubmit();
                                                     }}
                                                 >
                                                     Approve
@@ -1358,7 +1386,9 @@ const Dashboard = () => {
                                                     borderRadius={'lg'}
                                                     onClick={() => {
                                                         setStatus('accepted');
-                                                        handleSubmitNext(1);
+                                                        // handleSubmitNext(1);
+                                                        handleSubmit();
+                                                        setNextFlag(true);
                                                     }}
                                                 >
                                                     Approve & Next
@@ -1376,7 +1406,8 @@ const Dashboard = () => {
                                                     borderRadius={'lg'}
                                                     onClick={() => {
                                                         setStatus('rejected');
-                                                        handleSubmit(0);
+                                                        // handleSubmit(0);
+                                                        handleSubmit();
                                                     }}
                                                 >
                                                     Reject
@@ -1394,7 +1425,9 @@ const Dashboard = () => {
                                                     borderRadius={'lg'}
                                                     onClick={() => {
                                                         setStatus('rejected');
-                                                        handleSubmitNext(0);
+                                                        // handleSubmitNext(0);
+                                                        handleSubmit();
+                                                        setNextFlag(true);
                                                     }}
                                                 >
                                                     Reject & Next
@@ -1463,7 +1496,8 @@ const Dashboard = () => {
                                                     onClick={(event) => {
                                                         if (finalTranslateInput) {
                                                             setStatus('reviewed');
-                                                            handleFinalTranslateInputSubmit(event);
+                                                            // handleFinalTranslateInputSubmit(event);
+                                                            handleSubmit();
                                                         }
                                                     }}
                                                 >
