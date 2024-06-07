@@ -42,6 +42,7 @@ export const login = (email, password) => async (dispatch, getState) => {
     axios.post(login_url, {
         email: email,
         password: password,
+        // account_type: 'admin',
         // account_type: 'translator',
     })
         .then((response) => {
