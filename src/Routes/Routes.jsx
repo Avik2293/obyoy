@@ -2,6 +2,7 @@ import { createBrowserRouter, } from "react-router-dom";
 
 import Main from "../Layouts/Main";
 import Home from "../Pages/Home";
+import AdminLogin from "../Pages/AdminLogin";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import DashboardLayout from "../Layouts/DashboardLayout";
@@ -62,6 +63,10 @@ export const routes = createBrowserRouter([
 	{
 		path: '/login',
 		element: <Login />
+	},
+	{
+		path: '/admin/login',
+		element: <AdminLogin />
 	},
 	{
 		path: '/register',

@@ -5,7 +5,7 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { leaderboard, datasetCount, translationCount, reviewedCount, customDatasetCount, newLine, translatedLine } from '../Redux/Thunk/Home';
-import { selectProfile, selectLeaderboardTop, selectLine, selectToken, selectID, selectBasicCountInfo } from '../Redux/Reducer';
+import { selectProfile, selectLeaderboardTop, selectLine, selectToken, selectBasicCountInfo } from '../Redux/Reducer';
 import toast from 'react-hot-toast';
 
 
@@ -15,7 +15,7 @@ const Home = () => {
 	const token = useSelector(state => selectToken(state));
 	const topTen = useSelector(state => selectLeaderboardTop(state));
 	const profile = useSelector(state => selectProfile(state));
-	const userId = useSelector(state => selectID(state));
+	// const userId = useSelector(state => selectID(state));
 	const basicCountInfo = useSelector(state => selectBasicCountInfo(state));
 
 	const [count, setCount] = useState(0);

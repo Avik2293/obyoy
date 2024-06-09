@@ -36,14 +36,13 @@ export const signup = (firstName, lastName, email, password) => async (dispatch,
         })
 }
 
-export const login = (email, password) => async (dispatch, getState) => {
+export const login = (email, password, account_type) => async (dispatch, getState) => {
     dispatch(requestLogin())
 
     axios.post(login_url, {
         email: email,
         password: password,
-        // account_type: 'admin',
-        // account_type: 'translator',
+        account_type: account_type,
     })
         .then((response) => {
             dispatch(loginSuccess(response.data));

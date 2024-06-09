@@ -126,7 +126,7 @@ const Login = () => {
 
 	const handleSubmit = (event) => {
 		// event.preventDefault();
-		dispatch(login(email, password));
+		dispatch(login(email, password, 'translator'));
 		setEmail('');
 		setPassword('');
 		// console.log(email);
