@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8080";
+// const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://ardentprogrammers.com";
 
 // login
 export const signup_url = `${BASE_URL}/api/v1/users/registration`;                    //ok
